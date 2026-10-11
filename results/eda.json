@@ -1,0 +1,579 @@
+{
+  "input": "data/train.csv after cleaning (ADR 0001)",
+  "all_rows": {
+    "rows_by_label": {
+      "label_0": 4257,
+      "label_1": 4068
+    },
+    "scheme": {
+      "http": {
+        "label_0": {
+          "rows": 2383,
+          "share_of_class": 0.5598
+        },
+        "label_1": {
+          "rows": 2715,
+          "share_of_class": 0.6674
+        }
+      },
+      "https": {
+        "label_0": {
+          "rows": 1874,
+          "share_of_class": 0.4402
+        },
+        "label_1": {
+          "rows": 1353,
+          "share_of_class": 0.3326
+        }
+      }
+    },
+    "has_www": {
+      "False": {
+        "label_0": {
+          "rows": 1444,
+          "share_of_class": 0.3392
+        },
+        "label_1": {
+          "rows": 3242,
+          "share_of_class": 0.797
+        }
+      },
+      "True": {
+        "label_0": {
+          "rows": 2813,
+          "share_of_class": 0.6608
+        },
+        "label_1": {
+          "rows": 826,
+          "share_of_class": 0.203
+        }
+      }
+    },
+    "path_state": {
+      "none": {
+        "label_0": {
+          "rows": 259,
+          "share_of_class": 0.0608
+        },
+        "label_1": {
+          "rows": 220,
+          "share_of_class": 0.0541
+        }
+      },
+      "nonempty": {
+        "label_0": {
+          "rows": 2633,
+          "share_of_class": 0.6185
+        },
+        "label_1": {
+          "rows": 3261,
+          "share_of_class": 0.8016
+        }
+      },
+      "slash": {
+        "label_0": {
+          "rows": 1365,
+          "share_of_class": 0.3206
+        },
+        "label_1": {
+          "rows": 587,
+          "share_of_class": 0.1443
+        }
+      }
+    },
+    "has_query": {
+      "False": {
+        "label_0": {
+          "rows": 4114,
+          "share_of_class": 0.9664
+        },
+        "label_1": {
+          "rows": 3073,
+          "share_of_class": 0.7554
+        }
+      },
+      "True": {
+        "label_0": {
+          "rows": 143,
+          "share_of_class": 0.0336
+        },
+        "label_1": {
+          "rows": 995,
+          "share_of_class": 0.2446
+        }
+      }
+    },
+    "length_quantiles": {
+      "label_0": {
+        "q10": 24.0,
+        "q25": 29.0,
+        "q50": 42.0,
+        "q75": 60.0,
+        "q90": 80.0
+      },
+      "label_1": {
+        "q10": 29.0,
+        "q25": 38.0,
+        "q50": 55.0,
+        "q75": 89.0,
+        "q90": 131.0
+      }
+    },
+    "distinct_tlds_by_label": {
+      "label_0": 135,
+      "label_1": 166
+    },
+    "top_tlds": [
+      {
+        "tld": "com",
+        "rows": 5074,
+        "clean_rows": 2686,
+        "phishing_rows": 2388,
+        "phishing_share": 0.4706
+      },
+      {
+        "tld": "org",
+        "rows": 487,
+        "clean_rows": 414,
+        "phishing_rows": 73,
+        "phishing_share": 0.1499
+      },
+      {
+        "tld": "net",
+        "rows": 279,
+        "clean_rows": 126,
+        "phishing_rows": 153,
+        "phishing_share": 0.5484
+      },
+      {
+        "tld": "ru",
+        "rows": 213,
+        "clean_rows": 106,
+        "phishing_rows": 107,
+        "phishing_share": 0.5023
+      },
+      {
+        "tld": "uk",
+        "rows": 141,
+        "clean_rows": 89,
+        "phishing_rows": 52,
+        "phishing_share": 0.3688
+      },
+      {
+        "tld": "au",
+        "rows": 94,
+        "clean_rows": 43,
+        "phishing_rows": 51,
+        "phishing_share": 0.5426
+      },
+      {
+        "tld": "de",
+        "rows": 91,
+        "clean_rows": 70,
+        "phishing_rows": 21,
+        "phishing_share": 0.2308
+      },
+      {
+        "tld": "ip",
+        "rows": 81,
+        "clean_rows": 0,
+        "phishing_rows": 81,
+        "phishing_share": 1.0
+      },
+      {
+        "tld": "fr",
+        "rows": 70,
+        "clean_rows": 15,
+        "phishing_rows": 55,
+        "phishing_share": 0.7857
+      },
+      {
+        "tld": "it",
+        "rows": 68,
+        "clean_rows": 32,
+        "phishing_rows": 36,
+        "phishing_share": 0.5294
+      },
+      {
+        "tld": "edu",
+        "rows": 65,
+        "clean_rows": 63,
+        "phishing_rows": 2,
+        "phishing_share": 0.0308
+      },
+      {
+        "tld": "pl",
+        "rows": 62,
+        "clean_rows": 23,
+        "phishing_rows": 39,
+        "phishing_share": 0.629
+      },
+      {
+        "tld": "in",
+        "rows": 60,
+        "clean_rows": 25,
+        "phishing_rows": 35,
+        "phishing_share": 0.5833
+      },
+      {
+        "tld": "br",
+        "rows": 57,
+        "clean_rows": 16,
+        "phishing_rows": 41,
+        "phishing_share": 0.7193
+      },
+      {
+        "tld": "nl",
+        "rows": 55,
+        "clean_rows": 25,
+        "phishing_rows": 30,
+        "phishing_share": 0.5455
+      }
+    ]
+  },
+  "empty_path_rows": {
+    "rows_by_label": {
+      "label_0": 1624,
+      "label_1": 807
+    },
+    "scheme": {
+      "http": {
+        "label_0": {
+          "rows": 759,
+          "share_of_class": 0.4674
+        },
+        "label_1": {
+          "rows": 523,
+          "share_of_class": 0.6481
+        }
+      },
+      "https": {
+        "label_0": {
+          "rows": 865,
+          "share_of_class": 0.5326
+        },
+        "label_1": {
+          "rows": 284,
+          "share_of_class": 0.3519
+        }
+      }
+    },
+    "has_www": {
+      "False": {
+        "label_0": {
+          "rows": 484,
+          "share_of_class": 0.298
+        },
+        "label_1": {
+          "rows": 752,
+          "share_of_class": 0.9318
+        }
+      },
+      "True": {
+        "label_0": {
+          "rows": 1140,
+          "share_of_class": 0.702
+        },
+        "label_1": {
+          "rows": 55,
+          "share_of_class": 0.0682
+        }
+      }
+    },
+    "path_state": {
+      "none": {
+        "label_0": {
+          "rows": 259,
+          "share_of_class": 0.1595
+        },
+        "label_1": {
+          "rows": 220,
+          "share_of_class": 0.2726
+        }
+      },
+      "slash": {
+        "label_0": {
+          "rows": 1365,
+          "share_of_class": 0.8405
+        },
+        "label_1": {
+          "rows": 587,
+          "share_of_class": 0.7274
+        }
+      }
+    },
+    "has_query": {
+      "False": {
+        "label_0": {
+          "rows": 1610,
+          "share_of_class": 0.9914
+        },
+        "label_1": {
+          "rows": 757,
+          "share_of_class": 0.938
+        }
+      },
+      "True": {
+        "label_0": {
+          "rows": 14,
+          "share_of_class": 0.0086
+        },
+        "label_1": {
+          "rows": 50,
+          "share_of_class": 0.062
+        }
+      }
+    },
+    "length_quantiles": {
+      "label_0": {
+        "q10": 20.30000000000001,
+        "q25": 24.0,
+        "q50": 27.0,
+        "q75": 31.0,
+        "q90": 35.0
+      },
+      "label_1": {
+        "q10": 23.0,
+        "q25": 29.0,
+        "q50": 34.0,
+        "q75": 41.0,
+        "q90": 52.0
+      }
+    },
+    "distinct_tlds_by_label": {
+      "label_0": 122,
+      "label_1": 67
+    },
+    "top_tlds": [
+      {
+        "tld": "com",
+        "rows": 1368,
+        "clean_rows": 886,
+        "phishing_rows": 482,
+        "phishing_share": 0.3523
+      },
+      {
+        "tld": "ru",
+        "rows": 90,
+        "clean_rows": 42,
+        "phishing_rows": 48,
+        "phishing_share": 0.5333
+      },
+      {
+        "tld": "net",
+        "rows": 85,
+        "clean_rows": 37,
+        "phishing_rows": 48,
+        "phishing_share": 0.5647
+      },
+      {
+        "tld": "org",
+        "rows": 72,
+        "clean_rows": 68,
+        "phishing_rows": 4,
+        "phishing_share": 0.0556
+      },
+      {
+        "tld": "de",
+        "rows": 57,
+        "clean_rows": 54,
+        "phishing_rows": 3,
+        "phishing_share": 0.0526
+      },
+      {
+        "tld": "uk",
+        "rows": 52,
+        "clean_rows": 44,
+        "phishing_rows": 8,
+        "phishing_share": 0.1538
+      },
+      {
+        "tld": "au",
+        "rows": 30,
+        "clean_rows": 26,
+        "phishing_rows": 4,
+        "phishing_share": 0.1333
+      },
+      {
+        "tld": "app",
+        "rows": 30,
+        "clean_rows": 0,
+        "phishing_rows": 30,
+        "phishing_share": 1.0
+      },
+      {
+        "tld": "it",
+        "rows": 28,
+        "clean_rows": 27,
+        "phishing_rows": 1,
+        "phishing_share": 0.0357
+      },
+      {
+        "tld": "io",
+        "rows": 25,
+        "clean_rows": 6,
+        "phishing_rows": 19,
+        "phishing_share": 0.76
+      }
+    ]
+  },
+  "google_com": {
+    "domain": "google.com",
+    "rows": 107,
+    "phishing_rows": 92,
+    "by_host": [
+      {
+        "host": "drive.google.com",
+        "rows": 31,
+        "phishing_rows": 31
+      },
+      {
+        "host": "docs.google.com",
+        "rows": 29,
+        "phishing_rows": 29
+      },
+      {
+        "host": "sites.google.com",
+        "rows": 21,
+        "phishing_rows": 20
+      },
+      {
+        "host": "play.google.com",
+        "rows": 6,
+        "phishing_rows": 0
+      },
+      {
+        "host": "www.google.com",
+        "rows": 6,
+        "phishing_rows": 6
+      },
+      {
+        "host": "storage.cloud.google.com",
+        "rows": 4,
+        "phishing_rows": 4
+      },
+      {
+        "host": "accounts.google.com",
+        "rows": 3,
+        "phishing_rows": 2
+      },
+      {
+        "host": "groups.google.com",
+        "rows": 2,
+        "phishing_rows": 0
+      },
+      {
+        "host": "support.google.com",
+        "rows": 2,
+        "phishing_rows": 0
+      },
+      {
+        "host": "developers.google.com",
+        "rows": 1,
+        "phishing_rows": 0
+      },
+      {
+        "host": "plus.google.com",
+        "rows": 1,
+        "phishing_rows": 0
+      },
+      {
+        "host": "myactivity.google.com",
+        "rows": 1,
+        "phishing_rows": 0
+      }
+    ],
+    "by_host_and_first_segment": [
+      {
+        "host": "drive.google.com",
+        "first_segment": "file",
+        "rows": 29,
+        "phishing_rows": 29
+      },
+      {
+        "host": "docs.google.com",
+        "first_segment": "forms",
+        "rows": 26,
+        "phishing_rows": 26
+      },
+      {
+        "host": "sites.google.com",
+        "first_segment": "site",
+        "rows": 14,
+        "phishing_rows": 14
+      },
+      {
+        "host": "play.google.com",
+        "first_segment": "store",
+        "rows": 6,
+        "phishing_rows": 0
+      },
+      {
+        "host": "sites.google.com",
+        "first_segment": "view",
+        "rows": 6,
+        "phishing_rows": 6
+      },
+      {
+        "host": "www.google.com",
+        "first_segment": "url",
+        "rows": 5,
+        "phishing_rows": 5
+      },
+      {
+        "host": "accounts.google.com",
+        "first_segment": "ServiceLogin",
+        "rows": 3,
+        "phishing_rows": 2
+      },
+      {
+        "host": "docs.google.com",
+        "first_segment": "document",
+        "rows": 3,
+        "phishing_rows": 3
+      },
+      {
+        "host": "drive.google.com",
+        "first_segment": "open",
+        "rows": 2,
+        "phishing_rows": 2
+      },
+      {
+        "host": "storage.cloud.google.com",
+        "first_segment": "rqraaqqax3xa.appspot.com",
+        "rows": 2,
+        "phishing_rows": 2
+      },
+      {
+        "host": "developers.google.com",
+        "first_segment": "webmasters",
+        "rows": 1,
+        "phishing_rows": 0
+      },
+      {
+        "host": "myactivity.google.com",
+        "first_segment": "",
+        "rows": 1,
+        "phishing_rows": 0
+      },
+      {
+        "host": "groups.google.com",
+        "first_segment": "d",
+        "rows": 1,
+        "phishing_rows": 0
+      },
+      {
+        "host": "sites.google.com",
+        "first_segment": "cruzblanca.org",
+        "rows": 1,
+        "phishing_rows": 0
+      },
+      {
+        "host": "plus.google.com",
+        "first_segment": "+PublicdomainpicturesNet",
+        "rows": 1,
+        "phishing_rows": 0
+      }
+    ]
+  }
+}
