@@ -1,0 +1,42 @@
+{
+  "input": "data/train.csv (raw, before cleaning)",
+  "rows": 8651,
+  "groups": 5633,
+  "singleton_groups": 4790,
+  "key_kind_rows": {
+    "domain": 8567,
+    "ip": 84
+  },
+  "top_groups": [
+    {
+      "group": "duilawyeryork.com",
+      "rows": 265,
+      "share_of_rows": 0.0306,
+      "phishing_rows": 263
+    },
+    {
+      "group": "wikipedia.org",
+      "rows": 134,
+      "share_of_rows": 0.0155,
+      "phishing_rows": 0
+    },
+    {
+      "group": "google.com",
+      "rows": 113,
+      "share_of_rows": 0.0131,
+      "phishing_rows": 96
+    },
+    {
+      "group": "tumblr.com",
+      "rows": 64,
+      "share_of_rows": 0.0074,
+      "phishing_rows": 5
+    },
+    {
+      "group": "wordpress.com",
+      "rows": 54,
+      "share_of_rows": 0.0062,
+      "phishing_rows": 0
+    }
+  ]
+}
