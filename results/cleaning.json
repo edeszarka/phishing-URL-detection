@@ -1,0 +1,100 @@
+{
+  "input": "data/train.csv",
+  "raw_quality": {
+    "rows": 8651,
+    "label_values": {
+      "1": 4330,
+      "0": 4321
+    },
+    "malformed": {
+      "blank_url": 0,
+      "label_not_0_or_1": 0,
+      "surrounding_whitespace": 0,
+      "internal_whitespace": 2,
+      "nonprintable_chars": 0,
+      "non_ascii": 5,
+      "no_registered_domain_or_ip": 0
+    },
+    "scheme_present_by_label": {
+      "label_1": 4330,
+      "label_0": 4321
+    },
+    "scheme_absent_by_label": {},
+    "exact_url": {
+      "redundant_copies_same_label": 30,
+      "conflicting_keys": 50,
+      "rows_in_conflicting_keys": 100
+    },
+    "normalized_url": {
+      "redundant_copies_same_label": 219,
+      "conflicting_keys": 50,
+      "rows_in_conflicting_keys": 107
+    }
+  },
+  "cleaning": {
+    "rows_in": 8651,
+    "rule1_conflicting_keys": 50,
+    "rule1_rows_dropped": 107,
+    "rule1_dropped_by_label": {
+      "0": 50,
+      "1": 57
+    },
+    "rule2_rows_dropped": 219,
+    "rule2_dropped_by_label": {
+      "0": 14,
+      "1": 205
+    },
+    "rows_out": 8325,
+    "label_counts_out": {
+      "0": 4257,
+      "1": 4068
+    },
+    "option_c_keep_path_case": {
+      "rule2_rows_dropped": 217,
+      "rows_merged_only_by_path_case": 2
+    }
+  },
+  "groups_after_cleaning": {
+    "rows": 8325,
+    "groups": 5599,
+    "singleton_groups": 4889,
+    "key_kind_rows": {
+      "domain": 8244,
+      "ip": 81
+    },
+    "top_groups": [
+      {
+        "group": "duilawyeryork.com",
+        "rows": 257,
+        "share_of_rows": 0.0309,
+        "phishing_rows": 257
+      },
+      {
+        "group": "wikipedia.org",
+        "rows": 134,
+        "share_of_rows": 0.0161,
+        "phishing_rows": 0
+      },
+      {
+        "group": "google.com",
+        "rows": 107,
+        "share_of_rows": 0.0129,
+        "phishing_rows": 92
+      },
+      {
+        "group": "tumblr.com",
+        "rows": 64,
+        "share_of_rows": 0.0077,
+        "phishing_rows": 5
+      },
+      {
+        "group": "wordpress.com",
+        "rows": 54,
+        "share_of_rows": 0.0065,
+        "phishing_rows": 0
+      }
+    ]
+  },
+  "max_group_share": 0.0309,
+  "max_group_share_exceeds_10pct": false
+}
