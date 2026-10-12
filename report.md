@@ -26,9 +26,19 @@ Patterns of these feeds, not of phishing in general.
 
 ## 3. Threshold and deployment
 
-TODO(me, <=150 words): threshold (ADR 0003), assumptions, precision at 1:1000
-from measured test TPR/FPR with intervals, what the sample size allows,
-deployment mode, evidence needed.
+Threshold 0.74956: the OOF FPR <= 1% point at fold seed 0, fixed before any
+test scoring (ADR 0003). OOF: TP 1,779, FP 42, TPR 0.4373, FPR 0.00987;
+assuming 1 in 1,000 URLs is phishing, precision 0.0425 (group bootstrap
+0.018-0.209, exact binomial 0.031-0.060) [results/oof_headline.json].
+
+Split sensitivity: over fold seeds 0-4, recall at FPR <= 1% ranges
+0.4373-0.5602 and its threshold 0.6825-0.75171 [results/group_ablation.json].
+Group-bootstrap CIs do not include this split variance. **[HYP]** The spread
+comes from which large platforms share a fold; blogspot.com alone gives 26 of
+the 42 seed-0 false positives [results/oof_headline.json].
+
+TODO(me): test/external TPR/FPR at 0.74956, precision at 1:1000 with intervals,
+what the sample size allows, deployment mode, evidence needed.
 
 ## 4. Data handling
 
@@ -47,7 +57,12 @@ makes the data easier than real traffic.
 2. Tenant-level folds leaked platforms (AUC 0.9 vs 0.6092) -> platform-level groups (ADR 0002) -> recall at 1% FPR 0.5951 to 0.4373 [results/controls.json].
 3. `www.` gap -> stripped-input variant -> AUC 0.9346 vs 0.9421; not adopted, kept as probe (ADR 0003) [results/oof_headline.json].
 4. 0.1% FPR rests on 4 false positives -> operate at 1% FPR, threshold 0.74956, precision at 1:1000 0.0425 (ADR 0003) [results/oof_headline.json].
+5. Unsuccessful: duilawyeryork.com, 257 phishing rows -> excluded from training, paired over 5 fold seeds -> recall difference -0.0052 to 0.0111, all CIs include 0; baseline kept, no cap (ADR 0004) [results/group_ablation.json].
 
 ## 6. Limitations and next steps
 
-TODO(me, <=100 words): limitations, unfinished work, next steps.
+Hyperparameter configurations tried: 1 [results/baseline_oof.json]. Variants
+compared on OOF: 3 (baseline, stripped-input probe, duilawyeryork exclusion);
+a per-group cap was not tried (ADR 0004) [results/group_ablation.json].
+
+TODO(me): other limitations, unfinished work, next steps.
