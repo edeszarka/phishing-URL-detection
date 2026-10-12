@@ -26,9 +26,9 @@ ABLATION_GROUP = "duilawyeryork.com"
 INPUT_VARIANTS = {"raw_url": False, "without_scheme_and_www": True}
 
 
-def assign_folds(labels: pd.Series, groups: pd.Series) -> np.ndarray:
+def assign_folds(labels: pd.Series, groups: pd.Series, seed: int = SEED) -> np.ndarray:
     """Fold id per row; every group lands in exactly one fold."""
-    splitter = StratifiedGroupKFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
+    splitter = StratifiedGroupKFold(n_splits=N_FOLDS, shuffle=True, random_state=seed)
     folds = np.empty(len(labels), dtype=int)
     for fold, (_, val_idx) in enumerate(splitter.split(labels, labels, groups)):
         folds[val_idx] = fold
