@@ -60,6 +60,13 @@
             "share_of_resamples_above_0": 0.319
           }
         }
+      },
+      "baseline_operating_point_fpr_0.01": {
+        "threshold": 0.74956,
+        "true_positives": 1779,
+        "false_positives": 42,
+        "tpr": 0.4373,
+        "fpr": 0.00987
       }
     },
     "fold_seed_1": {
@@ -104,6 +111,13 @@
             "share_of_resamples_above_0": 0.7065
           }
         }
+      },
+      "baseline_operating_point_fpr_0.01": {
+        "threshold": 0.74499,
+        "true_positives": 1819,
+        "false_positives": 42,
+        "tpr": 0.4471,
+        "fpr": 0.00987
       }
     },
     "fold_seed_2": {
@@ -148,6 +162,13 @@
             "share_of_resamples_above_0": 0.7915
           }
         }
+      },
+      "baseline_operating_point_fpr_0.01": {
+        "threshold": 0.72299,
+        "true_positives": 1981,
+        "false_positives": 42,
+        "tpr": 0.487,
+        "fpr": 0.00987
       }
     },
     "fold_seed_3": {
@@ -192,6 +213,13 @@
             "share_of_resamples_above_0": 0.599
           }
         }
+      },
+      "baseline_operating_point_fpr_0.01": {
+        "threshold": 0.6825,
+        "true_positives": 2279,
+        "false_positives": 42,
+        "tpr": 0.5602,
+        "fpr": 0.00987
       }
     },
     "fold_seed_4": {
@@ -236,6 +264,13 @@
             "share_of_resamples_above_0": 0.2895
           }
         }
+      },
+      "baseline_operating_point_fpr_0.01": {
+        "threshold": 0.75171,
+        "true_positives": 1783,
+        "false_positives": 42,
+        "tpr": 0.4383,
+        "fpr": 0.00987
       }
     }
   }

@@ -22,7 +22,7 @@ from src.clean import load_clean_train
 from src.features import SEED, build_pipeline
 from src.groups import cv_group_key
 from src.oof_metrics import N_BOOTSTRAP, group_bootstrap_weights, interval
-from src.train import ABLATION_GROUP, N_FOLDS, REPORTING_FPR, assign_folds
+from src.train import ABLATION_GROUP, N_FOLDS, REPORTING_FPR, assign_folds, operating_point
 
 ROOT = Path(__file__).resolve().parent.parent
 FOLD_SEEDS = (0, 1, 2, 3, 4)
@@ -83,6 +83,19 @@ def paired_comparison(labels: np.ndarray, probs: dict, groups: np.ndarray) -> di
     }
 
 
+def baseline_operating_point(labels: np.ndarray, probs: np.ndarray) -> dict:
+    """Baseline threshold for FPR <= 1% on all rows, with its counts, for one fold seed."""
+    threshold, tpr, fpr = operating_point(labels, probs, REPORTING_FPR)
+    flagged = probs >= threshold
+    return {
+        "threshold": round(threshold, 5),
+        "true_positives": int((flagged & (labels == 1)).sum()),
+        "false_positives": int((flagged & (labels == 0)).sum()),
+        "tpr": round(tpr, 4),
+        "fpr": round(fpr, 5),
+    }
+
+
 def main() -> None:
     df = load_clean_train()
     groups = df["url"].map(cv_group_key)
@@ -99,6 +112,9 @@ def main() -> None:
             pop: paired_comparison(y[keep], {v: p[keep] for v, p in probs.items()}, g[keep])
             for pop, keep in scored.items()
         }
+        by_seed[f"fold_seed_{seed}"]["baseline_operating_point_fpr_0.01"] = (
+            baseline_operating_point(y, probs["baseline"])
+        )
         print(f"fold seed {seed} done")
 
     report = {
