@@ -2,7 +2,8 @@
   "source": "data/oof_predictions.csv (src.train, raw URL, platform-level folds, ADR 0002)",
   "prevalence_assumed": 0.001,
   "bootstrap": "2000 resamples of platform-level groups, seed 0, percentile 95% CI; OOF models held fixed, so CIs cover evaluation-sample variation, not retraining",
-  "threshold_rule": "highest TPR with OOF FPR <= target (candidate points, not yet adopted)",
+  "threshold_rule": "highest TPR with OOF FPR <= target; operating point FPR <= 1%, FPR <= 0.1% reported as a scenario (ADR 0003)",
+  "exact_ci_note": "Clopper-Pearson on row counts; ignores grouping, so narrower than real",
   "all_groups": {
     "rows": 8325,
     "phishing_rows": 4068,
@@ -37,6 +38,87 @@
       "recall_at_target_fpr_reoptimised_ci95": [
         0.31943,
         0.61841
+      ],
+      "exact_binomial_ci95": {
+        "tpr": [
+          0.422,
+          0.45272
+        ],
+        "fpr": [
+          0.00712,
+          0.013313
+        ],
+        "precision_at_1_in_1000_range": [
+          0.0308,
+          0.0598
+        ]
+      },
+      "false_positive_concentration": {
+        "groups_with_false_positives": 11,
+        "top_groups": [
+          {
+            "group": "blogspot.com",
+            "false_positives": 26,
+            "clean_rows": 91
+          },
+          {
+            "group": "microsoftonline.com",
+            "false_positives": 5,
+            "clean_rows": 5
+          },
+          {
+            "group": "apple.com",
+            "false_positives": 3,
+            "clean_rows": 6
+          },
+          {
+            "group": "dateandtime.info",
+            "false_positives": 1,
+            "clean_rows": 1
+          },
+          {
+            "group": "dynu.net",
+            "false_positives": 1,
+            "clean_rows": 1
+          }
+        ]
+      },
+      "threshold_carry_over_by_fold": [
+        {
+          "fold": 0,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.5725,
+          "fpr_at_pooled_threshold": 0.00823,
+          "own_threshold_for_target": 0.71922
+        },
+        {
+          "fold": 1,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.4317,
+          "fpr_at_pooled_threshold": 0.00352,
+          "own_threshold_for_target": 0.68547
+        },
+        {
+          "fold": 2,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.3931,
+          "fpr_at_pooled_threshold": 0.00588,
+          "own_threshold_for_target": 0.69752
+        },
+        {
+          "fold": 3,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.3788,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.63245
+        },
+        {
+          "fold": 4,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.4103,
+          "fpr_at_pooled_threshold": 0.03173,
+          "own_threshold_for_target": 0.78554
+        }
       ]
     },
     "target_fpr_0.001": {
@@ -63,6 +145,72 @@
       "recall_at_target_fpr_reoptimised_ci95": [
         0.17261,
         0.36993
+      ],
+      "exact_binomial_ci95": {
+        "tpr": [
+          0.19606,
+          0.22127
+        ],
+        "fpr": [
+          0.000256,
+          0.002404
+        ],
+        "precision_at_1_in_1000_range": [
+          0.0755,
+          0.4638
+        ]
+      },
+      "false_positive_concentration": {
+        "groups_with_false_positives": 2,
+        "top_groups": [
+          {
+            "group": "microsoftonline.com",
+            "false_positives": 3,
+            "clean_rows": 5
+          },
+          {
+            "group": "ederslik.edu.az",
+            "false_positives": 1,
+            "clean_rows": 1
+          }
+        ]
+      },
+      "threshold_carry_over_by_fold": [
+        {
+          "fold": 0,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.2334,
+          "fpr_at_pooled_threshold": 0.00353,
+          "own_threshold_for_target": 0.84961
+        },
+        {
+          "fold": 1,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.2374,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.80184
+        },
+        {
+          "fold": 2,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.1978,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.84127
+        },
+        {
+          "fold": 3,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.2079,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.6932
+        },
+        {
+          "fold": 4,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.1658,
+          "fpr_at_pooled_threshold": 0.00118,
+          "own_threshold_for_target": 0.91099
+        }
       ]
     }
   },
@@ -100,6 +248,87 @@
       "recall_at_target_fpr_reoptimised_ci95": [
         0.30694,
         0.59594
+      ],
+      "exact_binomial_ci95": {
+        "tpr": [
+          0.39446,
+          0.42594
+        ],
+        "fpr": [
+          0.00712,
+          0.013313
+        ],
+        "precision_at_1_in_1000_range": [
+          0.0288,
+          0.0565
+        ]
+      },
+      "false_positive_concentration": {
+        "groups_with_false_positives": 11,
+        "top_groups": [
+          {
+            "group": "blogspot.com",
+            "false_positives": 26,
+            "clean_rows": 91
+          },
+          {
+            "group": "microsoftonline.com",
+            "false_positives": 5,
+            "clean_rows": 5
+          },
+          {
+            "group": "apple.com",
+            "false_positives": 3,
+            "clean_rows": 6
+          },
+          {
+            "group": "dateandtime.info",
+            "false_positives": 1,
+            "clean_rows": 1
+          },
+          {
+            "group": "dynu.net",
+            "false_positives": 1,
+            "clean_rows": 1
+          }
+        ]
+      },
+      "threshold_carry_over_by_fold": [
+        {
+          "fold": 0,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.4488,
+          "fpr_at_pooled_threshold": 0.00823,
+          "own_threshold_for_target": 0.71922
+        },
+        {
+          "fold": 1,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.4317,
+          "fpr_at_pooled_threshold": 0.00352,
+          "own_threshold_for_target": 0.68547
+        },
+        {
+          "fold": 2,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.3931,
+          "fpr_at_pooled_threshold": 0.00588,
+          "own_threshold_for_target": 0.69752
+        },
+        {
+          "fold": 3,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.3788,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.63245
+        },
+        {
+          "fold": 4,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.4103,
+          "fpr_at_pooled_threshold": 0.03173,
+          "own_threshold_for_target": 0.78554
+        }
       ]
     },
     "target_fpr_0.001": {
@@ -126,6 +355,292 @@
       "recall_at_target_fpr_reoptimised_ci95": [
         0.17467,
         0.35779
+      ],
+      "exact_binomial_ci95": {
+        "tpr": [
+          0.1976,
+          0.22374
+        ],
+        "fpr": [
+          0.000256,
+          0.002404
+        ],
+        "precision_at_1_in_1000_range": [
+          0.076,
+          0.4665
+        ]
+      },
+      "false_positive_concentration": {
+        "groups_with_false_positives": 2,
+        "top_groups": [
+          {
+            "group": "microsoftonline.com",
+            "false_positives": 3,
+            "clean_rows": 5
+          },
+          {
+            "group": "ederslik.edu.az",
+            "false_positives": 1,
+            "clean_rows": 1
+          }
+        ]
+      },
+      "threshold_carry_over_by_fold": [
+        {
+          "fold": 0,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.2585,
+          "fpr_at_pooled_threshold": 0.00353,
+          "own_threshold_for_target": 0.85005
+        },
+        {
+          "fold": 1,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.2374,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.80184
+        },
+        {
+          "fold": 2,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.1978,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.84127
+        },
+        {
+          "fold": 3,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.2079,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.6932
+        },
+        {
+          "fold": 4,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.1658,
+          "fpr_at_pooled_threshold": 0.00118,
+          "own_threshold_for_target": 0.91099
+        }
+      ]
+    }
+  },
+  "probe_without_scheme_and_www": {
+    "rows": 8325,
+    "phishing_rows": 4068,
+    "clean_rows": 4257,
+    "groups": 5130,
+    "auc": 0.9346,
+    "auc_ci95": [
+      0.91724,
+      0.95037
+    ],
+    "target_fpr_0.01": {
+      "threshold": 0.69256,
+      "true_positives": 1815,
+      "false_positives": 42,
+      "tpr": 0.4462,
+      "fpr": 0.00987,
+      "precision_at_1_in_1000": 0.0433,
+      "fixed_threshold_ci95": {
+        "tpr": [
+          0.38807,
+          0.51046
+        ],
+        "fpr": [
+          0.00436,
+          0.01818
+        ],
+        "precision_at_1_in_1000": [
+          0.02417,
+          0.09244
+        ]
+      },
+      "recall_at_target_fpr_reoptimised_ci95": [
+        0.36187,
+        0.57976
+      ],
+      "exact_binomial_ci95": {
+        "tpr": [
+          0.43081,
+          0.4616
+        ],
+        "fpr": [
+          0.00712,
+          0.013313
+        ],
+        "precision_at_1_in_1000_range": [
+          0.0314,
+          0.0609
+        ]
+      },
+      "false_positive_concentration": {
+        "groups_with_false_positives": 24,
+        "top_groups": [
+          {
+            "group": "blogspot.com",
+            "false_positives": 15,
+            "clean_rows": 91
+          },
+          {
+            "group": "microsoftonline.com",
+            "false_positives": 5,
+            "clean_rows": 5
+          },
+          {
+            "group": "bankwest.com.au",
+            "false_positives": 1,
+            "clean_rows": 1
+          },
+          {
+            "group": "apple.com",
+            "false_positives": 1,
+            "clean_rows": 6
+          },
+          {
+            "group": "dateandtime.info",
+            "false_positives": 1,
+            "clean_rows": 1
+          }
+        ]
+      },
+      "threshold_carry_over_by_fold": [
+        {
+          "fold": 0,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.6106,
+          "fpr_at_pooled_threshold": 0.0141,
+          "own_threshold_for_target": 0.76391
+        },
+        {
+          "fold": 1,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.4194,
+          "fpr_at_pooled_threshold": 0.00235,
+          "own_threshold_for_target": 0.62445
+        },
+        {
+          "fold": 2,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.3661,
+          "fpr_at_pooled_threshold": 0.00588,
+          "own_threshold_for_target": 0.65773
+        },
+        {
+          "fold": 3,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.3936,
+          "fpr_at_pooled_threshold": 0.00469,
+          "own_threshold_for_target": 0.58873
+        },
+        {
+          "fold": 4,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.441,
+          "fpr_at_pooled_threshold": 0.02233,
+          "own_threshold_for_target": 0.70962
+        }
+      ]
+    },
+    "target_fpr_0.001": {
+      "threshold": 0.88479,
+      "true_positives": 447,
+      "false_positives": 4,
+      "tpr": 0.1099,
+      "fpr": 0.00094,
+      "precision_at_1_in_1000": 0.1048,
+      "fixed_threshold_ci95": {
+        "tpr": [
+          0.08675,
+          0.1346
+        ],
+        "fpr": [
+          0.00023,
+          0.00196
+        ],
+        "precision_at_1_in_1000": [
+          0.05166,
+          0.34076
+        ]
+      },
+      "recall_at_target_fpr_reoptimised_ci95": [
+        0.06984,
+        0.19656
+      ],
+      "exact_binomial_ci95": {
+        "tpr": [
+          0.10043,
+          0.1199
+        ],
+        "fpr": [
+          0.000256,
+          0.002404
+        ],
+        "precision_at_1_in_1000_range": [
+          0.0401,
+          0.3191
+        ]
+      },
+      "false_positive_concentration": {
+        "groups_with_false_positives": 4,
+        "top_groups": [
+          {
+            "group": "ederslik.edu.az",
+            "false_positives": 1,
+            "clean_rows": 1
+          },
+          {
+            "group": "idevaffiliate.com",
+            "false_positives": 1,
+            "clean_rows": 1
+          },
+          {
+            "group": "quillpad.in",
+            "false_positives": 1,
+            "clean_rows": 1
+          },
+          {
+            "group": "site2design.ir",
+            "false_positives": 1,
+            "clean_rows": 1
+          }
+        ]
+      },
+      "threshold_carry_over_by_fold": [
+        {
+          "fold": 0,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.0971,
+          "fpr_at_pooled_threshold": 0.00235,
+          "own_threshold_for_target": 0.90629
+        },
+        {
+          "fold": 1,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.1513,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.75332
+        },
+        {
+          "fold": 2,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.0897,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.86656
+        },
+        {
+          "fold": 3,
+          "clean_rows": 852,
+          "tpr_at_pooled_threshold": 0.1058,
+          "fpr_at_pooled_threshold": 0.0,
+          "own_threshold_for_target": 0.88574
+        },
+        {
+          "fold": 4,
+          "clean_rows": 851,
+          "tpr_at_pooled_threshold": 0.1057,
+          "fpr_at_pooled_threshold": 0.00235,
+          "own_threshold_for_target": 0.90834
+        }
       ]
     }
   }
