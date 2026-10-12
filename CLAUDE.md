@@ -12,8 +12,8 @@ Read docs/ASSIGNMENT.md first. Report and code comments in English.
 ## Evaluation integrity (hard rules)
 - Labels of data/test.csv and data/external_test.csv are read ONLY in
   src/evaluate.py, run at the end. Overlap analysis may read their URLs only.
-- Validation is split from train.csv, grouped by the platform-level key
-  (registered domain ignoring private suffixes, ADR 0002).
+- Validation is split from train.csv, grouped by the platform-level key (registered
+  domain ignoring private suffixes, ADR 0002). No random split for any reported number.
 - Supplied data never goes into git: data/ is ignored, and no derived copies
   (e.g. a cleaned train.csv) are committed; regenerate them by script.
 
