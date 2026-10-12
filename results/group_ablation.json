@@ -1,0 +1,242 @@
+{
+  "question": "does limiting large groups in training change recall at FPR <= 1%?",
+  "design": "paired: same folds, scored rows and re-optimised threshold rule per variant; 2000 platform-level group resamples (seed 0) per fold seed",
+  "fold_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "training_rows_removed": {
+    "baseline": 0,
+    "without_duilawyeryork": 257
+  },
+  "training_configs_evaluated": {
+    "before_this_experiment": 1,
+    "this_experiment_new": 1,
+    "note": "baseline is unchanged; no variant replaces it (ADR 0003)"
+  },
+  "results": {
+    "fold_seed_0": {
+      "all_rows": {
+        "rows": 8325,
+        "auc": {
+          "baseline": 0.9421,
+          "without_duilawyeryork": 0.9422
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.4373,
+          "without_duilawyeryork": 0.4383
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": 0.001,
+            "group_bootstrap_ci95": [
+              -0.01415,
+              0.01835
+            ],
+            "share_of_resamples_above_0": 0.3495
+          }
+        }
+      },
+      "without_duilawyeryork": {
+        "rows": 8068,
+        "auc": {
+          "baseline": 0.9387,
+          "without_duilawyeryork": 0.9388
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.4101,
+          "without_duilawyeryork": 0.4112
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": 0.001,
+            "group_bootstrap_ci95": [
+              -0.01372,
+              0.01762
+            ],
+            "share_of_resamples_above_0": 0.319
+          }
+        }
+      }
+    },
+    "fold_seed_1": {
+      "all_rows": {
+        "rows": 8325,
+        "auc": {
+          "baseline": 0.944,
+          "without_duilawyeryork": 0.9444
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.4471,
+          "without_duilawyeryork": 0.4582
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": 0.0111,
+            "group_bootstrap_ci95": [
+              -0.00979,
+              0.01561
+            ],
+            "share_of_resamples_above_0": 0.724
+          }
+        }
+      },
+      "without_duilawyeryork": {
+        "rows": 8068,
+        "auc": {
+          "baseline": 0.9407,
+          "without_duilawyeryork": 0.9411
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.4206,
+          "without_duilawyeryork": 0.4324
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": 0.0118,
+            "group_bootstrap_ci95": [
+              -0.01068,
+              0.01615
+            ],
+            "share_of_resamples_above_0": 0.7065
+          }
+        }
+      }
+    },
+    "fold_seed_2": {
+      "all_rows": {
+        "rows": 8325,
+        "auc": {
+          "baseline": 0.9446,
+          "without_duilawyeryork": 0.9453
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.487,
+          "without_duilawyeryork": 0.4931
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": 0.0061,
+            "group_bootstrap_ci95": [
+              -0.00723,
+              0.02219
+            ],
+            "share_of_resamples_above_0": 0.787
+          }
+        }
+      },
+      "without_duilawyeryork": {
+        "rows": 8068,
+        "auc": {
+          "baseline": 0.9411,
+          "without_duilawyeryork": 0.9419
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.4631,
+          "without_duilawyeryork": 0.4694
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": 0.0063,
+            "group_bootstrap_ci95": [
+              -0.00692,
+              0.02194
+            ],
+            "share_of_resamples_above_0": 0.7915
+          }
+        }
+      }
+    },
+    "fold_seed_3": {
+      "all_rows": {
+        "rows": 8325,
+        "auc": {
+          "baseline": 0.9465,
+          "without_duilawyeryork": 0.9467
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.5602,
+          "without_duilawyeryork": 0.5602
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": 0.0,
+            "group_bootstrap_ci95": [
+              -0.00977,
+              0.02105
+            ],
+            "share_of_resamples_above_0": 0.6045
+          }
+        }
+      },
+      "without_duilawyeryork": {
+        "rows": 8068,
+        "auc": {
+          "baseline": 0.9432,
+          "without_duilawyeryork": 0.9434
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.5411,
+          "without_duilawyeryork": 0.5411
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": 0.0,
+            "group_bootstrap_ci95": [
+              -0.01044,
+              0.02465
+            ],
+            "share_of_resamples_above_0": 0.599
+          }
+        }
+      }
+    },
+    "fold_seed_4": {
+      "all_rows": {
+        "rows": 8325,
+        "auc": {
+          "baseline": 0.9426,
+          "without_duilawyeryork": 0.943
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.4383,
+          "without_duilawyeryork": 0.4331
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": -0.0052,
+            "group_bootstrap_ci95": [
+              -0.01105,
+              0.00789
+            ],
+            "share_of_resamples_above_0": 0.2985
+          }
+        }
+      },
+      "without_duilawyeryork": {
+        "rows": 8068,
+        "auc": {
+          "baseline": 0.939,
+          "without_duilawyeryork": 0.9395
+        },
+        "recall_at_fpr_0.01": {
+          "baseline": 0.4112,
+          "without_duilawyeryork": 0.4057
+        },
+        "difference_vs_baseline": {
+          "without_duilawyeryork": {
+            "point": -0.0055,
+            "group_bootstrap_ci95": [
+              -0.01151,
+              0.00694
+            ],
+            "share_of_resamples_above_0": 0.2895
+          }
+        }
+      }
+    }
+  }
+}
