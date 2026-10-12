@@ -35,6 +35,8 @@ No cleaned file is written; `src.clean.load_clean_train()` regenerates it.
   merge purely by path case. Not worth diverging from the external-set rule.
 - Majority vote or "flagged once means phishing" for conflicts: both keep labels
   the data itself shows to be unreliable.
+- Last-in-file or a random representative instead of the first: tested, see
+  Consequences.
 
 ## Consequences
 - 8,651 → 8,325 rows; 4,068 phishing and 4,257 clean. Rule 1 dropped 57
@@ -44,6 +46,16 @@ No cleaned file is written; `src.clean.load_clean_train()` regenerates it.
   legitimate sites). The cleaned data is therefore easier than real traffic, and
   validation metrics on it are optimistic for that slice.
 - Grouped CV already puts duplicates in the same fold, so dedupe changes row
-  weighting, not leakage. After cleaning the largest group is 3.09% of rows,
-  well under the 10% threshold for revisiting the group key.
-- Effect on out-of-fold metrics: not measured yet.
+  weighting, not leakage. After cleaning the largest platform-level group
+  (ADR 0002) is blogspot.com with 3.40% of rows, under the 10% threshold for
+  revisiting the group key.
+- The file order shows no structure (label runs test z = 0.89; per-decile
+  phishing share 47.9-52.8%; `results/eda.json`), so "first in file" is not
+  tied to one feed.
+- Representative choice (`results/controls.json`, platform-level folds held
+  fixed per group): keeping the last or a random copy changes 166 and 94 kept
+  URL strings, OOF AUC 0.9421 / 0.9422 / 0.9417 and recall at FPR <= 1%
+  0.4373 / 0.4373 / 0.4334 for first / last / random; the bare-host
+  no-slash share of phishing stays 29.2% / 29.1% / 29.3%. The choice does not
+  matter materially.
+- Effect of cleaning itself (cleaned vs raw) on OOF metrics: not measured.
