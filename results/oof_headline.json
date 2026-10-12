@@ -1,0 +1,132 @@
+{
+  "source": "data/oof_predictions.csv (src.train, raw URL baseline, registered-domain folds)",
+  "prevalence_assumed": 0.001,
+  "bootstrap": "2000 resamples of registered-domain groups, seed 0, percentile 95% CI; OOF models held fixed, so CIs cover evaluation-sample variation, not retraining",
+  "threshold_rule": "highest TPR with OOF FPR <= target (candidate points, not yet adopted)",
+  "all_groups": {
+    "rows": 8325,
+    "phishing_rows": 4068,
+    "clean_rows": 4257,
+    "groups": 5599,
+    "auc": 0.9491,
+    "auc_ci95": [
+      0.94066,
+      0.95723
+    ],
+    "target_fpr_0.01": {
+      "threshold": 0.68273,
+      "true_positives": 2421,
+      "false_positives": 42,
+      "tpr": 0.5951,
+      "fpr": 0.00987,
+      "precision_at_1_in_1000": 0.0569,
+      "fixed_threshold_ci95": {
+        "tpr": [
+          0.54946,
+          0.63959
+        ],
+        "fpr": [
+          0.00634,
+          0.014
+        ],
+        "precision_at_1_in_1000": [
+          0.04064,
+          0.0848
+        ]
+      },
+      "recall_at_target_fpr_reoptimised_ci95": [
+        0.53725,
+        0.64485
+      ]
+    },
+    "target_fpr_0.001": {
+      "threshold": 0.81832,
+      "true_positives": 1239,
+      "false_positives": 4,
+      "tpr": 0.3046,
+      "fpr": 0.00094,
+      "precision_at_1_in_1000": 0.245,
+      "fixed_threshold_ci95": {
+        "tpr": [
+          0.278,
+          0.33365
+        ],
+        "fpr": [
+          0.00023,
+          0.00195
+        ],
+        "precision_at_1_in_1000": [
+          0.13394,
+          0.58094
+        ]
+      },
+      "recall_at_target_fpr_reoptimised_ci95": [
+        0.2644,
+        0.46137
+      ]
+    }
+  },
+  "scored_without_largest_group": {
+    "rows": 8068,
+    "phishing_rows": 3811,
+    "clean_rows": 4257,
+    "groups": 5598,
+    "auc": 0.9461,
+    "auc_ci95": [
+      0.93912,
+      0.95326
+    ],
+    "target_fpr_0.01": {
+      "threshold": 0.68273,
+      "true_positives": 2204,
+      "false_positives": 42,
+      "tpr": 0.5783,
+      "fpr": 0.00987,
+      "precision_at_1_in_1000": 0.0554,
+      "fixed_threshold_ci95": {
+        "tpr": [
+          0.54034,
+          0.6141
+        ],
+        "fpr": [
+          0.00643,
+          0.01425
+        ],
+        "precision_at_1_in_1000": [
+          0.03899,
+          0.08276
+        ]
+      },
+      "recall_at_target_fpr_reoptimised_ci95": [
+        0.51933,
+        0.62372
+      ]
+    },
+    "target_fpr_0.001": {
+      "threshold": 0.81848,
+      "true_positives": 1184,
+      "false_positives": 4,
+      "tpr": 0.3107,
+      "fpr": 0.00094,
+      "precision_at_1_in_1000": 0.2487,
+      "fixed_threshold_ci95": {
+        "tpr": [
+          0.28374,
+          0.33971
+        ],
+        "fpr": [
+          0.00022,
+          0.00204
+        ],
+        "precision_at_1_in_1000": [
+          0.13276,
+          0.58371
+        ]
+      },
+      "recall_at_target_fpr_reoptimised_ci95": [
+        0.27534,
+        0.44979
+      ]
+    }
+  }
+}

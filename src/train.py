@@ -46,15 +46,27 @@ def oof_probabilities(
     return probs
 
 
-def recall_at_fpr(labels: np.ndarray, probs: np.ndarray, max_fpr: float) -> dict:
-    """Highest recall whose FPR does not exceed max_fpr, with its threshold."""
+def operating_point(
+    labels: np.ndarray, probs: np.ndarray, max_fpr: float
+) -> tuple[float, float, float]:
+    """(threshold, tpr, fpr) with the highest TPR whose FPR does not exceed max_fpr.
+
+    Rows with prob >= threshold are flagged. Values are unrounded.
+    """
     fpr, tpr, thresholds = roc_curve(labels, probs)
-    best = np.flatnonzero(fpr <= max_fpr)[np.argmax(tpr[fpr <= max_fpr])]
+    allowed = np.flatnonzero(fpr <= max_fpr)
+    best = allowed[np.argmax(tpr[allowed])]
+    return float(thresholds[best]), float(tpr[best]), float(fpr[best])
+
+
+def recall_at_fpr(labels: np.ndarray, probs: np.ndarray, max_fpr: float) -> dict:
+    """Highest recall whose FPR does not exceed max_fpr, with its threshold (rounded)."""
+    threshold, tpr, fpr = operating_point(labels, probs, max_fpr)
     return {
         "max_fpr": max_fpr,
-        "recall": round(float(tpr[best]), 4),
-        "fpr": round(float(fpr[best]), 4),
-        "threshold": round(float(thresholds[best]), 4),
+        "recall": round(tpr, 4),
+        "fpr": round(fpr, 4),
+        "threshold": round(threshold, 4),
     }
 
 
