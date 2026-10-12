@@ -12,14 +12,15 @@ Read docs/ASSIGNMENT.md first. Report and code comments in English.
 ## Evaluation integrity (hard rules)
 - Labels of data/test.csv and data/external_test.csv are read ONLY in
   src/evaluate.py, run at the end. Overlap analysis may read their URLs only.
-- Validation is split from train.csv, grouped by registered domain.
-  No random split for any reported number.
+- Validation is split from train.csv, grouped by the platform-level key
+  (registered domain ignoring private suffixes, ADR 0002).
 - Supplied data never goes into git: data/ is ignored, and no derived copies
   (e.g. a cleaned train.csv) are committed; regenerate them by script.
 
 ## Data handling order
 1. Clean first (exact duplicates, conflicting labels, malformed rows); log rows affected.
-2. Define groups (registered domain), then split with StratifiedGroupKFold.
+2. Define groups with the platform-level key (registered domain ignoring private
+   suffixes, ADR 0002), then split with StratifiedGroupKFold (shuffle=True, fixed seed).
 3. Anything that learns from data (TF-IDF vocab/idf, scalers, encoders, target
    encoding, imputation, calibration) is fit on the training fold only, inside
    an sklearn Pipeline. Stateless per-row features may be computed before the split.
