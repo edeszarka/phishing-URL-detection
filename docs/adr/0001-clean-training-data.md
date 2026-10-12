@@ -39,7 +39,7 @@ No cleaned file is written; `src.clean.load_clean_train()` regenerates it.
 ## Consequences
 - 8,651 → 8,325 rows; 4,068 phishing and 4,257 clean. Rule 1 dropped 57
   phishing / 50 clean rows; rule 2 dropped 205 phishing / 14 clean rows, so
-  near-duplicates sit almost entirely in the phishing feeds.
+  normalized duplicates sit almost entirely in the phishing feeds.
 - Dropping conflicts removes exactly the ambiguous cases (e.g. compromised
   legitimate sites). The cleaned data is therefore easier than real traffic, and
   validation metrics on it are optimistic for that slice.
