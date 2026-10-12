@@ -4,11 +4,12 @@ import json
 from pathlib import Path
 from urllib.parse import urlsplit
 
+import numpy as np
 import pandas as pd
 
 from src.clean import load_clean_train, load_raw, rule2_pairs
 from src.features import prepare_url_without_scheme_and_www
-from src.groups import _EXTRACT, group_key
+from src.groups import _EXTRACT, group_key, registry_domain
 
 ROOT = Path(__file__).resolve().parent.parent
 QUANTILES = [0.1, 0.25, 0.5, 0.75, 0.9]
@@ -140,12 +141,6 @@ def is_bare_host(url: str) -> bool:
     return parts.path in ("", "/") and not parts.query and not parts.fragment
 
 
-def registry_domain(url: str) -> str:
-    """Domain under the ICANN suffix, ignoring private suffixes (x.netlify.app -> netlify.app)."""
-    ext = _EXTRACT(url.strip().lower())
-    return ext.ipv4 or ext.ipv6 or ext.top_domain_under_registry_suffix or "none"
-
-
 def group_support(df: pd.DataFrame) -> dict:
     """How many distinct groups stand behind the rows of `df`, per class."""
     sizes = df["group"].value_counts()
@@ -224,10 +219,60 @@ def dropped_duplicate_profile(pairs: pd.DataFrame, top_n: int = 5) -> dict:
     return result
 
 
+def label_runs_test(labels: np.ndarray) -> dict:
+    """Wald-Wolfowitz runs test: z near 0 is consistent with random order."""
+    n = labels.size
+    n1 = int(labels.sum())
+    n0 = n - n1
+    runs = 1 + int(np.count_nonzero(labels[1:] != labels[:-1]))
+    expected = 2 * n1 * n0 / n + 1
+    variance = (expected - 1) * (expected - 2) / (n - 1)
+    return {
+        "runs": runs,
+        "expected_runs": round(expected, 1),
+        "z": round((runs - expected) / variance**0.5, 2),
+    }
+
+
+def file_order_profile(raw: pd.DataFrame, n_bins: int = 10) -> dict:
+    """Label, https and www shares along file position (raw file order)."""
+    profile = pd.DataFrame(raw["url"].map(url_profile).tolist())
+    df = pd.DataFrame(
+        {
+            "label": raw["label"].astype(int).to_numpy(),
+            "https": (profile["scheme"] == "https").to_numpy(),
+            "www": profile["has_www"].to_numpy(),
+            "bin": np.arange(len(raw)) * n_bins // len(raw),
+        }
+    )
+    rows = []
+    for position, part in df.groupby("bin"):
+        by_class = part.groupby("label")[["https", "www"]].mean()
+        rows.append(
+            {
+                "decile": int(position),
+                "rows": len(part),
+                "phishing_share": round(part["label"].mean(), 4),
+                "https_share_clean": round(by_class.loc[0, "https"], 4),
+                "https_share_phishing": round(by_class.loc[1, "https"], 4),
+                "www_share_clean": round(by_class.loc[0, "www"], 4),
+                "www_share_phishing": round(by_class.loc[1, "www"], 4),
+            }
+        )
+    return {"deciles": rows, "label_runs": label_runs_test(df["label"].to_numpy())}
+
+
+def profile_frame(df: pd.DataFrame) -> pd.DataFrame:
+    """Rows of `df` with url_profile columns and the group key attached."""
+    profiled = pd.concat([df, pd.DataFrame(df["url"].map(url_profile).tolist())], axis=1)
+    profiled["group"] = profiled["url"].map(lambda u: group_key(u)[0])
+    return profiled
+
+
 def main() -> None:
     train = load_clean_train()
-    profiled = pd.concat([train, pd.DataFrame(train["url"].map(url_profile).tolist())], axis=1)
-    profiled["group"] = profiled["url"].map(lambda u: group_key(u)[0])
+    raw = load_raw(ROOT / "data" / "train.csv")
+    profiled = profile_frame(train)
     empty_path = profiled[profiled["path_state"] != "nonempty"]
     result = {
         "input": "data/train.csv after cleaning (ADR 0001)",
@@ -236,9 +281,8 @@ def main() -> None:
         "google_com": domain_breakdown(train, "google.com"),
         "tld_group_support": tld_support(profiled, ["app", "ip", "fr", "edu"]),
         "bare_host_trailing_slash": bare_host_trailing_slash(profiled),
-        "rule2_dropped_duplicates": dropped_duplicate_profile(
-            rule2_pairs(load_raw(ROOT / "data" / "train.csv"))
-        ),
+        "rule2_dropped_duplicates": dropped_duplicate_profile(rule2_pairs(raw)),
+        "file_order_raw": file_order_profile(raw),
     }
     out = ROOT / "results" / "eda.json"
     out.parent.mkdir(exist_ok=True)

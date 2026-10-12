@@ -14,8 +14,10 @@ import json
 import re
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
+from src.features import SEED
 from src.groups import group_key, group_summary
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -90,14 +92,22 @@ def label_counts(labels: pd.Series) -> dict:
     return {str(k): int(v) for k, v in labels.value_counts().sort_index().items()}
 
 
-def rule_masks(df: pd.DataFrame) -> tuple[pd.Series, pd.Series, pd.Series]:
-    """Normalised key, rule-1 mask (conflict) and rule-2 mask (later copy).
+def is_redundant_copy(key: pd.Series, keep: str) -> pd.Series:
+    """True for every row except the representative of its key.
 
-    The rule-2 mask is only meaningful on rows outside the rule-1 mask.
+    keep: 'first' or 'last' in file order, or 'random' (seeded).
     """
+    if keep in ("first", "last"):
+        return key.duplicated(keep=keep)
+    order = np.random.default_rng(SEED).permutation(len(key))
+    return key.iloc[order].duplicated(keep="first").reindex(key.index)
+
+
+def rule_masks(df: pd.DataFrame, keep: str = "first") -> tuple[pd.Series, pd.Series, pd.Series]:
+    """Normalised key, rule-1 mask (conflict) and rule-2 mask (non-representative copy)."""
     key = df["url"].map(normalize_url)
     in_conflict = df.groupby(key)["label"].transform("nunique") > 1
-    is_copy = key.where(~in_conflict).duplicated(keep="first") & ~in_conflict
+    is_copy = is_redundant_copy(key.where(~in_conflict), keep) & ~in_conflict
     return key, in_conflict, is_copy
 
 
@@ -115,9 +125,12 @@ def rule2_pairs(df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def clean_train(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
-    """Apply the cleaning rules; return cleaned rows (int labels) and a log."""
-    key, in_conflict, is_copy = rule_masks(df)
+def clean_train(df: pd.DataFrame, keep: str = "first") -> tuple[pd.DataFrame, dict]:
+    """Apply the cleaning rules; return cleaned rows (int labels) and a log.
+
+    keep="first" is the adopted rule (ADR 0001); other values are sensitivity checks.
+    """
+    key, in_conflict, is_copy = rule_masks(df, keep)
     kept = df[~in_conflict]
     is_copy = is_copy[~in_conflict]
     cleaned = kept[~is_copy].reset_index(drop=True).astype({"label": int})

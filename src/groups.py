@@ -3,6 +3,7 @@
 PSL private suffixes count as public suffixes, so alice.github.io and
 bob.github.io are separate groups. IP hosts are their own group. URLs with no
 recognisable registered domain fall back to the whole lower-cased string.
+registry_domain() is the coarser control key that ignores private suffixes.
 Uses tldextract's bundled suffix-list snapshot; never touches the network.
 """
 
@@ -27,6 +28,12 @@ def group_key(url: str) -> tuple[str, str]:
     if ext.top_domain_under_public_suffix:
         return ext.top_domain_under_public_suffix, "domain"
     return text, "fallback"
+
+
+def registry_domain(url: str) -> str:
+    """Domain under the ICANN suffix, ignoring private suffixes (x.netlify.app -> netlify.app)."""
+    ext = _EXTRACT(url.strip().lower())
+    return ext.ipv4 or ext.ipv6 or ext.top_domain_under_registry_suffix or url.strip().lower()
 
 
 def group_summary(df: pd.DataFrame, top_n: int = 5) -> dict:

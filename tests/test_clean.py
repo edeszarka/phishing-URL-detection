@@ -62,3 +62,13 @@ def test_rule2_pairs_point_at_kept_representative():
     assert pairs.to_dict(orient="records") == [
         {"dropped_url": "https://a.com/x/", "kept_url": "http://A.com/X", "label": 1}
     ]
+
+
+def test_representative_choice_keeps_one_row_per_key():
+    df = pd.DataFrame(
+        {"url": ["http://a.com/x", "https://a.com/x/", "http://a.com/x/"], "label": ["1"] * 3}
+    )
+    assert clean_train(df, "first")[0]["url"].tolist() == ["http://a.com/x"]
+    assert clean_train(df, "last")[0]["url"].tolist() == ["http://a.com/x/"]
+    random_pick = clean_train(df, "random")[0]["url"].tolist()
+    assert len(random_pick) == 1 and random_pick == clean_train(df, "random")[0]["url"].tolist()

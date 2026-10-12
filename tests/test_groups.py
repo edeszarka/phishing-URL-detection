@@ -1,4 +1,4 @@
-from src.groups import group_key
+from src.groups import group_key, registry_domain
 
 
 def test_subdomains_share_registered_domain():
@@ -45,3 +45,8 @@ def test_garbage_inputs_fall_back_without_raising():
         key, kind = group_key(garbage)
         assert kind == "fallback"
         assert key == garbage.strip().lower()
+
+
+def test_registry_domain_falls_back_like_group_key():
+    assert registry_domain("Not A URL") == "not a url"
+    assert registry_domain("https://a.netlify.app") == registry_domain("https://b.netlify.app")

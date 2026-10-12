@@ -1,12 +1,13 @@
 import pandas as pd
 
+from src.groups import registry_domain
 from src.inspect_data import (
     domain_breakdown,
     duplicate_difference,
     host_and_first_segment,
     is_bare_host,
+    label_runs_test,
     path_state,
-    registry_domain,
     top_level_domain,
     url_profile,
 )
@@ -77,3 +78,12 @@ def test_duplicate_difference_names_each_part():
 def test_registry_domain_ignores_private_suffix():
     assert registry_domain("https://musing-villani.netlify.app/") == "netlify.app"
     assert registry_domain("http://10.0.0.1/x") == "10.0.0.1"
+
+
+def test_label_runs_test_flags_sorted_order():
+    import numpy as np
+
+    sorted_labels = np.array([0] * 50 + [1] * 50)
+    alternating = np.array([0, 1] * 50)
+    assert label_runs_test(sorted_labels)["z"] < -5
+    assert label_runs_test(alternating)["z"] > 5
