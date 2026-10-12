@@ -5,6 +5,7 @@ from src.clean import (
     duplicate_counts,
     normalize_url,
     normalize_url_keep_path_case,
+    rule2_pairs,
 )
 
 
@@ -48,3 +49,16 @@ def test_clean_drops_conflicts_before_dedupe_and_keeps_first_original():
     assert cleaned["label"].tolist() == [1, 0]
     assert (log["rule1_rows_dropped"], log["rule2_rows_dropped"]) == (3, 1)
     assert log["option_c_keep_path_case"]["rows_merged_only_by_path_case"] == 1
+
+
+def test_rule2_pairs_point_at_kept_representative():
+    df = pd.DataFrame(
+        {
+            "url": ["http://A.com/X", "https://a.com/x/", "http://c.com", "https://c.com/"],
+            "label": ["1", "1", "0", "1"],
+        }
+    )
+    pairs = rule2_pairs(df)
+    assert pairs.to_dict(orient="records") == [
+        {"dropped_url": "https://a.com/x/", "kept_url": "http://A.com/X", "label": 1}
+    ]

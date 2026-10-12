@@ -90,12 +90,36 @@ def label_counts(labels: pd.Series) -> dict:
     return {str(k): int(v) for k, v in labels.value_counts().sort_index().items()}
 
 
-def clean_train(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
-    """Apply the cleaning rules; return cleaned rows (int labels) and a log."""
+def rule_masks(df: pd.DataFrame) -> tuple[pd.Series, pd.Series, pd.Series]:
+    """Normalised key, rule-1 mask (conflict) and rule-2 mask (later copy).
+
+    The rule-2 mask is only meaningful on rows outside the rule-1 mask.
+    """
     key = df["url"].map(normalize_url)
     in_conflict = df.groupby(key)["label"].transform("nunique") > 1
-    kept, kept_key = df[~in_conflict], key[~in_conflict]
-    is_copy = kept_key.duplicated(keep="first")
+    is_copy = key.where(~in_conflict).duplicated(keep="first") & ~in_conflict
+    return key, in_conflict, is_copy
+
+
+def rule2_pairs(df: pd.DataFrame) -> pd.DataFrame:
+    """Each row dropped by rule 2 next to the kept row of the same key."""
+    key, in_conflict, is_copy = rule_masks(df)
+    representative = df[~in_conflict & ~is_copy].assign(key=key).set_index("key")["url"]
+    dropped = df[is_copy]
+    return pd.DataFrame(
+        {
+            "dropped_url": dropped["url"].to_numpy(),
+            "kept_url": key[is_copy].map(representative).to_numpy(),
+            "label": dropped["label"].astype(int).to_numpy(),
+        }
+    )
+
+
+def clean_train(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+    """Apply the cleaning rules; return cleaned rows (int labels) and a log."""
+    key, in_conflict, is_copy = rule_masks(df)
+    kept = df[~in_conflict]
+    is_copy = is_copy[~in_conflict]
     cleaned = kept[~is_copy].reset_index(drop=True).astype({"label": int})
 
     case_kept_copies = kept["url"].map(normalize_url_keep_path_case).duplicated().sum()
