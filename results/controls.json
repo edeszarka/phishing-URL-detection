@@ -1,0 +1,382 @@
+{
+  "rule2_representative": {
+    "first": {
+      "rows": 8325,
+      "urls_not_in_first_variant": 0,
+      "oof_raw_url": {
+        "rows": 8325,
+        "phishing_rows": 4068,
+        "pooled_auc": 0.9491,
+        "per_fold_auc": [
+          0.9597,
+          0.9427,
+          0.9631,
+          0.945,
+          0.9353
+        ],
+        "per_fold_auc_std": 0.0105,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5951,
+          "fpr": 0.0099,
+          "threshold": 0.6827
+        }
+      },
+      "bare_host_trailing_slash": {
+        "rows_by_label": {
+          "label_0": 1590,
+          "label_1": 750
+        },
+        "path_state": {
+          "none": {
+            "label_0": {
+              "rows": 259,
+              "share_of_class": 0.1629
+            },
+            "label_1": {
+              "rows": 219,
+              "share_of_class": 0.292
+            }
+          },
+          "slash": {
+            "label_0": {
+              "rows": 1331,
+              "share_of_class": 0.8371
+            },
+            "label_1": {
+              "rows": 531,
+              "share_of_class": 0.708
+            }
+          }
+        },
+        "groups_by_path_state": {
+          "none": {
+            "rows": 478,
+            "phishing_rows": 219,
+            "distinct_groups": 419,
+            "distinct_phishing_groups": 190,
+            "distinct_clean_groups": 229,
+            "distinct_registry_domains": 272,
+            "top_registry_domains": {
+              "blogspot.com": 139,
+              "tumblr.com": 24,
+              "hop.ru": 11
+            },
+            "largest_group": {
+              "group": "tumblr.com",
+              "rows": 24
+            }
+          },
+          "slash": {
+            "rows": 1862,
+            "phishing_rows": 531,
+            "distinct_groups": 1714,
+            "distinct_phishing_groups": 425,
+            "distinct_clean_groups": 1292,
+            "distinct_registry_domains": 1501,
+            "top_registry_domains": {
+              "blogspot.com": 127,
+              "appspot.com": 38,
+              "wordpress.com": 28
+            },
+            "largest_group": {
+              "group": "wordpress.com",
+              "rows": 28
+            }
+          }
+        }
+      }
+    },
+    "last": {
+      "rows": 8325,
+      "urls_not_in_first_variant": 166,
+      "oof_raw_url": {
+        "rows": 8325,
+        "phishing_rows": 4068,
+        "pooled_auc": 0.9492,
+        "per_fold_auc": [
+          0.9604,
+          0.9436,
+          0.9628,
+          0.9441,
+          0.9352
+        ],
+        "per_fold_auc_std": 0.0106,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5946,
+          "fpr": 0.0096,
+          "threshold": 0.6833
+        }
+      },
+      "bare_host_trailing_slash": {
+        "rows_by_label": {
+          "label_0": 1590,
+          "label_1": 750
+        },
+        "path_state": {
+          "none": {
+            "label_0": {
+              "rows": 259,
+              "share_of_class": 0.1629
+            },
+            "label_1": {
+              "rows": 218,
+              "share_of_class": 0.2907
+            }
+          },
+          "slash": {
+            "label_0": {
+              "rows": 1331,
+              "share_of_class": 0.8371
+            },
+            "label_1": {
+              "rows": 532,
+              "share_of_class": 0.7093
+            }
+          }
+        },
+        "groups_by_path_state": {
+          "none": {
+            "rows": 477,
+            "phishing_rows": 218,
+            "distinct_groups": 418,
+            "distinct_phishing_groups": 189,
+            "distinct_clean_groups": 229,
+            "distinct_registry_domains": 269,
+            "top_registry_domains": {
+              "blogspot.com": 140,
+              "tumblr.com": 24,
+              "hop.ru": 11
+            },
+            "largest_group": {
+              "group": "tumblr.com",
+              "rows": 24
+            }
+          },
+          "slash": {
+            "rows": 1863,
+            "phishing_rows": 532,
+            "distinct_groups": 1715,
+            "distinct_phishing_groups": 426,
+            "distinct_clean_groups": 1292,
+            "distinct_registry_domains": 1504,
+            "top_registry_domains": {
+              "blogspot.com": 126,
+              "appspot.com": 38,
+              "wordpress.com": 28
+            },
+            "largest_group": {
+              "group": "wordpress.com",
+              "rows": 28
+            }
+          }
+        }
+      }
+    },
+    "random": {
+      "rows": 8325,
+      "urls_not_in_first_variant": 94,
+      "oof_raw_url": {
+        "rows": 8325,
+        "phishing_rows": 4068,
+        "pooled_auc": 0.949,
+        "per_fold_auc": [
+          0.9595,
+          0.9429,
+          0.963,
+          0.9445,
+          0.935
+        ],
+        "per_fold_auc_std": 0.0106,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5944,
+          "fpr": 0.0099,
+          "threshold": 0.6837
+        }
+      },
+      "bare_host_trailing_slash": {
+        "rows_by_label": {
+          "label_0": 1590,
+          "label_1": 750
+        },
+        "path_state": {
+          "none": {
+            "label_0": {
+              "rows": 259,
+              "share_of_class": 0.1629
+            },
+            "label_1": {
+              "rows": 220,
+              "share_of_class": 0.2933
+            }
+          },
+          "slash": {
+            "label_0": {
+              "rows": 1331,
+              "share_of_class": 0.8371
+            },
+            "label_1": {
+              "rows": 530,
+              "share_of_class": 0.7067
+            }
+          }
+        },
+        "groups_by_path_state": {
+          "none": {
+            "rows": 479,
+            "phishing_rows": 220,
+            "distinct_groups": 419,
+            "distinct_phishing_groups": 190,
+            "distinct_clean_groups": 229,
+            "distinct_registry_domains": 270,
+            "top_registry_domains": {
+              "blogspot.com": 140,
+              "tumblr.com": 24,
+              "hop.ru": 11
+            },
+            "largest_group": {
+              "group": "tumblr.com",
+              "rows": 24
+            }
+          },
+          "slash": {
+            "rows": 1861,
+            "phishing_rows": 530,
+            "distinct_groups": 1714,
+            "distinct_phishing_groups": 425,
+            "distinct_clean_groups": 1292,
+            "distinct_registry_domains": 1503,
+            "top_registry_domains": {
+              "blogspot.com": 126,
+              "appspot.com": 38,
+              "wordpress.com": 28
+            },
+            "largest_group": {
+              "group": "wordpress.com",
+              "rows": 28
+            }
+          }
+        }
+      }
+    }
+  },
+  "group_key": {
+    "rows_where_keys_differ": 650,
+    "registered_domain": {
+      "groups": 5599,
+      "top_groups": [
+        {
+          "group": "duilawyeryork.com",
+          "rows": 257,
+          "share_of_rows": 0.0309
+        },
+        {
+          "group": "wikipedia.org",
+          "rows": 134,
+          "share_of_rows": 0.0161
+        },
+        {
+          "group": "google.com",
+          "rows": 107,
+          "share_of_rows": 0.0129
+        },
+        {
+          "group": "tumblr.com",
+          "rows": 64,
+          "share_of_rows": 0.0077
+        },
+        {
+          "group": "wordpress.com",
+          "rows": 54,
+          "share_of_rows": 0.0065
+        }
+      ],
+      "max_group_share_exceeds_10pct": false,
+      "oof_raw_url": {
+        "rows": 8325,
+        "phishing_rows": 4068,
+        "pooled_auc": 0.9491,
+        "per_fold_auc": [
+          0.9597,
+          0.9427,
+          0.9631,
+          0.945,
+          0.9353
+        ],
+        "per_fold_auc_std": 0.0105,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5951,
+          "fpr": 0.0099,
+          "threshold": 0.6827
+        }
+      },
+      "rows_where_keys_differ": {
+        "rows": 650,
+        "phishing_rows": 538,
+        "pooled_auc": 0.9,
+        "mean_prob_phishing": 0.8032,
+        "mean_prob_clean": 0.5429
+      }
+    },
+    "registry_domain": {
+      "groups": 5130,
+      "top_groups": [
+        {
+          "group": "blogspot.com",
+          "rows": 283,
+          "share_of_rows": 0.034
+        },
+        {
+          "group": "duilawyeryork.com",
+          "rows": 257,
+          "share_of_rows": 0.0309
+        },
+        {
+          "group": "appspot.com",
+          "rows": 196,
+          "share_of_rows": 0.0235
+        },
+        {
+          "group": "wikipedia.org",
+          "rows": 134,
+          "share_of_rows": 0.0161
+        },
+        {
+          "group": "google.com",
+          "rows": 107,
+          "share_of_rows": 0.0129
+        }
+      ],
+      "max_group_share_exceeds_10pct": false,
+      "oof_raw_url": {
+        "rows": 8325,
+        "phishing_rows": 4068,
+        "pooled_auc": 0.9421,
+        "per_fold_auc": [
+          0.9455,
+          0.9568,
+          0.9523,
+          0.9624,
+          0.8968
+        ],
+        "per_fold_auc_std": 0.0236,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.4373,
+          "fpr": 0.0099,
+          "threshold": 0.7496
+        }
+      },
+      "rows_where_keys_differ": {
+        "rows": 650,
+        "phishing_rows": 538,
+        "pooled_auc": 0.6092,
+        "mean_prob_phishing": 0.7244,
+        "mean_prob_clean": 0.6704
+      }
+    }
+  }
+}
