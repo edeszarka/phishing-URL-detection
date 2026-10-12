@@ -1,0 +1,461 @@
+{
+  "input": "data/train.csv after cleaning (ADR 0001)",
+  "model": "char 3-5-gram TF-IDF (sublinear, lowercase=False) + LogisticRegression(C=1)",
+  "hyperparameter_configs_tried": 1,
+  "cv": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=0)",
+  "group_key": "registered domain (src.groups.group_key)",
+  "reporting_fpr_note": "recall_at_fpr is a reporting point, not the operating threshold",
+  "largest_group": "duilawyeryork.com",
+  "results": {
+    "raw_url": {
+      "all_groups": {
+        "rows": 8325,
+        "phishing_rows": 4068,
+        "pooled_auc": 0.9491,
+        "per_fold_auc": [
+          0.9597,
+          0.9427,
+          0.9631,
+          0.945,
+          0.9353
+        ],
+        "per_fold_auc_std": 0.0105,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5951,
+          "fpr": 0.0099,
+          "threshold": 0.6827
+        }
+      },
+      "all_groups_scored_without_largest": {
+        "rows": 8068,
+        "phishing_rows": 3811,
+        "pooled_auc": 0.9461,
+        "per_fold_auc": [
+          0.9427,
+          0.9427,
+          0.9631,
+          0.945,
+          0.9353
+        ],
+        "per_fold_auc_std": 0.0093,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5783,
+          "fpr": 0.0099,
+          "threshold": 0.6827
+        }
+      },
+      "without_largest_group": {
+        "rows": 8068,
+        "phishing_rows": 3811,
+        "pooled_auc": 0.9459,
+        "per_fold_auc": [
+          0.9455,
+          0.9372,
+          0.9481,
+          0.9522,
+          0.9471
+        ],
+        "per_fold_auc_std": 0.0049,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5796,
+          "fpr": 0.0099,
+          "threshold": 0.6821
+        }
+      },
+      "top_ngrams_full_fit": {
+        "phishing": [
+          [
+            "php",
+            2.725
+          ],
+          [
+            ".php",
+            2.717
+          ],
+          [
+            ".ph",
+            2.629
+          ],
+          [
+            "app",
+            2.361
+          ],
+          [
+            "gin",
+            1.973
+          ],
+          [
+            "ogin",
+            1.888
+          ],
+          [
+            "mail",
+            1.873
+          ],
+          [
+            "/wp",
+            1.726
+          ],
+          [
+            "ogi",
+            1.692
+          ],
+          [
+            "login",
+            1.686
+          ],
+          [
+            "mai",
+            1.679
+          ],
+          [
+            "wp-",
+            1.642
+          ],
+          [
+            "/wp-",
+            1.612
+          ],
+          [
+            "ail",
+            1.567
+          ],
+          [
+            "web",
+            1.548
+          ],
+          [
+            "logi",
+            1.51
+          ],
+          [
+            ".ap",
+            1.51
+          ],
+          [
+            ".app",
+            1.49
+          ],
+          [
+            "/log",
+            1.42
+          ],
+          [
+            "/lo",
+            1.36
+          ]
+        ],
+        "clean": [
+          [
+            "//www",
+            -4.089
+          ],
+          [
+            "://ww",
+            -4.065
+          ],
+          [
+            "//ww",
+            -4.065
+          ],
+          [
+            "/www.",
+            -3.992
+          ],
+          [
+            "www.",
+            -3.967
+          ],
+          [
+            "ww.",
+            -3.962
+          ],
+          [
+            "://w",
+            -3.951
+          ],
+          [
+            "//w",
+            -3.951
+          ],
+          [
+            "/www",
+            -3.934
+          ],
+          [
+            "/ww",
+            -3.904
+          ],
+          [
+            "www",
+            -3.882
+          ],
+          [
+            "s://w",
+            -3.54
+          ],
+          [
+            ".pdf",
+            -2.209
+          ],
+          [
+            ".pd",
+            -2.196
+          ],
+          [
+            "pdf",
+            -2.098
+          ],
+          [
+            "p://w",
+            -2.065
+          ],
+          [
+            "wiki",
+            -1.791
+          ],
+          [
+            "iki",
+            -1.783
+          ],
+          [
+            "wik",
+            -1.71
+          ],
+          [
+            ".or",
+            -1.699
+          ]
+        ]
+      }
+    },
+    "without_scheme_and_www": {
+      "all_groups": {
+        "rows": 8325,
+        "phishing_rows": 4068,
+        "pooled_auc": 0.9417,
+        "per_fold_auc": [
+          0.963,
+          0.9356,
+          0.9491,
+          0.9366,
+          0.9237
+        ],
+        "per_fold_auc_std": 0.0134,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5415,
+          "fpr": 0.0099,
+          "threshold": 0.6642
+        }
+      },
+      "all_groups_scored_without_largest": {
+        "rows": 8068,
+        "phishing_rows": 3811,
+        "pooled_auc": 0.9382,
+        "per_fold_auc": [
+          0.9474,
+          0.9356,
+          0.9491,
+          0.9366,
+          0.9237
+        ],
+        "per_fold_auc_std": 0.0092,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.5135,
+          "fpr": 0.0099,
+          "threshold": 0.6642
+        }
+      },
+      "without_largest_group": {
+        "rows": 8068,
+        "phishing_rows": 3811,
+        "pooled_auc": 0.9382,
+        "per_fold_auc": [
+          0.9403,
+          0.9416,
+          0.9375,
+          0.9405,
+          0.9318
+        ],
+        "per_fold_auc_std": 0.0035,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.513,
+          "fpr": 0.0099,
+          "threshold": 0.6553
+        }
+      },
+      "top_ngrams_full_fit": {
+        "phishing": [
+          [
+            ".php",
+            3.173
+          ],
+          [
+            "php",
+            3.169
+          ],
+          [
+            ".ph",
+            3.125
+          ],
+          [
+            "app",
+            2.936
+          ],
+          [
+            "mail",
+            2.384
+          ],
+          [
+            "gin",
+            2.276
+          ],
+          [
+            "ogin",
+            2.195
+          ],
+          [
+            "mai",
+            2.16
+          ],
+          [
+            "ogi",
+            2.011
+          ],
+          [
+            "ail",
+            1.994
+          ],
+          [
+            "login",
+            1.983
+          ],
+          [
+            "/wp",
+            1.957
+          ],
+          [
+            ".ap",
+            1.866
+          ],
+          [
+            "web",
+            1.855
+          ],
+          [
+            ".app",
+            1.839
+          ],
+          [
+            "wp-",
+            1.825
+          ],
+          [
+            "logi",
+            1.811
+          ],
+          [
+            "/wp-",
+            1.796
+          ],
+          [
+            "/log",
+            1.674
+          ],
+          [
+            "/lo",
+            1.621
+          ]
+        ],
+        "clean": [
+          [
+            ".com/",
+            -2.998
+          ],
+          [
+            "om/",
+            -2.951
+          ],
+          [
+            "com/",
+            -2.948
+          ],
+          [
+            "com",
+            -2.428
+          ],
+          [
+            ".com",
+            -2.368
+          ],
+          [
+            ".co",
+            -2.215
+          ],
+          [
+            ".or",
+            -2.073
+          ],
+          [
+            "org",
+            -2.054
+          ],
+          [
+            ".pdf",
+            -2.003
+          ],
+          [
+            ".org",
+            -1.999
+          ],
+          [
+            ".pd",
+            -1.983
+          ],
+          [
+            ".org/",
+            -1.966
+          ],
+          [
+            "rg/",
+            -1.931
+          ],
+          [
+            "org/",
+            -1.926
+          ],
+          [
+            "pdf",
+            -1.906
+          ],
+          [
+            "iki",
+            -1.672
+          ],
+          [
+            "wiki",
+            -1.663
+          ],
+          [
+            "ter",
+            -1.631
+          ],
+          [
+            ".de/",
+            -1.561
+          ],
+          [
+            "wik",
+            -1.552
+          ]
+        ]
+      }
+    }
+  }
+}
