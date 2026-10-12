@@ -1,47 +1,55 @@
-from src.groups import group_key
+from src.groups import key_kind, platform_group_key, tenant_group_key
+
+BOTH_KEYS = (tenant_group_key, platform_group_key)
 
 
-def test_subdomains_share_registered_domain():
-    assert group_key("https://login.evil.co.uk/a")[0] == group_key("pay.evil.co.uk")[0]
+def test_subdomains_share_a_group_under_both_keys():
+    for key in BOTH_KEYS:
+        assert key("https://login.evil.co.uk/a") == key("pay.evil.co.uk") == "evil.co.uk"
 
 
-def test_private_suffix_splits_tenants():
-    assert group_key("http://alice.github.io")[0] != group_key("http://bob.github.io")[0]
+def test_private_suffix_tenants_split_only_at_tenant_level():
+    assert tenant_group_key("http://alice.github.io") != tenant_group_key("http://bob.github.io")
+    assert platform_group_key("http://alice.github.io") == "github.io"
+    assert platform_group_key("https://a.netlify.app") == platform_group_key(
+        "https://b.netlify.app"
+    )
 
 
 def test_ip_host_is_own_group():
-    assert group_key("http://192.168.0.1/login") == ("192.168.0.1", "ip")
-
-
-def test_unparseable_falls_back_without_raising():
-    assert group_key("")[1] == "fallback"
-    assert group_key("not a url")[1] == "fallback"
+    for key in BOTH_KEYS:
+        assert key("http://192.168.0.1/login") == "192.168.0.1"
+        assert key("10.0.0.1/admin") == "10.0.0.1"
+        assert key("http://[::1]:8080/x") == "::1"
+    assert key_kind("http://192.168.0.1/login") == "ip"
 
 
 def test_scheme_less_matches_schemed():
-    assert group_key("www.example.co.uk/path") == group_key("https://www.example.co.uk/x")
-    assert group_key("www.example.co.uk/path") == ("example.co.uk", "domain")
+    for key in BOTH_KEYS:
+        assert key("www.example.co.uk/path") == key("https://www.example.co.uk/x")
 
 
 def test_scheme_less_deceptive_subdomain_uses_real_domain():
-    assert group_key("PayPal.com.evil.tk/login") == ("evil.tk", "domain")
+    for key in BOTH_KEYS:
+        assert key("PayPal.com.evil.tk/login") == "evil.tk"
 
 
-def test_case_and_whitespace_do_not_change_group():
-    assert group_key("  HTTP://Login.Evil.TK/A ") == group_key("http://login.evil.tk/a")
-
-
-def test_userinfo_and_port_are_ignored():
-    assert group_key("http://user@evil.tk:443/x") == ("evil.tk", "domain")
-
-
-def test_scheme_less_ip_and_ipv6():
-    assert group_key("10.0.0.1/admin") == ("10.0.0.1", "ip")
-    assert group_key("http://[::1]:8080/x") == ("::1", "ip")
+def test_case_whitespace_userinfo_and_port_are_ignored():
+    for key in BOTH_KEYS:
+        assert key("  HTTP://Login.Evil.TK/A ") == key("http://user@evil.tk:443/x") == "evil.tk"
 
 
 def test_garbage_inputs_fall_back_without_raising():
-    for garbage in ["   ", "http://", "@@@", "\x00\n", "javascript:alert(1)", "a" * 5000]:
-        key, kind = group_key(garbage)
-        assert kind == "fallback"
-        assert key == garbage.strip().lower()
+    for garbage in [
+        "",
+        "   ",
+        "not a url",
+        "http://",
+        "@@@",
+        "\x00\n",
+        "javascript:alert(1)",
+        "a" * 5000,
+    ]:
+        assert key_kind(garbage) == "fallback"
+        for key in BOTH_KEYS:
+            assert key(garbage) == garbage.strip().lower()

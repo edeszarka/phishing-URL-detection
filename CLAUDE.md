@@ -46,6 +46,7 @@ Read docs/ASSIGNMENT.md first. Report and code comments in English.
   model artifact, predictions.csv and results/ MUST stay tracked: do not ignore
   *.pkl/*.joblib. Never read or print .env. Before every commit run
   `git ls-files | grep -E "^data/|\.env$"` and abort if it matches.
+- One branch per phase or experiment, merge with --no-ff, never delete failed experiment branches, never squash.
 
 ## ADRs
 - docs/adr/NNNN-title.md: Status, Context (observation with numbers), Decision,

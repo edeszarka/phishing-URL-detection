@@ -1,8 +1,12 @@
 import pandas as pd
 
+from src.groups import platform_group_key
 from src.inspect_data import (
     domain_breakdown,
+    duplicate_difference,
     host_and_first_segment,
+    is_bare_host,
+    label_runs_test,
     path_state,
     top_level_domain,
     url_profile,
@@ -55,3 +59,31 @@ def test_domain_breakdown_counts_hosts():
     result = domain_breakdown(df, "google.com")
     assert (result["rows"], result["phishing_rows"]) == (3, 2)
     assert result["by_host"][0] == {"host": "docs.google.com", "rows": 2, "phishing_rows": 2}
+
+
+def test_is_bare_host():
+    assert is_bare_host("http://a.com") and is_bare_host("https://www.a.com/")
+    assert not is_bare_host("http://a.com/?q=1")
+    assert not is_bare_host("http://a.com/x")
+
+
+def test_duplicate_difference_names_each_part():
+    assert duplicate_difference("http://a.com/x/", "http://a.com/x") == "trailing_slash"
+    assert duplicate_difference("https://www.a.com/X", "http://a.com/x/") == (
+        "scheme+www+trailing_slash+case"
+    )
+    assert duplicate_difference("http://a.com", "http://a.com") == "identical"
+
+
+def test_platform_group_key_ignores_private_suffix():
+    assert platform_group_key("https://musing-villani.netlify.app/") == "netlify.app"
+    assert platform_group_key("http://10.0.0.1/x") == "10.0.0.1"
+
+
+def test_label_runs_test_flags_sorted_order():
+    import numpy as np
+
+    sorted_labels = np.array([0] * 50 + [1] * 50)
+    alternating = np.array([0, 1] * 50)
+    assert label_runs_test(sorted_labels)["z"] < -5
+    assert label_runs_test(alternating)["z"] > 5

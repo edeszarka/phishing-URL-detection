@@ -575,5 +575,390 @@
         "phishing_rows": 0
       }
     ]
+  },
+  "tld_group_support": {
+    "app": {
+      "all_rows": {
+        "rows": 32,
+        "phishing_rows": 32,
+        "distinct_groups": 5,
+        "distinct_phishing_groups": 5,
+        "distinct_clean_groups": 0,
+        "distinct_tenant_groups": 32,
+        "distinct_platform_groups": 5,
+        "top_platform_groups": {
+          "netlify.app": 14,
+          "web.app": 7,
+          "csb.app": 6
+        },
+        "largest_group": {
+          "group": "netlify.app",
+          "rows": 14
+        }
+      },
+      "empty_path_rows": {
+        "rows": 30,
+        "phishing_rows": 30,
+        "distinct_groups": 4,
+        "distinct_phishing_groups": 4,
+        "distinct_clean_groups": 0,
+        "distinct_tenant_groups": 30,
+        "distinct_platform_groups": 4,
+        "top_platform_groups": {
+          "netlify.app": 14,
+          "web.app": 7,
+          "csb.app": 5
+        },
+        "largest_group": {
+          "group": "netlify.app",
+          "rows": 14
+        }
+      }
+    },
+    "ip": {
+      "all_rows": {
+        "rows": 81,
+        "phishing_rows": 81,
+        "distinct_groups": 58,
+        "distinct_phishing_groups": 58,
+        "distinct_clean_groups": 0,
+        "distinct_tenant_groups": 58,
+        "distinct_platform_groups": 58,
+        "top_platform_groups": {
+          "78.143.96.35": 8,
+          "107.180.44.78": 4,
+          "98.126.214.77": 3
+        },
+        "largest_group": {
+          "group": "78.143.96.35",
+          "rows": 8
+        }
+      },
+      "empty_path_rows": {
+        "rows": 11,
+        "phishing_rows": 11,
+        "distinct_groups": 11,
+        "distinct_phishing_groups": 11,
+        "distinct_clean_groups": 0,
+        "distinct_tenant_groups": 11,
+        "distinct_platform_groups": 11,
+        "top_platform_groups": {
+          "31.3.88.166": 1,
+          "189.36.52.206": 1,
+          "178.33.67.12": 1
+        },
+        "largest_group": {
+          "group": "31.3.88.166",
+          "rows": 1
+        }
+      }
+    },
+    "fr": {
+      "all_rows": {
+        "rows": 70,
+        "phishing_rows": 55,
+        "distinct_groups": 44,
+        "distinct_phishing_groups": 29,
+        "distinct_clean_groups": 15,
+        "distinct_tenant_groups": 44,
+        "distinct_platform_groups": 44,
+        "top_platform_groups": {
+          "courgeon-immobilier.fr": 15,
+          "free.fr": 6,
+          "citrulline.fr": 3
+        },
+        "largest_group": {
+          "group": "courgeon-immobilier.fr",
+          "rows": 15
+        }
+      },
+      "empty_path_rows": {
+        "rows": 15,
+        "phishing_rows": 3,
+        "distinct_groups": 15,
+        "distinct_phishing_groups": 3,
+        "distinct_clean_groups": 12,
+        "distinct_tenant_groups": 15,
+        "distinct_platform_groups": 15,
+        "top_platform_groups": {
+          "marches-publics.gouv.fr": 1,
+          "lyoncapitale.fr": 1,
+          "lachambredezoe.fr": 1
+        },
+        "largest_group": {
+          "group": "marches-publics.gouv.fr",
+          "rows": 1
+        }
+      }
+    },
+    "edu": {
+      "all_rows": {
+        "rows": 65,
+        "phishing_rows": 2,
+        "distinct_groups": 50,
+        "distinct_phishing_groups": 2,
+        "distinct_clean_groups": 48,
+        "distinct_tenant_groups": 50,
+        "distinct_platform_groups": 50,
+        "top_platform_groups": {
+          "stanford.edu": 4,
+          "dartmouth.edu": 3,
+          "usf.edu": 3
+        },
+        "largest_group": {
+          "group": "stanford.edu",
+          "rows": 4
+        }
+      },
+      "empty_path_rows": {
+        "rows": 2,
+        "phishing_rows": 0,
+        "distinct_groups": 2,
+        "distinct_phishing_groups": 0,
+        "distinct_clean_groups": 2,
+        "distinct_tenant_groups": 2,
+        "distinct_platform_groups": 2,
+        "top_platform_groups": {
+          "richmond.edu": 1,
+          "gtc.edu": 1
+        },
+        "largest_group": {
+          "group": "richmond.edu",
+          "rows": 1
+        }
+      }
+    }
+  },
+  "bare_host_trailing_slash": {
+    "rows_by_label": {
+      "label_0": 1590,
+      "label_1": 750
+    },
+    "path_state": {
+      "none": {
+        "label_0": {
+          "rows": 259,
+          "share_of_class": 0.1629
+        },
+        "label_1": {
+          "rows": 219,
+          "share_of_class": 0.292
+        }
+      },
+      "slash": {
+        "label_0": {
+          "rows": 1331,
+          "share_of_class": 0.8371
+        },
+        "label_1": {
+          "rows": 531,
+          "share_of_class": 0.708
+        }
+      }
+    },
+    "groups_by_path_state": {
+      "none": {
+        "rows": 478,
+        "phishing_rows": 219,
+        "distinct_groups": 272,
+        "distinct_phishing_groups": 72,
+        "distinct_clean_groups": 201,
+        "distinct_tenant_groups": 419,
+        "distinct_platform_groups": 272,
+        "top_platform_groups": {
+          "blogspot.com": 139,
+          "tumblr.com": 24,
+          "hop.ru": 11
+        },
+        "largest_group": {
+          "group": "blogspot.com",
+          "rows": 139
+        }
+      },
+      "slash": {
+        "rows": 1862,
+        "phishing_rows": 531,
+        "distinct_groups": 1501,
+        "distinct_phishing_groups": 281,
+        "distinct_clean_groups": 1226,
+        "distinct_tenant_groups": 1714,
+        "distinct_platform_groups": 1501,
+        "top_platform_groups": {
+          "blogspot.com": 127,
+          "appspot.com": 38,
+          "wordpress.com": 28
+        },
+        "largest_group": {
+          "group": "blogspot.com",
+          "rows": 127
+        }
+      }
+    }
+  },
+  "rule2_dropped_duplicates": {
+    "label_0": {
+      "rows": 14,
+      "difference_types": {
+        "identical": 14
+      },
+      "distinct_groups": 14,
+      "top_groups": [
+        {
+          "group": "electricaltechnology.org",
+          "rows": 1
+        },
+        {
+          "group": "thrillist.com",
+          "rows": 1
+        },
+        {
+          "group": "webopedia.com",
+          "rows": 1
+        },
+        {
+          "group": "jelqgym.com",
+          "rows": 1
+        },
+        {
+          "group": "slideshare.net",
+          "rows": 1
+        }
+      ]
+    },
+    "label_1": {
+      "rows": 205,
+      "difference_types": {
+        "trailing_slash": 75,
+        "scheme": 42,
+        "www": 41,
+        "identical": 17,
+        "www+trailing_slash": 14,
+        "scheme+trailing_slash": 8,
+        "scheme+www": 6,
+        "case": 2
+      },
+      "distinct_groups": 131,
+      "top_groups": [
+        {
+          "group": "codesandbox.io",
+          "rows": 16
+        },
+        {
+          "group": "justlookapp.com",
+          "rows": 13
+        },
+        {
+          "group": "stolizaparketa.ru",
+          "rows": 13
+        },
+        {
+          "group": "zabor-vn.com",
+          "rows": 5
+        },
+        {
+          "group": "my-free.website",
+          "rows": 5
+        }
+      ]
+    }
+  },
+  "file_order_raw": {
+    "deciles": [
+      {
+        "decile": 0,
+        "rows": 866,
+        "phishing_share": 0.4919,
+        "https_share_clean": 0.4636,
+        "https_share_phishing": 0.3192,
+        "www_share_clean": 0.6773,
+        "www_share_phishing": 0.223
+      },
+      {
+        "decile": 1,
+        "rows": 865,
+        "phishing_share": 0.5283,
+        "https_share_clean": 0.473,
+        "https_share_phishing": 0.3063,
+        "www_share_clean": 0.6863,
+        "www_share_phishing": 0.1969
+      },
+      {
+        "decile": 2,
+        "rows": 865,
+        "phishing_share": 0.5179,
+        "https_share_clean": 0.4532,
+        "https_share_phishing": 0.3415,
+        "www_share_clean": 0.6595,
+        "www_share_phishing": 0.2165
+      },
+      {
+        "decile": 3,
+        "rows": 865,
+        "phishing_share": 0.5145,
+        "https_share_clean": 0.4262,
+        "https_share_phishing": 0.3326,
+        "www_share_clean": 0.6119,
+        "www_share_phishing": 0.2045
+      },
+      {
+        "decile": 4,
+        "rows": 865,
+        "phishing_share": 0.4879,
+        "https_share_clean": 0.4221,
+        "https_share_phishing": 0.3318,
+        "www_share_clean": 0.6591,
+        "www_share_phishing": 0.2133
+      },
+      {
+        "decile": 5,
+        "rows": 865,
+        "phishing_share": 0.4948,
+        "https_share_clean": 0.4577,
+        "https_share_phishing": 0.3505,
+        "www_share_clean": 0.6613,
+        "www_share_phishing": 0.2033
+      },
+      {
+        "decile": 6,
+        "rows": 865,
+        "phishing_share": 0.4983,
+        "https_share_clean": 0.4124,
+        "https_share_phishing": 0.3434,
+        "www_share_clean": 0.6521,
+        "www_share_phishing": 0.2065
+      },
+      {
+        "decile": 7,
+        "rows": 865,
+        "phishing_share": 0.4786,
+        "https_share_clean": 0.4368,
+        "https_share_phishing": 0.3478,
+        "www_share_clean": 0.6674,
+        "www_share_phishing": 0.1957
+      },
+      {
+        "decile": 8,
+        "rows": 865,
+        "phishing_share": 0.4867,
+        "https_share_clean": 0.4324,
+        "https_share_phishing": 0.3064,
+        "www_share_clean": 0.6441,
+        "www_share_phishing": 0.2257
+      },
+      {
+        "decile": 9,
+        "rows": 865,
+        "phishing_share": 0.5064,
+        "https_share_clean": 0.4309,
+        "https_share_phishing": 0.3288,
+        "www_share_clean": 0.6721,
+        "www_share_phishing": 0.2009
+      }
+    ],
+    "label_runs": {
+      "runs": 4368,
+      "expected_runs": 4326.5,
+      "z": 0.89
+    }
   }
 }
