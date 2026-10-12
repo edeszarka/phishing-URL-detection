@@ -13,7 +13,7 @@ import pandas as pd
 from sklearn.metrics import roc_auc_score, roc_curve
 
 from src.features import SEED
-from src.train import LARGEST_GROUP, operating_point
+from src.train import ABLATION_GROUP, operating_point
 
 ROOT = Path(__file__).resolve().parent.parent
 PREVALENCE = 0.001
@@ -102,19 +102,19 @@ def headline(labels: np.ndarray, probs: np.ndarray, groups: np.ndarray) -> dict:
 
 def main() -> None:
     oof = pd.read_csv(ROOT / "data" / "oof_predictions.csv")
-    without = oof[oof["group"] != LARGEST_GROUP]
+    without = oof[oof["group"] != ABLATION_GROUP]
     report = {
-        "source": "data/oof_predictions.csv (src.train, raw URL baseline, tenant-level folds)",
+        "source": "data/oof_predictions.csv (src.train, raw URL, platform-level folds, ADR 0002)",
         "prevalence_assumed": PREVALENCE,
         "bootstrap": (
-            f"{N_BOOTSTRAP} resamples of tenant-level groups, seed {SEED}, percentile 95% CI;"
+            f"{N_BOOTSTRAP} resamples of platform-level groups, seed {SEED}, percentile 95% CI;"
             " OOF models held fixed, so CIs cover evaluation-sample variation, not retraining"
         ),
         "threshold_rule": "highest TPR with OOF FPR <= target (candidate points, not yet adopted)",
         "all_groups": headline(
             oof["label"].to_numpy(), oof[PROB_COLUMN].to_numpy(), oof["group"].to_numpy()
         ),
-        "scored_without_largest_group": headline(
+        "scored_without_duilawyeryork": headline(
             without["label"].to_numpy(),
             without[PROB_COLUMN].to_numpy(),
             without["group"].to_numpy(),

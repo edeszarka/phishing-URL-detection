@@ -56,18 +56,30 @@
   },
   "groups_after_cleaning": {
     "rows": 8325,
-    "groups": 5599,
-    "singleton_groups": 4889,
+    "groups": 5130,
+    "singleton_groups": 4443,
     "key_kind_rows": {
       "domain": 8244,
       "ip": 81
     },
     "top_groups": [
       {
+        "group": "blogspot.com",
+        "rows": 283,
+        "share_of_rows": 0.034,
+        "phishing_rows": 192
+      },
+      {
         "group": "duilawyeryork.com",
         "rows": 257,
         "share_of_rows": 0.0309,
         "phishing_rows": 257
+      },
+      {
+        "group": "appspot.com",
+        "rows": 196,
+        "share_of_rows": 0.0235,
+        "phishing_rows": 196
       },
       {
         "group": "wikipedia.org",
@@ -80,22 +92,10 @@
         "rows": 107,
         "share_of_rows": 0.0129,
         "phishing_rows": 92
-      },
-      {
-        "group": "tumblr.com",
-        "rows": 64,
-        "share_of_rows": 0.0077,
-        "phishing_rows": 5
-      },
-      {
-        "group": "wordpress.com",
-        "rows": 54,
-        "share_of_rows": 0.0065,
-        "phishing_rows": 0
       }
     ],
     "max_group_share_exceeds_10pct": false
   },
-  "max_group_share": 0.0309,
+  "max_group_share": 0.034,
   "max_group_share_exceeds_10pct": false
 }

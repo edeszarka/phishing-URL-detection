@@ -16,12 +16,13 @@ from sklearn.pipeline import Pipeline
 
 from src.clean import load_clean_train
 from src.features import SEED, build_pipeline
-from src.groups import tenant_group_key
+from src.groups import cv_group_key
 
 ROOT = Path(__file__).resolve().parent.parent
 N_FOLDS = 5
 REPORTING_FPR = 0.01
-LARGEST_GROUP = "duilawyeryork.com"
+# Ablation group (decision 2d): 257 rows after cleaning, all phishing.
+ABLATION_GROUP = "duilawyeryork.com"
 INPUT_VARIANTS = {"raw_url": False, "without_scheme_and_www": True}
 
 
@@ -94,8 +95,8 @@ def top_ngrams(model: Pipeline, n: int = 20) -> dict:
 
 
 def run_ablations(df: pd.DataFrame) -> tuple[dict, pd.DataFrame]:
-    """OOF metrics for each input variant on all groups and without the largest."""
-    subsets = {"all_groups": df, "without_largest_group": df[df["group"] != LARGEST_GROUP]}
+    """OOF metrics for each input variant on all groups and without ABLATION_GROUP."""
+    subsets = {"all_groups": df, "without_duilawyeryork": df[df["group"] != ABLATION_GROUP]}
     folds = {name: assign_folds(s["label"], s["group"]) for name, s in subsets.items()}
     results: dict = {}
     oof = df[["label", "group"]].assign(fold=folds["all_groups"])
@@ -107,8 +108,8 @@ def run_ablations(df: pd.DataFrame) -> tuple[dict, pd.DataFrame]:
             results[variant][name] = summarize(labels, probs, folds[name])
             if name == "all_groups":
                 oof[f"prob_{variant}"] = probs
-                keep = (subset["group"] != LARGEST_GROUP).to_numpy()
-                results[variant]["all_groups_scored_without_largest"] = summarize(
+                keep = (subset["group"] != ABLATION_GROUP).to_numpy()
+                results[variant]["all_groups_scored_without_duilawyeryork"] = summarize(
                     labels[keep], probs[keep], folds[name][keep]
                 )
         results[variant]["top_ngrams_full_fit"] = top_ngrams(
@@ -119,16 +120,16 @@ def run_ablations(df: pd.DataFrame) -> tuple[dict, pd.DataFrame]:
 
 def main() -> None:
     df = load_clean_train()
-    df["group"] = df["url"].map(tenant_group_key)
+    df["group"] = df["url"].map(cv_group_key)
     results, oof = run_ablations(df)
     report = {
         "input": "data/train.csv after cleaning (ADR 0001)",
         "model": "char 3-5-gram TF-IDF (sublinear, lowercase=False) + LogisticRegression(C=1)",
         "hyperparameter_configs_tried": 1,
         "cv": f"StratifiedGroupKFold(n_splits={N_FOLDS}, shuffle=True, random_state={SEED})",
-        "group_key": "tenant-level (src.groups.tenant_group_key)",
+        "group_key": "platform-level (src.groups.cv_group_key, ADR 0002)",
         "reporting_fpr_note": "recall_at_fpr is a reporting point, not the operating threshold",
-        "largest_group": LARGEST_GROUP,
+        "ablation_group": ABLATION_GROUP,
         "results": results,
     }
     out = ROOT / "results" / "baseline_oof.json"

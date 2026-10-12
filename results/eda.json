@@ -581,8 +581,8 @@
       "all_rows": {
         "rows": 32,
         "phishing_rows": 32,
-        "distinct_groups": 32,
-        "distinct_phishing_groups": 32,
+        "distinct_groups": 5,
+        "distinct_phishing_groups": 5,
         "distinct_clean_groups": 0,
         "distinct_tenant_groups": 32,
         "distinct_platform_groups": 5,
@@ -592,15 +592,15 @@
           "csb.app": 6
         },
         "largest_group": {
-          "group": "musing-villani-4a7781.netlify.app",
-          "rows": 1
+          "group": "netlify.app",
+          "rows": 14
         }
       },
       "empty_path_rows": {
         "rows": 30,
         "phishing_rows": 30,
-        "distinct_groups": 30,
-        "distinct_phishing_groups": 30,
+        "distinct_groups": 4,
+        "distinct_phishing_groups": 4,
         "distinct_clean_groups": 0,
         "distinct_tenant_groups": 30,
         "distinct_platform_groups": 4,
@@ -610,8 +610,8 @@
           "csb.app": 5
         },
         "largest_group": {
-          "group": "musing-villani-4a7781.netlify.app",
-          "rows": 1
+          "group": "netlify.app",
+          "rows": 14
         }
       }
     },
@@ -760,9 +760,9 @@
       "none": {
         "rows": 478,
         "phishing_rows": 219,
-        "distinct_groups": 419,
-        "distinct_phishing_groups": 190,
-        "distinct_clean_groups": 229,
+        "distinct_groups": 272,
+        "distinct_phishing_groups": 72,
+        "distinct_clean_groups": 201,
         "distinct_tenant_groups": 419,
         "distinct_platform_groups": 272,
         "top_platform_groups": {
@@ -771,16 +771,16 @@
           "hop.ru": 11
         },
         "largest_group": {
-          "group": "tumblr.com",
-          "rows": 24
+          "group": "blogspot.com",
+          "rows": 139
         }
       },
       "slash": {
         "rows": 1862,
         "phishing_rows": 531,
-        "distinct_groups": 1714,
-        "distinct_phishing_groups": 425,
-        "distinct_clean_groups": 1292,
+        "distinct_groups": 1501,
+        "distinct_phishing_groups": 281,
+        "distinct_clean_groups": 1226,
         "distinct_tenant_groups": 1714,
         "distinct_platform_groups": 1501,
         "top_platform_groups": {
@@ -789,8 +789,8 @@
           "wordpress.com": 28
         },
         "largest_group": {
-          "group": "wordpress.com",
-          "rows": 28
+          "group": "blogspot.com",
+          "rows": 127
         }
       }
     }
@@ -837,7 +837,7 @@
         "scheme+www": 6,
         "case": 2
       },
-      "distinct_groups": 135,
+      "distinct_groups": 131,
       "top_groups": [
         {
           "group": "codesandbox.io",

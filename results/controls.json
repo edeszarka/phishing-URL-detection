@@ -6,20 +6,20 @@
       "oof_raw_url": {
         "rows": 8325,
         "phishing_rows": 4068,
-        "pooled_auc": 0.9491,
+        "pooled_auc": 0.9421,
         "per_fold_auc": [
-          0.9597,
-          0.9427,
-          0.9631,
-          0.945,
-          0.9353
+          0.9455,
+          0.9568,
+          0.9523,
+          0.9624,
+          0.8968
         ],
-        "per_fold_auc_std": 0.0105,
+        "per_fold_auc_std": 0.0236,
         "recall_at_fpr": {
           "max_fpr": 0.01,
-          "recall": 0.5951,
+          "recall": 0.4373,
           "fpr": 0.0099,
-          "threshold": 0.6827
+          "threshold": 0.7496
         }
       },
       "bare_host_trailing_slash": {
@@ -53,9 +53,9 @@
           "none": {
             "rows": 478,
             "phishing_rows": 219,
-            "distinct_groups": 419,
-            "distinct_phishing_groups": 190,
-            "distinct_clean_groups": 229,
+            "distinct_groups": 272,
+            "distinct_phishing_groups": 72,
+            "distinct_clean_groups": 201,
             "distinct_tenant_groups": 419,
             "distinct_platform_groups": 272,
             "top_platform_groups": {
@@ -64,16 +64,16 @@
               "hop.ru": 11
             },
             "largest_group": {
-              "group": "tumblr.com",
-              "rows": 24
+              "group": "blogspot.com",
+              "rows": 139
             }
           },
           "slash": {
             "rows": 1862,
             "phishing_rows": 531,
-            "distinct_groups": 1714,
-            "distinct_phishing_groups": 425,
-            "distinct_clean_groups": 1292,
+            "distinct_groups": 1501,
+            "distinct_phishing_groups": 281,
+            "distinct_clean_groups": 1226,
             "distinct_tenant_groups": 1714,
             "distinct_platform_groups": 1501,
             "top_platform_groups": {
@@ -82,8 +82,8 @@
               "wordpress.com": 28
             },
             "largest_group": {
-              "group": "wordpress.com",
-              "rows": 28
+              "group": "blogspot.com",
+              "rows": 127
             }
           }
         }
@@ -95,20 +95,20 @@
       "oof_raw_url": {
         "rows": 8325,
         "phishing_rows": 4068,
-        "pooled_auc": 0.9492,
+        "pooled_auc": 0.9422,
         "per_fold_auc": [
-          0.9604,
-          0.9436,
-          0.9628,
-          0.9441,
-          0.9352
+          0.9458,
+          0.9558,
+          0.9521,
+          0.963,
+          0.8976
         ],
-        "per_fold_auc_std": 0.0106,
+        "per_fold_auc_std": 0.0233,
         "recall_at_fpr": {
           "max_fpr": 0.01,
-          "recall": 0.5946,
-          "fpr": 0.0096,
-          "threshold": 0.6833
+          "recall": 0.4373,
+          "fpr": 0.0099,
+          "threshold": 0.75
         }
       },
       "bare_host_trailing_slash": {
@@ -142,9 +142,9 @@
           "none": {
             "rows": 477,
             "phishing_rows": 218,
-            "distinct_groups": 418,
-            "distinct_phishing_groups": 189,
-            "distinct_clean_groups": 229,
+            "distinct_groups": 269,
+            "distinct_phishing_groups": 69,
+            "distinct_clean_groups": 201,
             "distinct_tenant_groups": 418,
             "distinct_platform_groups": 269,
             "top_platform_groups": {
@@ -153,16 +153,16 @@
               "hop.ru": 11
             },
             "largest_group": {
-              "group": "tumblr.com",
-              "rows": 24
+              "group": "blogspot.com",
+              "rows": 140
             }
           },
           "slash": {
             "rows": 1863,
             "phishing_rows": 532,
-            "distinct_groups": 1715,
-            "distinct_phishing_groups": 426,
-            "distinct_clean_groups": 1292,
+            "distinct_groups": 1504,
+            "distinct_phishing_groups": 284,
+            "distinct_clean_groups": 1226,
             "distinct_tenant_groups": 1715,
             "distinct_platform_groups": 1504,
             "top_platform_groups": {
@@ -171,8 +171,8 @@
               "wordpress.com": 28
             },
             "largest_group": {
-              "group": "wordpress.com",
-              "rows": 28
+              "group": "blogspot.com",
+              "rows": 126
             }
           }
         }
@@ -184,20 +184,20 @@
       "oof_raw_url": {
         "rows": 8325,
         "phishing_rows": 4068,
-        "pooled_auc": 0.949,
+        "pooled_auc": 0.9417,
         "per_fold_auc": [
-          0.9595,
-          0.9429,
+          0.945,
+          0.9561,
+          0.9518,
           0.963,
-          0.9445,
-          0.935
+          0.8965
         ],
-        "per_fold_auc_std": 0.0106,
+        "per_fold_auc_std": 0.0237,
         "recall_at_fpr": {
           "max_fpr": 0.01,
-          "recall": 0.5944,
+          "recall": 0.4334,
           "fpr": 0.0099,
-          "threshold": 0.6837
+          "threshold": 0.7524
         }
       },
       "bare_host_trailing_slash": {
@@ -231,9 +231,9 @@
           "none": {
             "rows": 479,
             "phishing_rows": 220,
-            "distinct_groups": 419,
-            "distinct_phishing_groups": 190,
-            "distinct_clean_groups": 229,
+            "distinct_groups": 270,
+            "distinct_phishing_groups": 70,
+            "distinct_clean_groups": 201,
             "distinct_tenant_groups": 419,
             "distinct_platform_groups": 270,
             "top_platform_groups": {
@@ -242,16 +242,16 @@
               "hop.ru": 11
             },
             "largest_group": {
-              "group": "tumblr.com",
-              "rows": 24
+              "group": "blogspot.com",
+              "rows": 140
             }
           },
           "slash": {
             "rows": 1861,
             "phishing_rows": 530,
-            "distinct_groups": 1714,
-            "distinct_phishing_groups": 425,
-            "distinct_clean_groups": 1292,
+            "distinct_groups": 1503,
+            "distinct_phishing_groups": 283,
+            "distinct_clean_groups": 1226,
             "distinct_tenant_groups": 1714,
             "distinct_platform_groups": 1503,
             "top_platform_groups": {
@@ -260,8 +260,8 @@
               "wordpress.com": 28
             },
             "largest_group": {
-              "group": "wordpress.com",
-              "rows": 28
+              "group": "blogspot.com",
+              "rows": 126
             }
           }
         }

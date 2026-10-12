@@ -3,66 +3,66 @@
   "model": "char 3-5-gram TF-IDF (sublinear, lowercase=False) + LogisticRegression(C=1)",
   "hyperparameter_configs_tried": 1,
   "cv": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=0)",
-  "group_key": "tenant-level (src.groups.tenant_group_key)",
+  "group_key": "platform-level (src.groups.cv_group_key, ADR 0002)",
   "reporting_fpr_note": "recall_at_fpr is a reporting point, not the operating threshold",
-  "largest_group": "duilawyeryork.com",
+  "ablation_group": "duilawyeryork.com",
   "results": {
     "raw_url": {
       "all_groups": {
         "rows": 8325,
         "phishing_rows": 4068,
-        "pooled_auc": 0.9491,
-        "per_fold_auc": [
-          0.9597,
-          0.9427,
-          0.9631,
-          0.945,
-          0.9353
-        ],
-        "per_fold_auc_std": 0.0105,
-        "recall_at_fpr": {
-          "max_fpr": 0.01,
-          "recall": 0.5951,
-          "fpr": 0.0099,
-          "threshold": 0.6827
-        }
-      },
-      "all_groups_scored_without_largest": {
-        "rows": 8068,
-        "phishing_rows": 3811,
-        "pooled_auc": 0.9461,
-        "per_fold_auc": [
-          0.9427,
-          0.9427,
-          0.9631,
-          0.945,
-          0.9353
-        ],
-        "per_fold_auc_std": 0.0093,
-        "recall_at_fpr": {
-          "max_fpr": 0.01,
-          "recall": 0.5783,
-          "fpr": 0.0099,
-          "threshold": 0.6827
-        }
-      },
-      "without_largest_group": {
-        "rows": 8068,
-        "phishing_rows": 3811,
-        "pooled_auc": 0.9459,
+        "pooled_auc": 0.9421,
         "per_fold_auc": [
           0.9455,
-          0.9372,
-          0.9481,
-          0.9522,
-          0.9471
+          0.9568,
+          0.9523,
+          0.9624,
+          0.8968
         ],
-        "per_fold_auc_std": 0.0049,
+        "per_fold_auc_std": 0.0236,
         "recall_at_fpr": {
           "max_fpr": 0.01,
-          "recall": 0.5796,
+          "recall": 0.4373,
           "fpr": 0.0099,
-          "threshold": 0.6821
+          "threshold": 0.7496
+        }
+      },
+      "all_groups_scored_without_duilawyeryork": {
+        "rows": 8068,
+        "phishing_rows": 3811,
+        "pooled_auc": 0.9387,
+        "per_fold_auc": [
+          0.9242,
+          0.9568,
+          0.9523,
+          0.9624,
+          0.8968
+        ],
+        "per_fold_auc_std": 0.0247,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.4101,
+          "fpr": 0.0099,
+          "threshold": 0.7496
+        }
+      },
+      "without_duilawyeryork": {
+        "rows": 8068,
+        "phishing_rows": 3811,
+        "pooled_auc": 0.9412,
+        "per_fold_auc": [
+          0.953,
+          0.9537,
+          0.9143,
+          0.9485,
+          0.9429
+        ],
+        "per_fold_auc_std": 0.0146,
+        "recall_at_fpr": {
+          "max_fpr": 0.01,
+          "recall": 0.4671,
+          "fpr": 0.0096,
+          "threshold": 0.7131
         }
       },
       "top_ngrams_full_fit": {
@@ -236,58 +236,58 @@
       "all_groups": {
         "rows": 8325,
         "phishing_rows": 4068,
-        "pooled_auc": 0.9417,
+        "pooled_auc": 0.9346,
         "per_fold_auc": [
-          0.963,
-          0.9356,
-          0.9491,
-          0.9366,
-          0.9237
+          0.9451,
+          0.9515,
+          0.9273,
+          0.9543,
+          0.909
         ],
-        "per_fold_auc_std": 0.0134,
+        "per_fold_auc_std": 0.017,
         "recall_at_fpr": {
           "max_fpr": 0.01,
-          "recall": 0.5415,
+          "recall": 0.4462,
           "fpr": 0.0099,
-          "threshold": 0.6642
+          "threshold": 0.6926
         }
       },
-      "all_groups_scored_without_largest": {
+      "all_groups_scored_without_duilawyeryork": {
         "rows": 8068,
         "phishing_rows": 3811,
-        "pooled_auc": 0.9382,
+        "pooled_auc": 0.9306,
         "per_fold_auc": [
-          0.9474,
-          0.9356,
-          0.9491,
-          0.9366,
-          0.9237
+          0.9255,
+          0.9515,
+          0.9273,
+          0.9543,
+          0.909
         ],
-        "per_fold_auc_std": 0.0092,
+        "per_fold_auc_std": 0.0171,
         "recall_at_fpr": {
           "max_fpr": 0.01,
-          "recall": 0.5135,
+          "recall": 0.4143,
           "fpr": 0.0099,
-          "threshold": 0.6642
+          "threshold": 0.6926
         }
       },
-      "without_largest_group": {
+      "without_duilawyeryork": {
         "rows": 8068,
         "phishing_rows": 3811,
-        "pooled_auc": 0.9382,
+        "pooled_auc": 0.9318,
         "per_fold_auc": [
-          0.9403,
-          0.9416,
-          0.9375,
-          0.9405,
-          0.9318
+          0.9468,
+          0.9457,
+          0.9146,
+          0.9145,
+          0.9506
         ],
-        "per_fold_auc_std": 0.0035,
+        "per_fold_auc_std": 0.0163,
         "recall_at_fpr": {
           "max_fpr": 0.01,
-          "recall": 0.513,
-          "fpr": 0.0099,
-          "threshold": 0.6553
+          "recall": 0.4613,
+          "fpr": 0.0096,
+          "threshold": 0.6638
         }
       },
       "top_ngrams_full_fit": {

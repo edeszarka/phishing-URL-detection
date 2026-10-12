@@ -37,6 +37,10 @@ def platform_group_key(url: str) -> str:
     return ext.ipv4 or ext.ipv6 or ext.top_domain_under_registry_suffix or text
 
 
+# Adopted for CV folds, threshold choice and the bootstrap unit (ADR 0002).
+cv_group_key = platform_group_key
+
+
 def key_kind(url: str) -> str:
     """'ip', 'domain', or 'fallback' when no domain is recognisable."""
     ext = _EXTRACT(str(url).strip().lower())

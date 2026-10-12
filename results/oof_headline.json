@@ -1,131 +1,131 @@
 {
-  "source": "data/oof_predictions.csv (src.train, raw URL baseline, tenant-level folds)",
+  "source": "data/oof_predictions.csv (src.train, raw URL, platform-level folds, ADR 0002)",
   "prevalence_assumed": 0.001,
-  "bootstrap": "2000 resamples of tenant-level groups, seed 0, percentile 95% CI; OOF models held fixed, so CIs cover evaluation-sample variation, not retraining",
+  "bootstrap": "2000 resamples of platform-level groups, seed 0, percentile 95% CI; OOF models held fixed, so CIs cover evaluation-sample variation, not retraining",
   "threshold_rule": "highest TPR with OOF FPR <= target (candidate points, not yet adopted)",
   "all_groups": {
     "rows": 8325,
     "phishing_rows": 4068,
     "clean_rows": 4257,
-    "groups": 5599,
-    "auc": 0.9491,
+    "groups": 5130,
+    "auc": 0.9421,
     "auc_ci95": [
-      0.94066,
-      0.95723
+      0.92289,
+      0.95718
     ],
     "target_fpr_0.01": {
-      "threshold": 0.68273,
-      "true_positives": 2421,
+      "threshold": 0.74956,
+      "true_positives": 1779,
       "false_positives": 42,
-      "tpr": 0.5951,
+      "tpr": 0.4373,
       "fpr": 0.00987,
-      "precision_at_1_in_1000": 0.0569,
+      "precision_at_1_in_1000": 0.0425,
       "fixed_threshold_ci95": {
         "tpr": [
-          0.54946,
-          0.63959
+          0.38874,
+          0.49517
         ],
         "fpr": [
-          0.00634,
-          0.014
+          0.00169,
+          0.02363
         ],
         "precision_at_1_in_1000": [
-          0.04064,
-          0.0848
+          0.01813,
+          0.20889
         ]
       },
       "recall_at_target_fpr_reoptimised_ci95": [
-        0.53725,
-        0.64485
+        0.31943,
+        0.61841
       ]
     },
     "target_fpr_0.001": {
-      "threshold": 0.81832,
-      "true_positives": 1239,
+      "threshold": 0.84127,
+      "true_positives": 848,
       "false_positives": 4,
-      "tpr": 0.3046,
+      "tpr": 0.2085,
       "fpr": 0.00094,
-      "precision_at_1_in_1000": 0.245,
+      "precision_at_1_in_1000": 0.1817,
       "fixed_threshold_ci95": {
         "tpr": [
-          0.278,
-          0.33365
+          0.18045,
+          0.23577
         ],
         "fpr": [
-          0.00023,
-          0.00195
+          0.0,
+          0.00273
         ],
         "precision_at_1_in_1000": [
-          0.13394,
-          0.58094
+          0.07088,
+          1.0
         ]
       },
       "recall_at_target_fpr_reoptimised_ci95": [
-        0.2644,
-        0.46137
+        0.17261,
+        0.36993
       ]
     }
   },
-  "scored_without_largest_group": {
+  "scored_without_duilawyeryork": {
     "rows": 8068,
     "phishing_rows": 3811,
     "clean_rows": 4257,
-    "groups": 5598,
-    "auc": 0.9461,
+    "groups": 5129,
+    "auc": 0.9387,
     "auc_ci95": [
-      0.93912,
-      0.95326
+      0.91903,
+      0.95345
     ],
     "target_fpr_0.01": {
-      "threshold": 0.68273,
-      "true_positives": 2204,
+      "threshold": 0.74956,
+      "true_positives": 1563,
       "false_positives": 42,
-      "tpr": 0.5783,
+      "tpr": 0.4101,
       "fpr": 0.00987,
-      "precision_at_1_in_1000": 0.0554,
+      "precision_at_1_in_1000": 0.0399,
       "fixed_threshold_ci95": {
         "tpr": [
-          0.54034,
-          0.6141
+          0.37642,
+          0.4412
         ],
         "fpr": [
-          0.00643,
-          0.01425
+          0.00167,
+          0.02283
         ],
         "precision_at_1_in_1000": [
-          0.03899,
-          0.08276
+          0.01748,
+          0.19741
         ]
       },
       "recall_at_target_fpr_reoptimised_ci95": [
-        0.51933,
-        0.62372
+        0.30694,
+        0.59594
       ]
     },
     "target_fpr_0.001": {
-      "threshold": 0.81848,
-      "true_positives": 1184,
+      "threshold": 0.84127,
+      "true_positives": 802,
       "false_positives": 4,
-      "tpr": 0.3107,
+      "tpr": 0.2104,
       "fpr": 0.00094,
-      "precision_at_1_in_1000": 0.2487,
+      "precision_at_1_in_1000": 0.1831,
       "fixed_threshold_ci95": {
         "tpr": [
-          0.28374,
-          0.33971
+          0.18048,
+          0.23915
         ],
         "fpr": [
-          0.00022,
-          0.00204
+          0.0,
+          0.0027
         ],
         "precision_at_1_in_1000": [
-          0.13276,
-          0.58371
+          0.0708,
+          1.0
         ]
       },
       "recall_at_target_fpr_reoptimised_ci95": [
-        0.27534,
-        0.44979
+        0.17467,
+        0.35779
       ]
     }
   }
