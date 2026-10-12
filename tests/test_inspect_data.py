@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.groups import registry_domain
+from src.groups import platform_group_key
 from src.inspect_data import (
     domain_breakdown,
     duplicate_difference,
@@ -75,9 +75,9 @@ def test_duplicate_difference_names_each_part():
     assert duplicate_difference("http://a.com", "http://a.com") == "identical"
 
 
-def test_registry_domain_ignores_private_suffix():
-    assert registry_domain("https://musing-villani.netlify.app/") == "netlify.app"
-    assert registry_domain("http://10.0.0.1/x") == "10.0.0.1"
+def test_platform_group_key_ignores_private_suffix():
+    assert platform_group_key("https://musing-villani.netlify.app/") == "netlify.app"
+    assert platform_group_key("http://10.0.0.1/x") == "10.0.0.1"
 
 
 def test_label_runs_test_flags_sorted_order():

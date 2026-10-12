@@ -9,7 +9,7 @@ import pandas as pd
 
 from src.clean import load_clean_train, load_raw, rule2_pairs
 from src.features import prepare_url_without_scheme_and_www
-from src.groups import _EXTRACT, group_key, registry_domain
+from src.groups import _EXTRACT, platform_group_key, tenant_group_key
 
 ROOT = Path(__file__).resolve().parent.parent
 QUANTILES = [0.1, 0.25, 0.5, 0.75, 0.9]
@@ -122,7 +122,7 @@ def label_table(df: pd.DataFrame, by: list[str], top_n: int) -> list[dict]:
 
 def domain_breakdown(df: pd.DataFrame, domain: str, top_n: int = 15) -> dict:
     """Split one registered-domain group into hosts and first path segments."""
-    rows = df[df["url"].map(lambda u: group_key(u)[0]) == domain].copy()
+    rows = df[df["url"].map(tenant_group_key) == domain].copy()
     parts = rows["url"].map(host_and_first_segment)
     rows["host"] = parts.str[0]
     rows["first_segment"] = parts.str[1]
@@ -150,9 +150,10 @@ def group_support(df: pd.DataFrame) -> dict:
         "distinct_groups": int(df["group"].nunique()),
         "distinct_phishing_groups": int(df.loc[df["label"] == 1, "group"].nunique()),
         "distinct_clean_groups": int(df.loc[df["label"] == 0, "group"].nunique()),
-        "distinct_registry_domains": int(df["url"].map(registry_domain).nunique()),
-        "top_registry_domains": {
-            k: int(v) for k, v in df["url"].map(registry_domain).value_counts().head(3).items()
+        "distinct_tenant_groups": int(df["url"].map(tenant_group_key).nunique()),
+        "distinct_platform_groups": int(df["url"].map(platform_group_key).nunique()),
+        "top_platform_groups": {
+            k: int(v) for k, v in df["url"].map(platform_group_key).value_counts().head(3).items()
         },
         "largest_group": {"group": sizes.index[0], "rows": int(sizes.iloc[0])} if len(df) else None,
     }
@@ -205,7 +206,7 @@ def dropped_duplicate_profile(pairs: pd.DataFrame, top_n: int = 5) -> dict:
             duplicate_difference(d, k)
             for d, k in zip(pairs["dropped_url"], pairs["kept_url"], strict=True)
         ],
-        group=pairs["dropped_url"].map(lambda u: group_key(u)[0]),
+        group=pairs["dropped_url"].map(tenant_group_key),
     )
     result = {}
     for label, rows in pairs.groupby("label"):
@@ -265,7 +266,7 @@ def file_order_profile(raw: pd.DataFrame, n_bins: int = 10) -> dict:
 def profile_frame(df: pd.DataFrame) -> pd.DataFrame:
     """Rows of `df` with url_profile columns and the group key attached."""
     profiled = pd.concat([df, pd.DataFrame(df["url"].map(url_profile).tolist())], axis=1)
-    profiled["group"] = profiled["url"].map(lambda u: group_key(u)[0])
+    profiled["group"] = profiled["url"].map(tenant_group_key)
     return profiled
 
 

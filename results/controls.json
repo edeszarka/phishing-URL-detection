@@ -56,8 +56,9 @@
             "distinct_groups": 419,
             "distinct_phishing_groups": 190,
             "distinct_clean_groups": 229,
-            "distinct_registry_domains": 272,
-            "top_registry_domains": {
+            "distinct_tenant_groups": 419,
+            "distinct_platform_groups": 272,
+            "top_platform_groups": {
               "blogspot.com": 139,
               "tumblr.com": 24,
               "hop.ru": 11
@@ -73,8 +74,9 @@
             "distinct_groups": 1714,
             "distinct_phishing_groups": 425,
             "distinct_clean_groups": 1292,
-            "distinct_registry_domains": 1501,
-            "top_registry_domains": {
+            "distinct_tenant_groups": 1714,
+            "distinct_platform_groups": 1501,
+            "top_platform_groups": {
               "blogspot.com": 127,
               "appspot.com": 38,
               "wordpress.com": 28
@@ -143,8 +145,9 @@
             "distinct_groups": 418,
             "distinct_phishing_groups": 189,
             "distinct_clean_groups": 229,
-            "distinct_registry_domains": 269,
-            "top_registry_domains": {
+            "distinct_tenant_groups": 418,
+            "distinct_platform_groups": 269,
+            "top_platform_groups": {
               "blogspot.com": 140,
               "tumblr.com": 24,
               "hop.ru": 11
@@ -160,8 +163,9 @@
             "distinct_groups": 1715,
             "distinct_phishing_groups": 426,
             "distinct_clean_groups": 1292,
-            "distinct_registry_domains": 1504,
-            "top_registry_domains": {
+            "distinct_tenant_groups": 1715,
+            "distinct_platform_groups": 1504,
+            "top_platform_groups": {
               "blogspot.com": 126,
               "appspot.com": 38,
               "wordpress.com": 28
@@ -230,8 +234,9 @@
             "distinct_groups": 419,
             "distinct_phishing_groups": 190,
             "distinct_clean_groups": 229,
-            "distinct_registry_domains": 270,
-            "top_registry_domains": {
+            "distinct_tenant_groups": 419,
+            "distinct_platform_groups": 270,
+            "top_platform_groups": {
               "blogspot.com": 140,
               "tumblr.com": 24,
               "hop.ru": 11
@@ -247,8 +252,9 @@
             "distinct_groups": 1714,
             "distinct_phishing_groups": 425,
             "distinct_clean_groups": 1292,
-            "distinct_registry_domains": 1503,
-            "top_registry_domains": {
+            "distinct_tenant_groups": 1714,
+            "distinct_platform_groups": 1503,
+            "top_platform_groups": {
               "blogspot.com": 126,
               "appspot.com": 38,
               "wordpress.com": 28
@@ -264,7 +270,7 @@
   },
   "group_key": {
     "rows_where_keys_differ": 650,
-    "registered_domain": {
+    "tenant_level": {
       "groups": 5599,
       "top_groups": [
         {
@@ -321,7 +327,7 @@
         "mean_prob_clean": 0.5429
       }
     },
-    "registry_domain": {
+    "platform_level": {
       "groups": 5130,
       "top_groups": [
         {

@@ -13,7 +13,7 @@
       "internal_whitespace": 2,
       "nonprintable_chars": 0,
       "non_ascii": 5,
-      "no_registered_domain_or_ip": 0
+      "no_domain_or_ip": 0
     },
     "scheme_present_by_label": {
       "label_1": 4330,
@@ -93,7 +93,8 @@
         "share_of_rows": 0.0065,
         "phishing_rows": 0
       }
-    ]
+    ],
+    "max_group_share_exceeds_10pct": false
   },
   "max_group_share": 0.0309,
   "max_group_share_exceeds_10pct": false

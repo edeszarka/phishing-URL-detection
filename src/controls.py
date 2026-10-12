@@ -12,15 +12,15 @@ import pandas as pd
 from sklearn.metrics import roc_auc_score
 
 from src.clean import clean_train, load_raw
-from src.groups import group_key, registry_domain
+from src.groups import platform_group_key, tenant_group_key
 from src.inspect_data import bare_host_trailing_slash, profile_frame
 from src.train import assign_folds, oof_probabilities, summarize
 
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def registered_groups(df: pd.DataFrame) -> pd.Series:
-    return df["url"].map(lambda u: group_key(u)[0])
+def tenant_groups(df: pd.DataFrame) -> pd.Series:
+    return df["url"].map(tenant_group_key)
 
 
 def oof(df: pd.DataFrame, folds: np.ndarray) -> np.ndarray:
@@ -33,11 +33,11 @@ def rule2_sensitivity(raw: pd.DataFrame) -> dict:
     """Rule-2 representative first/last/random; folds fixed per group across variants."""
     variants = {keep: clean_train(raw, keep)[0] for keep in ("first", "last", "random")}
     base = variants["first"]
-    base_groups = registered_groups(base)
+    base_groups = tenant_groups(base)
     fold_of = dict(zip(base_groups, assign_folds(base["label"], base_groups), strict=True))
     result = {}
     for keep, df in variants.items():
-        folds = registered_groups(df).map(fold_of)
+        folds = tenant_groups(df).map(fold_of)
         assert folds.notna().all(), "variants must share groups"
         labels = df["label"].to_numpy()
         result[keep] = {
@@ -70,12 +70,12 @@ def subset_summary(labels: np.ndarray, probs: np.ndarray) -> dict:
 
 
 def group_key_control(df: pd.DataFrame) -> dict:
-    """Registered domain (adopted) vs registry domain (private suffixes merged)."""
+    """Tenant-level vs platform-level group key (private suffixes merged)."""
     keys = {
-        "registered_domain": registered_groups(df),
-        "registry_domain": df["url"].map(registry_domain),
+        "tenant_level": tenant_groups(df),
+        "platform_level": df["url"].map(platform_group_key),
     }
-    differs = (keys["registered_domain"] != keys["registry_domain"]).to_numpy()
+    differs = (keys["tenant_level"] != keys["platform_level"]).to_numpy()
     labels = df["label"].to_numpy()
     result = {"rows_where_keys_differ": int(differs.sum())}
     for name, groups in keys.items():

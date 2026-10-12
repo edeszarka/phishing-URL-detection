@@ -584,8 +584,9 @@
         "distinct_groups": 32,
         "distinct_phishing_groups": 32,
         "distinct_clean_groups": 0,
-        "distinct_registry_domains": 5,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 32,
+        "distinct_platform_groups": 5,
+        "top_platform_groups": {
           "netlify.app": 14,
           "web.app": 7,
           "csb.app": 6
@@ -601,8 +602,9 @@
         "distinct_groups": 30,
         "distinct_phishing_groups": 30,
         "distinct_clean_groups": 0,
-        "distinct_registry_domains": 4,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 30,
+        "distinct_platform_groups": 4,
+        "top_platform_groups": {
           "netlify.app": 14,
           "web.app": 7,
           "csb.app": 5
@@ -620,8 +622,9 @@
         "distinct_groups": 58,
         "distinct_phishing_groups": 58,
         "distinct_clean_groups": 0,
-        "distinct_registry_domains": 58,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 58,
+        "distinct_platform_groups": 58,
+        "top_platform_groups": {
           "78.143.96.35": 8,
           "107.180.44.78": 4,
           "98.126.214.77": 3
@@ -637,8 +640,9 @@
         "distinct_groups": 11,
         "distinct_phishing_groups": 11,
         "distinct_clean_groups": 0,
-        "distinct_registry_domains": 11,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 11,
+        "distinct_platform_groups": 11,
+        "top_platform_groups": {
           "31.3.88.166": 1,
           "189.36.52.206": 1,
           "178.33.67.12": 1
@@ -656,8 +660,9 @@
         "distinct_groups": 44,
         "distinct_phishing_groups": 29,
         "distinct_clean_groups": 15,
-        "distinct_registry_domains": 44,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 44,
+        "distinct_platform_groups": 44,
+        "top_platform_groups": {
           "courgeon-immobilier.fr": 15,
           "free.fr": 6,
           "citrulline.fr": 3
@@ -673,8 +678,9 @@
         "distinct_groups": 15,
         "distinct_phishing_groups": 3,
         "distinct_clean_groups": 12,
-        "distinct_registry_domains": 15,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 15,
+        "distinct_platform_groups": 15,
+        "top_platform_groups": {
           "marches-publics.gouv.fr": 1,
           "lyoncapitale.fr": 1,
           "lachambredezoe.fr": 1
@@ -692,8 +698,9 @@
         "distinct_groups": 50,
         "distinct_phishing_groups": 2,
         "distinct_clean_groups": 48,
-        "distinct_registry_domains": 50,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 50,
+        "distinct_platform_groups": 50,
+        "top_platform_groups": {
           "stanford.edu": 4,
           "dartmouth.edu": 3,
           "usf.edu": 3
@@ -709,8 +716,9 @@
         "distinct_groups": 2,
         "distinct_phishing_groups": 0,
         "distinct_clean_groups": 2,
-        "distinct_registry_domains": 2,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 2,
+        "distinct_platform_groups": 2,
+        "top_platform_groups": {
           "richmond.edu": 1,
           "gtc.edu": 1
         },
@@ -755,8 +763,9 @@
         "distinct_groups": 419,
         "distinct_phishing_groups": 190,
         "distinct_clean_groups": 229,
-        "distinct_registry_domains": 272,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 419,
+        "distinct_platform_groups": 272,
+        "top_platform_groups": {
           "blogspot.com": 139,
           "tumblr.com": 24,
           "hop.ru": 11
@@ -772,8 +781,9 @@
         "distinct_groups": 1714,
         "distinct_phishing_groups": 425,
         "distinct_clean_groups": 1292,
-        "distinct_registry_domains": 1501,
-        "top_registry_domains": {
+        "distinct_tenant_groups": 1714,
+        "distinct_platform_groups": 1501,
+        "top_platform_groups": {
           "blogspot.com": 127,
           "appspot.com": 38,
           "wordpress.com": 28

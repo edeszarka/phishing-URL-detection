@@ -104,10 +104,10 @@ def main() -> None:
     oof = pd.read_csv(ROOT / "data" / "oof_predictions.csv")
     without = oof[oof["group"] != LARGEST_GROUP]
     report = {
-        "source": "data/oof_predictions.csv (src.train, raw URL baseline, registered-domain folds)",
+        "source": "data/oof_predictions.csv (src.train, raw URL baseline, tenant-level folds)",
         "prevalence_assumed": PREVALENCE,
         "bootstrap": (
-            f"{N_BOOTSTRAP} resamples of registered-domain groups, seed {SEED}, percentile 95% CI;"
+            f"{N_BOOTSTRAP} resamples of tenant-level groups, seed {SEED}, percentile 95% CI;"
             " OOF models held fixed, so CIs cover evaluation-sample variation, not retraining"
         ),
         "threshold_rule": "highest TPR with OOF FPR <= target (candidate points, not yet adopted)",

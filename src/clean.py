@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 
 from src.features import SEED
-from src.groups import group_key, group_summary
+from src.groups import group_summary, key_kind, tenant_group_key
 
 ROOT = Path(__file__).resolve().parent.parent
 _SCHEME = re.compile(r"^[a-z][a-z0-9+.\-]*://", re.IGNORECASE)
@@ -67,7 +67,7 @@ def by_label(df: pd.DataFrame, mask: pd.Series) -> dict:
 
 def quality_counts(df: pd.DataFrame) -> dict:
     url = df["url"]
-    kinds = url.map(lambda u: group_key(u)[1])
+    kinds = url.map(key_kind)
     has_scheme = url.str.strip().str.lower().str.match(_SCHEME)
     return {
         "rows": len(df),
@@ -79,7 +79,7 @@ def quality_counts(df: pd.DataFrame) -> dict:
             "internal_whitespace": int(url.str.strip().str.contains(r"\s").sum()),
             "nonprintable_chars": int(url.str.contains(_NONPRINTABLE).sum()),
             "non_ascii": int((~url.map(str.isascii)).sum()),
-            "no_registered_domain_or_ip": int((kinds == "fallback").sum()),
+            "no_domain_or_ip": int((kinds == "fallback").sum()),
         },
         "scheme_present_by_label": by_label(df, has_scheme),
         "scheme_absent_by_label": by_label(df, ~has_scheme),
@@ -161,7 +161,7 @@ def load_clean_train() -> pd.DataFrame:
 def main() -> None:
     raw = load_raw(ROOT / "data" / "train.csv")
     cleaned, log = clean_train(raw)
-    groups = group_summary(cleaned)
+    groups = group_summary(cleaned, tenant_group_key)
     report = {
         "input": "data/train.csv",
         "raw_quality": quality_counts(raw),

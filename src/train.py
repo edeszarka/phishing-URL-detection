@@ -16,7 +16,7 @@ from sklearn.pipeline import Pipeline
 
 from src.clean import load_clean_train
 from src.features import SEED, build_pipeline
-from src.groups import group_key
+from src.groups import tenant_group_key
 
 ROOT = Path(__file__).resolve().parent.parent
 N_FOLDS = 5
@@ -119,14 +119,14 @@ def run_ablations(df: pd.DataFrame) -> tuple[dict, pd.DataFrame]:
 
 def main() -> None:
     df = load_clean_train()
-    df["group"] = df["url"].map(lambda u: group_key(u)[0])
+    df["group"] = df["url"].map(tenant_group_key)
     results, oof = run_ablations(df)
     report = {
         "input": "data/train.csv after cleaning (ADR 0001)",
         "model": "char 3-5-gram TF-IDF (sublinear, lowercase=False) + LogisticRegression(C=1)",
         "hyperparameter_configs_tried": 1,
         "cv": f"StratifiedGroupKFold(n_splits={N_FOLDS}, shuffle=True, random_state={SEED})",
-        "group_key": "registered domain (src.groups.group_key)",
+        "group_key": "tenant-level (src.groups.tenant_group_key)",
         "reporting_fpr_note": "recall_at_fpr is a reporting point, not the operating threshold",
         "largest_group": LARGEST_GROUP,
         "results": results,

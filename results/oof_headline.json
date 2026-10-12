@@ -1,7 +1,7 @@
 {
-  "source": "data/oof_predictions.csv (src.train, raw URL baseline, registered-domain folds)",
+  "source": "data/oof_predictions.csv (src.train, raw URL baseline, tenant-level folds)",
   "prevalence_assumed": 0.001,
-  "bootstrap": "2000 resamples of registered-domain groups, seed 0, percentile 95% CI; OOF models held fixed, so CIs cover evaluation-sample variation, not retraining",
+  "bootstrap": "2000 resamples of tenant-level groups, seed 0, percentile 95% CI; OOF models held fixed, so CIs cover evaluation-sample variation, not retraining",
   "threshold_rule": "highest TPR with OOF FPR <= target (candidate points, not yet adopted)",
   "all_groups": {
     "rows": 8325,

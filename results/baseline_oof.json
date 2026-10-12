@@ -3,7 +3,7 @@
   "model": "char 3-5-gram TF-IDF (sublinear, lowercase=False) + LogisticRegression(C=1)",
   "hyperparameter_configs_tried": 1,
   "cv": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=0)",
-  "group_key": "registered domain (src.groups.group_key)",
+  "group_key": "tenant-level (src.groups.tenant_group_key)",
   "reporting_fpr_note": "recall_at_fpr is a reporting point, not the operating threshold",
   "largest_group": "duilawyeryork.com",
   "results": {
