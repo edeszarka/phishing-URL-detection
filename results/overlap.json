@@ -1,0 +1,85 @@
+{
+  "reference": "data/train.csv after cleaning (ADR 0001), the rows the model saw",
+  "levels_strictest_first": [
+    "exact",
+    "normalized_case",
+    "normalized",
+    "host_first_path",
+    "hostname",
+    "tenant_group",
+    "platform_group"
+  ],
+  "labels_read": false,
+  "test": {
+    "rows": 2858,
+    "strongest_level": {
+      "exact": 0,
+      "normalized_case": 145,
+      "normalized": 0,
+      "host_first_path": 560,
+      "hostname": 253,
+      "tenant_group": 235,
+      "platform_group": 157,
+      "none": 1508
+    },
+    "matches_at_level_or_stricter": {
+      "exact": 0,
+      "normalized_case": 145,
+      "normalized": 145,
+      "host_first_path": 705,
+      "hostname": 958,
+      "tenant_group": 1193,
+      "platform_group": 1350
+    },
+    "not_scored": 0,
+    "truncated": 0
+  },
+  "external": {
+    "rows": 2858,
+    "strongest_level": {
+      "exact": 0,
+      "normalized_case": 0,
+      "normalized": 0,
+      "host_first_path": 2,
+      "hostname": 22,
+      "tenant_group": 29,
+      "platform_group": 216,
+      "none": 2589
+    },
+    "matches_at_level_or_stricter": {
+      "exact": 0,
+      "normalized_case": 0,
+      "normalized": 0,
+      "host_first_path": 2,
+      "hostname": 24,
+      "tenant_group": 53,
+      "platform_group": 269
+    },
+    "not_scored": 0,
+    "truncated": 0
+  },
+  "test_vs_external": {
+    "rows": 2858,
+    "strongest_level": {
+      "exact": 0,
+      "normalized_case": 0,
+      "normalized": 0,
+      "host_first_path": 2,
+      "hostname": 14,
+      "tenant_group": 22,
+      "platform_group": 221,
+      "none": 2599
+    },
+    "matches_at_level_or_stricter": {
+      "exact": 0,
+      "normalized_case": 0,
+      "normalized": 0,
+      "host_first_path": 2,
+      "hostname": 16,
+      "tenant_group": 38,
+      "platform_group": 259
+    },
+    "not_scored": 0,
+    "truncated": 0
+  }
+}
