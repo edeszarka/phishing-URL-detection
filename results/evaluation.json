@@ -1,8 +1,8 @@
 {
   "run": {
-    "utc": "2026-10-14T13:05:54+00:00",
-    "git_commit": "61ff213b90ea1f6c1e9e794059612052de8a7c26",
-    "reason": "add precision_on_sample field required by the assignment; no other change"
+    "utc": "2026-10-14T13:51:57+00:00",
+    "git_commit": "639eb709bcf177fb6ee0c49740f5f08cf95dfc95",
+    "reason": "add low-FPR ROC diagnostic (TPR at FPR 0.1-5%, partial AUC); no other change"
   },
   "prevalence_assumed": 0.001,
   "bootstrap": "2000 resamples of platform-level groups, seed 0",
@@ -1058,6 +1058,38 @@
           ]
         }
       }
+    },
+    "low_fpr_roc": {
+      "model": {
+        "tpr_at_fpr": {
+          "0.001": 0.2302,
+          "0.005": 0.6697,
+          "0.01": 0.7341,
+          "0.02": 0.788,
+          "0.05": 0.8572
+        },
+        "partial_auc_max_fpr_0.01": 0.7927
+      },
+      "model_no_overlap": {
+        "tpr_at_fpr": {
+          "0.001": 0.0871,
+          "0.005": 0.5064,
+          "0.01": 0.5608,
+          "0.02": 0.6588,
+          "0.05": 0.7314
+        },
+        "partial_auc_max_fpr_0.01": 0.7194
+      },
+      "probe": {
+        "tpr_at_fpr": {
+          "0.001": 0.3569,
+          "0.005": 0.6081,
+          "0.01": 0.6438,
+          "0.02": 0.7404,
+          "0.05": 0.8383
+        },
+        "partial_auc_max_fpr_0.01": 0.7633
+      }
     }
   },
   "external": {
@@ -1847,6 +1879,38 @@
             }
           ]
         }
+      }
+    },
+    "low_fpr_roc": {
+      "model": {
+        "tpr_at_fpr": {
+          "0.001": 0.634,
+          "0.005": 0.6648,
+          "0.01": 0.6704,
+          "0.02": 0.7005,
+          "0.05": 0.7502
+        },
+        "partial_auc_max_fpr_0.01": 0.827
+      },
+      "model_no_overlap": {
+        "tpr_at_fpr": {
+          "0.001": 0.5595,
+          "0.005": 0.5952,
+          "0.01": 0.602,
+          "0.02": 0.6378,
+          "0.05": 0.6973
+        },
+        "partial_auc_max_fpr_0.01": 0.7913
+      },
+      "probe": {
+        "tpr_at_fpr": {
+          "0.001": 0.1896,
+          "0.005": 0.2617,
+          "0.01": 0.3009,
+          "0.02": 0.3695,
+          "0.05": 0.4738
+        },
+        "partial_auc_max_fpr_0.01": 0.6172
       }
     }
   }
