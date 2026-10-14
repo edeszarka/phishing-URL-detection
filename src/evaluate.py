@@ -39,6 +39,7 @@ from src.oof_metrics import (
     rates_at_threshold,
 )
 from src.overlap import EVAL_SETS, strongest_levels
+from src.roc_calibration import low_fpr_summary
 from src.train import ABLATION_GROUP
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -223,6 +224,7 @@ def evaluate_set(name: str, train_urls: pd.Series, probe: object) -> dict:
         mask = level.isin(levels).to_numpy()
         by_bin[bin_name] = evaluate_block(labels[mask], model_probs[mask], groups[mask], model_thr)
     keep = groups != ABLATION_GROUP
+    no_overlap = (level == "none").to_numpy()
     return {
         "model": evaluate_block(labels, model_probs, groups, model_thr),
         "model_by_overlap_bin": by_bin,
@@ -231,6 +233,12 @@ def evaluate_set(name: str, train_urls: pd.Series, probe: object) -> dict:
             **evaluate_block(labels[keep], model_probs[keep], groups[keep], model_thr),
         },
         "probe_without_scheme_and_www": evaluate_block(labels, probe_probs, groups, probe_thr),
+        # Diagnostic only: points off this set's own ROC curve; no threshold follows from it.
+        "low_fpr_roc": {
+            "model": low_fpr_summary(labels, model_probs),
+            "model_no_overlap": low_fpr_summary(labels[no_overlap], model_probs[no_overlap]),
+            "probe": low_fpr_summary(labels, probe_probs),
+        },
     }
 
 
