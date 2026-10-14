@@ -2,23 +2,29 @@
 
 **OOF** = out-of-fold predictions on cleaned `train.csv`: every training row scored by
 a model that did not see its platform group (5-fold grouped CV, ADR 0002). Test and
-external numbers come from a single run (`results/evaluation_runs.jsonl`) at thresholds
-fixed beforehand (ADR 0003). Brackets name the file each number comes from.
+external numbers come from one evaluation at thresholds fixed beforehand (ADR 0003); a
+second, logged run only added the sample-precision column, every other value is
+identical (`results/evaluation_runs.jsonl`). Brackets name the file each number comes from.
 
 ## 1. Result for the manager
 
-The model is char 3-5-gram TF-IDF + logistic regression on the raw URL. The threshold is
-0.74956, chosen on OOF for FPR <= 1%. I stand behind the **external set** and the **test
+**Model:** the raw URL string is split into overlapping 3-5 character pieces
+(`pay`, `ypal`, `.tk/`), case kept; each piece is weighted by TF-IDF, and a logistic
+regression (C=1) learns one weight per piece. A URL's score is the weighted sum of its pieces'
+TF-IDF values, passed through a sigmoid. One configuration was used. The threshold is 0.74956,
+chosen on OOF for FPR <= 1%. I stand behind the **external set** and the **test
 rows with no training overlap**, not the test headline [results/evaluation.json]:
 
-| evaluation | AUC | TP / FP | TPR | FPR | precision at 1:1000, 95% interval |
-|---|---|---|---|---|---|
-| OOF (validation) | 0.9421 | 1,779 / 42 | 0.4373 | 0.00987 | 0.0425 (0.018-0.209) |
-| test, all 2,858 | 0.9714 | 875 / 5 | 0.6123 | 0.0035 | 0.149 (0.080-0.468) |
-| test, no overlap (1,508) | 0.9472 | 249 / 4 | 0.4519 | 0.00418 | 0.098 (0.049-0.315) |
-| external, all 2,858 | 0.9127 | 304 / 0 | 0.2127 | 0 (<= 0.0031) | >= 0.058 (exact bound) |
+| evaluation | AUC | TP / FP | recall (TPR) | FPR | precision on sample | precision at 1:1000, 95% interval |
+|---|---|---|---|---|---|---|
+| OOF (validation) | 0.9421 | 1,779 / 42 | 0.4373 | 0.00987 | not computed | 0.0425 (0.018-0.209) |
+| test, all 2,858 | 0.9714 | 875 / 5 | 0.6123 | 0.0035 | 0.9943 | 0.149 (0.080-0.468) |
+| test, no overlap (1,508) | 0.9472 | 249 / 4 | 0.4519 | 0.00418 | 0.9842 | 0.098 (0.049-0.315) |
+| external, all 2,858 | 0.9127 | 304 / 0 | 0.2127 | 0 (<= 0.0031) | 1.0 | >= 0.058 (exact bound) |
 
-OOF row: `results/oof_headline.json`. Intervals are platform-group bootstrap; with 0
+OOF row: `results/oof_headline.json`. "Precision on sample" is TP / (TP + FP) on the
+evaluation sets' own roughly 1:1 class mix; it says nothing about deployment, where
+phishing is far rarer. Intervals are platform-group bootstrap; with 0
 false positives that collapses, so external uses the exact Clopper-Pearson bound
 (joint 95%, alpha 0.025 per rate).
 
@@ -27,6 +33,22 @@ recall at a low-FPR threshold does not transfer (about one phishing URL in five 
 separate collection); at 1:1000 most alerts would be false on every set. **Not
 supported:** that test numbers predict future traffic, or a deployed precision on
 unseen sources above the ~0.06 lower bound.
+
+**Overlap definition** (`src/overlap.py`). Each evaluation URL gets the strictest of
+seven levels at which it matches any cleaned training URL; each level implies the
+looser ones:
+1. exact string;
+2. normalised with path case kept;
+3. normalised by the external-set rule (lower-case, no scheme, no leading `www.`, no
+   trailing slash);
+4. hostname plus first path segment (near-duplicate pages);
+5. hostname (no `www.`, userinfo or port);
+6. tenant group (eTLD+1, hosting-platform suffixes count, so each tenant is separate);
+7. platform group (eTLD+1, ICANN suffixes only, the CV grouping key, ADR 0002).
+
+Metrics are split into four bins: same page (1-3), same site (4-5), same group (6-7)
+and none. Looser levels matter because a shared host or platform lets the model
+recognise a site rather than judge a URL (section 2).
 
 **What each set tells us:**
 - **OOF:** performance on platforms not seen in training. It is the only data that
@@ -87,6 +109,20 @@ moves FPR by 1/1,429. Exact joint-95% FPR intervals are 0.00095-0.0089 (test) an
 [results/evaluation.json]. The samples support "precision at 1:1000 is likely at least
 about 0.06"; they cannot distinguish 0.06 from 0.4.
 
+**Assumptions behind these figures:**
+- 1 in 1,000 incoming URLs is phishing.
+- TPR and FPR measured on these samples hold for deployment traffic. In particular, the
+  1,429 clean URLs per set look like real clean traffic; they are a curated, balanced
+  sample, so this is the weakest assumption.
+- The threshold transfers unchanged from OOF to the refit model (checked above).
+- Exact intervals assume independent rows; the bootstrap assumes independent platform
+  groups.
+
+**`probability`** is the logistic-regression score for the cleaned training population
+(4,068 of 8,325 phishing, about 1:1). It is not the chance that a URL is phishing at
+1:1000: even if it were calibrated for the training mix, the same score would mean a
+much lower chance at that prevalence. Its calibration was not checked, even on OOF. It is used only to rank and to apply the threshold.
+
 **Recommendation: prioritise review; do not block or warn users.** Even at the upper
 estimates most alerts are false. At the external lower bound, about 6 in 100 alerts are
 phishing, and only about one phishing URL in five from an unfamiliar source is caught.
@@ -106,6 +142,12 @@ recall on phishing from sources outside the training feeds.
 
 - **Result:** 8,325 rows, 4,068 phishing [results/cleaning.json]. Dropping conflicts
   makes the data easier than real traffic.
+- **Alternatives:** majority vote or "flagged once means phishing" for conflicts (both
+  keep labels the data shows to be unreliable); keeping the last or a random copy
+  instead of the first (AUC 0.9422 / 0.9417 vs 0.9421, so it does not matter)
+  [results/controls.json] (ADR 0001).
+- **No additional data** was used, so no exclusion check against the evaluation sets
+  was needed.
 - **Invalid inputs** (ADR 0005): a non-string or blank input returns `clean` with
   probability 0.0, meaning "not scored"; strings are cut at 4,000 characters. Neither
   evaluation set has such a URL [results/overlap.json]. A deployed system should route
@@ -135,8 +177,7 @@ recall on phishing from sources outside the training feeds.
   [results/group_ablation.json]. No variant was compared on test labels.
 - **Scope:** the training feeds do not represent phishing in general (section 1).
 - **Intervals:** exact intervals ignore grouping, the bootstrap breaks down at 0 false
-  positives, and neither includes split variance. `probability` is uncalibrated and
-  refers to the cleaned training mix (4,068 of 8,325 phishing).
+  positives, and neither includes split variance. `probability` is uncalibrated (section 3).
 - **Unfinished:** per-group cap (ADR 0004), effect of cleaning on metrics (ADR 0001),
   time-based split, host or reputation features, reproduction on a second OS.
 - **Next:** labelled deployment traffic to measure FPR at the 0.1% scale; a model less
