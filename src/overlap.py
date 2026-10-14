@@ -25,7 +25,7 @@ from pathlib import Path
 import pandas as pd
 
 from predict import is_scorable
-from src.clean import load_clean_train, normalize_url, normalize_url_keep_path_case
+from src.clean import load_clean_train, load_raw, normalize_url, normalize_url_keep_path_case
 from src.features import MAX_URL_CHARS
 from src.groups import platform_group_key, tenant_group_key
 
@@ -94,6 +94,47 @@ def summarize(level: pd.Series, urls: pd.Series) -> dict:
     }
 
 
+PAGE_KEYS: dict[str, Callable[[str], str]] = {
+    "exact": LEVELS["exact"],
+    "normalized_case": LEVELS["normalized_case"],
+    "normalized": LEVELS["normalized"],
+}
+
+
+def within_file_duplicates(urls: pd.Series) -> dict[str, int]:
+    """Rows that repeat an earlier row of the same file, per page-level key."""
+    return {name: int(urls.map(key).duplicated().sum()) for name, key in PAGE_KEYS.items()}
+
+
+def rows_matching(reference: pd.Series, urls: pd.Series) -> dict[str, int]:
+    """Rows of `urls` whose page-level key appears anywhere in `reference`."""
+    return {
+        name: int(urls.map(key).isin(set(reference.map(key))).sum())
+        for name, key in PAGE_KEYS.items()
+    }
+
+
+def duplication(raw_train: pd.Series, clean_train: pd.Series, sets: dict) -> dict:
+    """Page-level duplication within and between the three supplied files (URLs only)."""
+    removed_keys = set(raw_train.map(normalize_url)) - set(clean_train.map(normalize_url))
+    return {
+        "within_file": {
+            "train_raw": within_file_duplicates(raw_train),
+            **{name: within_file_duplicates(urls) for name, urls in sets.items()},
+        },
+        "train_raw_vs": {name: rows_matching(raw_train, urls) for name, urls in sets.items()},
+        "matching_keys_removed_by_cleaning": {
+            name: int(urls.map(normalize_url).isin(removed_keys).sum())
+            for name, urls in sets.items()
+        },
+        "normalized_keys_in_all_three": len(
+            set(raw_train.map(normalize_url))
+            & set(sets["test"].map(normalize_url))
+            & set(sets["external"].map(normalize_url))
+        ),
+    }
+
+
 def main() -> None:
     train_urls = load_clean_train()["url"]
     sets = {name: load_eval_urls(name) for name in EVAL_SETS}
@@ -110,6 +151,8 @@ def main() -> None:
     report["test_vs_external"] = summarize(
         strongest_levels(sets["test"], sets["external"]), sets["external"]
     )
+    raw_train = load_raw(ROOT / "data" / "train.csv")["url"]
+    report["duplication"] = duplication(raw_train, train_urls, sets)
     out = ROOT / "results" / "overlap.json"
     out.write_text(json.dumps(report, indent=2))
     pd.concat(frames).to_csv(ROOT / "data" / "overlap_levels.csv", index=False)
