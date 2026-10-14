@@ -71,7 +71,16 @@ Grouped OOF results (platform-level folds, ADR 0002; `results/oof_headline.json`
 - At the operating point, 95.75% of alerts at 1:1000 prevalence would
   be false (precision 0.0425), so the result supports review prioritisation, not
   blocking.
-- Measured test effect: not yet measured.
+- Measured test effect (single run at 59a648f, `results/evaluation.json`): at
+  0.74956, test TP/FP 875/5 (TPR 0.6123, FPR 0.0035), external 304/0 (TPR 0.2127,
+  FPR 0, exact joint-95% upper bound 0.003062). FPR stayed inside the per-fold OOF
+  range on both sets; the threshold was not re-tuned. Test no-overlap rows give
+  TPR 0.4519, same-site rows 0.7734, so the test headline is inflated by overlap.
+  The probe lowers AUC from 0.9127 to 0.8053 on external and from 0.9714 to 0.9645
+  on test.
+  A later logged diagnostic run (`low_fpr_roc`) shows external is ranked well at low
+  FPR (TPR 0.634 at FPR 0.1% on its own ROC curve) yet scores below the threshold:
+  the threshold, not the ranking, fails to transfer. It is not re-tuned on this.
 
 ## Note, 2026-10-14 (before any test or external label was read)
 Two details fixed before the run, without changing the decisions above:

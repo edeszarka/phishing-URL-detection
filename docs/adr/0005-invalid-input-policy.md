@@ -42,6 +42,7 @@ long input, and whatever it outputs for either is not evidence of anything.
   send unscored inputs to their own bucket, not into the clean stream.
 - Raising the cap from 2,048 to 4,000 affects no training row (longest 1,641),
   so the frozen model and the ADR 0003 thresholds are unchanged.
-- Measured effect: covered by `tests/test_predict.py` (contract and edge-case
-  inputs). The number of unscored or truncated URLs in the evaluation sets is
-  reported by `src/overlap.py`.
+- Measured effect: `tests/test_predict.py` covers the contract and edge-case
+  inputs. Neither evaluation set has an unscored or truncated URL
+  (`results/overlap.json`: 0 and 0 in test and external), so the policy changes no
+  reported metric.

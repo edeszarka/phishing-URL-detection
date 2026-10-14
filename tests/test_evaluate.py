@@ -43,6 +43,15 @@ def test_nothing_flagged_gives_null_precision_not_nan():
     assert point["group_bootstrap_ci95"]["precision_at_1_in_1000"] == [None, None]
 
 
+def test_precision_on_sample_counts_flagged_rows():
+    labels = np.array([1, 1, 1, 0, 0, 0])
+    probs = np.array([0.85, 0.8, 0.1, 0.7, 0.2, 0.1])
+    groups = np.arange(6).astype(str)
+    point = evaluate_block(labels, probs, groups, THRESHOLDS)
+    assert point["target_fpr_0.01"]["precision_on_sample"] == round(2 / 3, 4)
+    assert point["target_fpr_0.001"]["precision_on_sample"] is None
+
+
 def test_joint_exact_range_is_wider_than_per_rate_range():
     joint = exact_bounds(100, 400, 4, 400, alpha=0.025)["precision_at_1_in_1000_range"]
     single = exact_bounds(100, 400, 4, 400)["precision_at_1_in_1000_range"]

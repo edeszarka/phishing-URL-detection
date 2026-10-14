@@ -1,0 +1,157 @@
+{
+  "source": "data/oof_predictions.csv (training labels only; platform-level folds)",
+  "note": "diagnostic only; no threshold or model change follows from it (ADR 0003)",
+  "population": "cleaned training mix, 4068 of 8325 phishing",
+  "model": {
+    "tpr_at_fpr": {
+      "0.001": 0.2085,
+      "0.005": 0.3545,
+      "0.01": 0.4373,
+      "0.02": 0.5275,
+      "0.05": 0.7141
+    },
+    "partial_auc_max_fpr_0.01": 0.6674,
+    "calibration": {
+      "brier_score": 0.1079,
+      "brier_score_constant_base_rate": 0.2499,
+      "reliability": [
+        {
+          "bin": "0.0-0.1",
+          "rows": 1358,
+          "mean_score": 0.0621,
+          "phishing_share": 0.0184
+        },
+        {
+          "bin": "0.1-0.2",
+          "rows": 1343,
+          "mean_score": 0.1453,
+          "phishing_share": 0.0558
+        },
+        {
+          "bin": "0.2-0.3",
+          "rows": 644,
+          "mean_score": 0.2446,
+          "phishing_share": 0.1708
+        },
+        {
+          "bin": "0.3-0.4",
+          "rows": 518,
+          "mean_score": 0.3495,
+          "phishing_share": 0.2799
+        },
+        {
+          "bin": "0.4-0.5",
+          "rows": 577,
+          "mean_score": 0.4526,
+          "phishing_share": 0.461
+        },
+        {
+          "bin": "0.5-0.6",
+          "rows": 714,
+          "mean_score": 0.5519,
+          "phishing_share": 0.7101
+        },
+        {
+          "bin": "0.6-0.7",
+          "rows": 905,
+          "mean_score": 0.6502,
+          "phishing_share": 0.8431
+        },
+        {
+          "bin": "0.7-0.8",
+          "rows": 1048,
+          "mean_score": 0.7549,
+          "phishing_share": 0.9265
+        },
+        {
+          "bin": "0.8-0.9",
+          "rows": 766,
+          "mean_score": 0.844,
+          "phishing_share": 0.9856
+        },
+        {
+          "bin": "0.9-1.0",
+          "rows": 452,
+          "mean_score": 0.9346,
+          "phishing_share": 0.9978
+        }
+      ]
+    }
+  },
+  "probe": {
+    "tpr_at_fpr": {
+      "0.001": 0.1099,
+      "0.005": 0.3051,
+      "0.01": 0.4462,
+      "0.02": 0.5408,
+      "0.05": 0.6826
+    },
+    "partial_auc_max_fpr_0.01": 0.6429,
+    "calibration": {
+      "brier_score": 0.1281,
+      "brier_score_constant_base_rate": 0.2499,
+      "reliability": [
+        {
+          "bin": "0.0-0.1",
+          "rows": 343,
+          "mean_score": 0.065,
+          "phishing_share": 0.0029
+        },
+        {
+          "bin": "0.1-0.2",
+          "rows": 976,
+          "mean_score": 0.1583,
+          "phishing_share": 0.0184
+        },
+        {
+          "bin": "0.2-0.3",
+          "rows": 1440,
+          "mean_score": 0.2494,
+          "phishing_share": 0.0889
+        },
+        {
+          "bin": "0.3-0.4",
+          "rows": 1089,
+          "mean_score": 0.348,
+          "phishing_share": 0.2287
+        },
+        {
+          "bin": "0.4-0.5",
+          "rows": 1012,
+          "mean_score": 0.4513,
+          "phishing_share": 0.5543
+        },
+        {
+          "bin": "0.5-0.6",
+          "rows": 838,
+          "mean_score": 0.5454,
+          "phishing_share": 0.7458
+        },
+        {
+          "bin": "0.6-0.7",
+          "rows": 841,
+          "mean_score": 0.6538,
+          "phishing_share": 0.8775
+        },
+        {
+          "bin": "0.7-0.8",
+          "rows": 852,
+          "mean_score": 0.7395,
+          "phishing_share": 0.973
+        },
+        {
+          "bin": "0.8-0.9",
+          "rows": 566,
+          "mean_score": 0.8497,
+          "phishing_share": 0.9806
+        },
+        {
+          "bin": "0.9-1.0",
+          "rows": 368,
+          "mean_score": 0.9345,
+          "phishing_share": 0.9891
+        }
+      ]
+    }
+  }
+}
