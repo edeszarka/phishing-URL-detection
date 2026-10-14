@@ -101,6 +101,8 @@ def evaluate_block(
             "threshold": round(threshold, 5),
             "true_positives": tp,
             "false_positives": fp,
+            # On this sample's class mix (about 1:1 here), not deployment prevalence.
+            "precision_on_sample": round(tp / (tp + fp), 4) if tp + fp else None,
             "tpr": round(tpr, 4) if positives else None,
             "fpr": round(fpr, 5) if negatives else None,
             "precision_at_1_in_1000": round(precision_at_prevalence(tpr, fpr), 4)
