@@ -1,0 +1,36 @@
+{
+  "input": "data/train.csv after cleaning (ADR 0001)",
+  "rows": 8325,
+  "phishing_rows": 4068,
+  "clean_rows": 4257,
+  "max_url_chars": 4000,
+  "operating_target_fpr": "0.01",
+  "library_versions": {
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "joblib": "1.6.0"
+  },
+  "models": {
+    "model": {
+      "path": "models/model.joblib",
+      "input": "raw_url",
+      "thresholds": {
+        "0.01": 0.7495627035854618,
+        "0.001": 0.8412683039873285
+      },
+      "size_bytes": 10199364,
+      "sha256": "616c5a462b9e8923c685dc61e62ed294574c723df778d5d8fcd34ad9e59c44a9"
+    },
+    "probe": {
+      "path": "models/probe.joblib",
+      "input": "without_scheme_and_www",
+      "thresholds": {
+        "0.01": 0.6925635874697654,
+        "0.001": 0.884788171279828
+      },
+      "size_bytes": 9877716,
+      "sha256": "e114bdb0b89e99c3a923fc2aa3a4d7b0b43f2b6762a43594e3678ddfa050ff6e"
+    }
+  }
+}

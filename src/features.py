@@ -11,7 +11,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 
 SEED = 0
-MAX_URL_CHARS = 2048
+MAX_URL_CHARS = 4000  # guards n-gram cost on pathological input; longest train URL is 1641
 _SCHEME_AND_WWW = re.compile(r"^(?:[a-z][a-z0-9+.\-]*://)?(?:www\.)?", re.IGNORECASE)
 
 

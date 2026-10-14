@@ -86,10 +86,14 @@ def group_bootstrap_weights(groups: np.ndarray, n: int, seed: int) -> Iterator[n
         yield counts[codes]
 
 
-def exact_bounds(tp: int, positives: int, fp: int, negatives: int) -> dict:
-    """Row-level Clopper-Pearson CIs (ignore grouping) and the precision range they imply."""
-    tpr_low, tpr_high = clopper_pearson(tp, positives)
-    fpr_low, fpr_high = clopper_pearson(fp, negatives)
+def exact_bounds(tp: int, positives: int, fp: int, negatives: int, alpha: float = 0.05) -> dict:
+    """Row-level Clopper-Pearson CIs (ignore grouping) and the precision range they imply.
+
+    The precision range pairs the worst and best ends of the two rate intervals, so it
+    covers jointly with probability >= 1 - 2 * alpha (Bonferroni).
+    """
+    tpr_low, tpr_high = clopper_pearson(tp, positives, alpha)
+    fpr_low, fpr_high = clopper_pearson(fp, negatives, alpha)
     return {
         "tpr": [round(tpr_low, 5), round(tpr_high, 5)],
         "fpr": [round(fpr_low, 6), round(fpr_high, 6)],

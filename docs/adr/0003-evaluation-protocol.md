@@ -72,3 +72,19 @@ Grouped OOF results (platform-level folds, ADR 0002; `results/oof_headline.json`
   be false (precision 0.0425), so the result supports review prioritisation, not
   blocking.
 - Measured test effect: not yet measured.
+
+## Note, 2026-10-14 (before any test or external label was read)
+Two details fixed before the run, without changing the decisions above:
+
+- **Headline interval for deployed precision**: the platform-group bootstrap
+  percentile interval on precision at 1:1000 itself. It resamples TPR and FPR
+  together and respects grouping. Clopper-Pearson ranges are cross-checks: alpha
+  0.025 per rate (joint coverage >= 95% by Bonferroni; OOF range at the 1% point
+  0.0295-0.0629) and 0.05 per rate (as above, 0.031-0.060, kept for comparison).
+  Both ignore grouping and pair interval ends. If the bootstrap FPR interval has
+  zero width (e.g. no false positives), it is flagged and the exact FPR upper bound
+  is used. `src/evaluate.py --dry-run` reproduces `results/oof_headline.json`.
+- **Overlap strata** for decision 7, from strictest level per URL
+  (`results/overlap.json`): same page (exact, normalised, normalised with path
+  case), same site (host plus first path segment, hostname), same group (tenant
+  or platform group), none.
