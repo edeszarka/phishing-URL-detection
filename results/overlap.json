@@ -81,5 +81,41 @@
     },
     "not_scored": 0,
     "truncated": 0
+  },
+  "duplication": {
+    "within_file": {
+      "train_raw": {
+        "exact": 80,
+        "normalized_case": 274,
+        "normalized": 276
+      },
+      "test": {
+        "exact": 0,
+        "normalized_case": 24,
+        "normalized": 24
+      },
+      "external": {
+        "exact": 0,
+        "normalized_case": 0,
+        "normalized": 0
+      }
+    },
+    "train_raw_vs": {
+      "test": {
+        "exact": 0,
+        "normalized_case": 146,
+        "normalized": 146
+      },
+      "external": {
+        "exact": 0,
+        "normalized_case": 0,
+        "normalized": 0
+      }
+    },
+    "matching_keys_removed_by_cleaning": {
+      "test": 1,
+      "external": 0
+    },
+    "normalized_keys_in_all_three": 0
   }
 }
