@@ -1,0 +1,1827 @@
+{
+  "run": {
+    "utc": "2026-10-14T11:47:23+00:00",
+    "git_commit": "59a648f1d32c14d404c479c7b6ca70c722db4dd2",
+    "reason": "first run"
+  },
+  "prevalence_assumed": 0.001,
+  "bootstrap": "2000 resamples of platform-level groups, seed 0",
+  "headline_interval": "group_bootstrap_ci95; exact ranges are cross-checks",
+  "overlap_bins": {
+    "same_page": [
+      "exact",
+      "normalized_case",
+      "normalized"
+    ],
+    "same_site": [
+      "host_first_path",
+      "hostname"
+    ],
+    "same_group": [
+      "tenant_group",
+      "platform_group"
+    ],
+    "none": [
+      "none"
+    ]
+  },
+  "thresholds": {
+    "model": {
+      "0.01": 0.7495627035854618,
+      "0.001": 0.8412683039873285
+    },
+    "probe": {
+      "0.01": 0.6925635874697654,
+      "0.001": 0.884788171279828
+    }
+  },
+  "test": {
+    "model": {
+      "rows": 2858,
+      "phishing_rows": 1429,
+      "clean_rows": 1429,
+      "groups": 2037,
+      "auc": 0.9714,
+      "auc_ci95": [
+        0.96225,
+        0.97911
+      ],
+      "target_fpr_0.01": {
+        "role": "operating point (ADR 0003)",
+        "threshold": 0.74956,
+        "true_positives": 875,
+        "false_positives": 5,
+        "tpr": 0.6123,
+        "fpr": 0.0035,
+        "precision_at_1_in_1000": 0.1491,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.54682,
+            0.67376
+          ],
+          "fpr": [
+            0.0007,
+            0.00686
+          ],
+          "precision_at_1_in_1000": [
+            0.07986,
+            0.46808
+          ]
+        },
+        "bootstrap_degenerate": false,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.58281,
+            0.64123
+          ],
+          "fpr": [
+            0.000948,
+            0.008909
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0615,
+            0.4037
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.5865,
+            0.63767
+          ],
+          "fpr": [
+            0.001137,
+            0.008146
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0672,
+            0.3595
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 5,
+          "top_groups": [
+            {
+              "group": "azurewebsites.net",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "back.dog",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "ccmservicios.com.mx",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "mobilink.az",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "ustasb.com",
+              "false_positives": 1,
+              "clean_rows": 1
+            }
+          ]
+        }
+      },
+      "target_fpr_0.001": {
+        "role": "scenario only, evidence needed",
+        "threshold": 0.84127,
+        "true_positives": 580,
+        "false_positives": 2,
+        "tpr": 0.4059,
+        "fpr": 0.0014,
+        "precision_at_1_in_1000": 0.225,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.31646,
+            0.49744
+          ],
+          "fpr": [
+            0.0,
+            0.00367
+          ],
+          "precision_at_1_in_1000": [
+            0.09308,
+            1.0
+          ]
+        },
+        "bootstrap_degenerate": false,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.37669,
+            0.43556
+          ],
+          "fpr": [
+            0.000117,
+            0.005672
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0623,
+            0.7885
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.38028,
+            0.43186
+          ],
+          "fpr": [
+            0.00017,
+            0.005047
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0701,
+            0.7183
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 2,
+          "top_groups": [
+            {
+              "group": "azurewebsites.net",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "back.dog",
+              "false_positives": 1,
+              "clean_rows": 1
+            }
+          ]
+        }
+      }
+    },
+    "model_by_overlap_bin": {
+      "same_page": {
+        "rows": 145,
+        "phishing_rows": 144,
+        "clean_rows": 1,
+        "groups": 119,
+        "auc": 1.0,
+        "auc_ci95": [
+          1.0,
+          1.0
+        ],
+        "target_fpr_0.01": {
+          "role": "operating point (ADR 0003)",
+          "threshold": 0.74956,
+          "true_positives": 78,
+          "false_positives": 0,
+          "tpr": 0.5417,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.43304,
+              0.64243
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.44507,
+              0.63605
+            ],
+            "fpr": [
+              0.0,
+              0.9875
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0005,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.45669,
+              0.6249
+            ],
+            "fpr": [
+              0.0,
+              0.975
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0005,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        },
+        "target_fpr_0.001": {
+          "role": "scenario only, evidence needed",
+          "threshold": 0.84127,
+          "true_positives": 50,
+          "false_positives": 0,
+          "tpr": 0.3472,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.23403,
+              0.47159
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.25984,
+              0.44271
+            ],
+            "fpr": [
+              0.0,
+              0.9875
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0003,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.26989,
+              0.43099
+            ],
+            "fpr": [
+              0.0,
+              0.975
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0003,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        }
+      },
+      "same_site": {
+        "rows": 813,
+        "phishing_rows": 459,
+        "clean_rows": 354,
+        "groups": 371,
+        "auc": 0.9973,
+        "auc_ci95": [
+          0.99361,
+          0.99952
+        ],
+        "target_fpr_0.01": {
+          "role": "operating point (ADR 0003)",
+          "threshold": 0.74956,
+          "true_positives": 355,
+          "false_positives": 0,
+          "tpr": 0.7734,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.65368,
+              0.85889
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.7264,
+              0.81593
+            ],
+            "fpr": [
+              0.0,
+              0.012302
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0558,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.73234,
+              0.81094
+            ],
+            "fpr": [
+              0.0,
+              0.010366
+            ],
+            "precision_at_1_in_1000_range": [
+              0.066,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        },
+        "target_fpr_0.001": {
+          "role": "scenario only, evidence needed",
+          "threshold": 0.84127,
+          "true_positives": 272,
+          "false_positives": 0,
+          "tpr": 0.5926,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.40944,
+              0.73221
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.53951,
+              0.64415
+            ],
+            "fpr": [
+              0.0,
+              0.012302
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0421,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.54608,
+              0.63791
+            ],
+            "fpr": [
+              0.0,
+              0.010366
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0501,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        }
+      },
+      "same_group": {
+        "rows": 392,
+        "phishing_rows": 275,
+        "clean_rows": 117,
+        "groups": 121,
+        "auc": 0.9483,
+        "auc_ci95": [
+          0.90647,
+          0.98617
+        ],
+        "target_fpr_0.01": {
+          "role": "operating point (ADR 0003)",
+          "threshold": 0.74956,
+          "true_positives": 193,
+          "false_positives": 1,
+          "tpr": 0.7018,
+          "fpr": 0.00855,
+          "precision_at_1_in_1000": 0.076,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.59536,
+              0.80304
+            ],
+            "fpr": [
+              0.0,
+              0.03659
+            ],
+            "precision_at_1_in_1000": [
+              0.01991,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": false,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.63571,
+              0.76235
+            ],
+            "fpr": [
+              0.000108,
+              0.0533
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0118,
+              0.8765
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.64396,
+              0.75527
+            ],
+            "fpr": [
+              0.000216,
+              0.046701
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0136,
+              0.7775
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 1,
+            "top_groups": [
+              {
+                "group": "azurewebsites.net",
+                "false_positives": 1,
+                "clean_rows": 1
+              }
+            ]
+          }
+        },
+        "target_fpr_0.001": {
+          "role": "scenario only, evidence needed",
+          "threshold": 0.84127,
+          "true_positives": 110,
+          "false_positives": 1,
+          "tpr": 0.4,
+          "fpr": 0.00855,
+          "precision_at_1_in_1000": 0.0448,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.2435,
+              0.55113
+            ],
+            "fpr": [
+              0.0,
+              0.03659
+            ],
+            "precision_at_1_in_1000": [
+              0.01027,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": false,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.33372,
+              0.46904
+            ],
+            "fpr": [
+              0.000108,
+              0.0533
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0062,
+              0.8137
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.34164,
+              0.46054
+            ],
+            "fpr": [
+              0.000216,
+              0.046701
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0073,
+              0.6806
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 1,
+            "top_groups": [
+              {
+                "group": "azurewebsites.net",
+                "false_positives": 1,
+                "clean_rows": 1
+              }
+            ]
+          }
+        }
+      },
+      "none": {
+        "rows": 1508,
+        "phishing_rows": 551,
+        "clean_rows": 957,
+        "groups": 1474,
+        "auc": 0.9472,
+        "auc_ci95": [
+          0.9355,
+          0.95732
+        ],
+        "target_fpr_0.01": {
+          "role": "operating point (ADR 0003)",
+          "threshold": 0.74956,
+          "true_positives": 249,
+          "false_positives": 4,
+          "tpr": 0.4519,
+          "fpr": 0.00418,
+          "precision_at_1_in_1000": 0.0977,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.4095,
+              0.49618
+            ],
+            "fpr": [
+              0.00103,
+              0.00856
+            ],
+            "precision_at_1_in_1000": [
+              0.04863,
+              0.31495
+            ]
+          },
+          "bootstrap_degenerate": false,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.40394,
+              0.50053
+            ],
+            "fpr": [
+              0.000921,
+              0.011741
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0333,
+              0.3524
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.4098,
+              0.49453
+            ],
+            "fpr": [
+              0.00114,
+              0.010667
+            ],
+            "precision_at_1_in_1000_range": [
+              0.037,
+              0.3028
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 4,
+            "top_groups": [
+              {
+                "group": "back.dog",
+                "false_positives": 1,
+                "clean_rows": 1
+              },
+              {
+                "group": "ccmservicios.com.mx",
+                "false_positives": 1,
+                "clean_rows": 1
+              },
+              {
+                "group": "mobilink.az",
+                "false_positives": 1,
+                "clean_rows": 1
+              },
+              {
+                "group": "ustasb.com",
+                "false_positives": 1,
+                "clean_rows": 1
+              }
+            ]
+          }
+        },
+        "target_fpr_0.001": {
+          "role": "scenario only, evidence needed",
+          "threshold": 0.84127,
+          "true_positives": 148,
+          "false_positives": 1,
+          "tpr": 0.2686,
+          "fpr": 0.00104,
+          "precision_at_1_in_1000": 0.2047,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.23104,
+              0.30917
+            ],
+            "fpr": [
+              0.0,
+              0.00322
+            ],
+            "precision_at_1_in_1000": [
+              0.0728,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": false,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.22706,
+              0.31331
+            ],
+            "fpr": [
+              1.3e-05,
+              0.006649
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0331,
+              0.9598
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.23201,
+              0.3077
+            ],
+            "fpr": [
+              2.6e-05,
+              0.005808
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0384,
+              0.9209
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 1,
+            "top_groups": [
+              {
+                "group": "back.dog",
+                "false_positives": 1,
+                "clean_rows": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    "model_scored_without_duilawyeryork": {
+      "rows_removed": 91,
+      "rows": 2767,
+      "phishing_rows": 1338,
+      "clean_rows": 1429,
+      "groups": 2036,
+      "auc": 0.9694,
+      "auc_ci95": [
+        0.96088,
+        0.97714
+      ],
+      "target_fpr_0.01": {
+        "role": "operating point (ADR 0003)",
+        "threshold": 0.74956,
+        "true_positives": 784,
+        "false_positives": 5,
+        "tpr": 0.5859,
+        "fpr": 0.0035,
+        "precision_at_1_in_1000": 0.1436,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.53582,
+            0.63784
+          ],
+          "fpr": [
+            0.00071,
+            0.00701
+          ],
+          "precision_at_1_in_1000": [
+            0.07639,
+            0.44833
+          ]
+        },
+        "bootstrap_degenerate": false,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.55519,
+            0.61623
+          ],
+          "fpr": [
+            0.000948,
+            0.008909
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0587,
+            0.3942
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.55902,
+            0.6125
+          ],
+          "fpr": [
+            0.001137,
+            0.008146
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0643,
+            0.3503
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 5,
+          "top_groups": [
+            {
+              "group": "azurewebsites.net",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "back.dog",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "ccmservicios.com.mx",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "mobilink.az",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "ustasb.com",
+              "false_positives": 1,
+              "clean_rows": 1
+            }
+          ]
+        }
+      },
+      "target_fpr_0.001": {
+        "role": "scenario only, evidence needed",
+        "threshold": 0.84127,
+        "true_positives": 489,
+        "false_positives": 2,
+        "tpr": 0.3655,
+        "fpr": 0.0014,
+        "precision_at_1_in_1000": 0.2072,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.30464,
+            0.43425
+          ],
+          "fpr": [
+            0.0,
+            0.0038
+          ],
+          "precision_at_1_in_1000": [
+            0.0843,
+            1.0
+          ]
+        },
+        "bootstrap_degenerate": false,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.336,
+            0.3957
+          ],
+          "fpr": [
+            0.000117,
+            0.005672
+          ],
+          "precision_at_1_in_1000_range": [
+            0.056,
+            0.772
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.33961,
+            0.39192
+          ],
+          "fpr": [
+            0.00017,
+            0.005047
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0631,
+            0.6982
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 2,
+          "top_groups": [
+            {
+              "group": "azurewebsites.net",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "back.dog",
+              "false_positives": 1,
+              "clean_rows": 1
+            }
+          ]
+        }
+      }
+    },
+    "probe_without_scheme_and_www": {
+      "rows": 2858,
+      "phishing_rows": 1429,
+      "clean_rows": 1429,
+      "groups": 2037,
+      "auc": 0.9645,
+      "auc_ci95": [
+        0.95247,
+        0.97424
+      ],
+      "target_fpr_0.01": {
+        "role": "operating point (ADR 0003)",
+        "threshold": 0.69256,
+        "true_positives": 875,
+        "false_positives": 10,
+        "tpr": 0.6123,
+        "fpr": 0.007,
+        "precision_at_1_in_1000": 0.0805,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.54347,
+            0.67644
+          ],
+          "fpr": [
+            0.00276,
+            0.0119
+          ],
+          "precision_at_1_in_1000": [
+            0.04841,
+            0.18412
+          ]
+        },
+        "bootstrap_degenerate": false,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.58281,
+            0.64123
+          ],
+          "fpr": [
+            0.002999,
+            0.013759
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0407,
+            0.1763
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.5865,
+            0.63767
+          ],
+          "fpr": [
+            0.003361,
+            0.012832
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0438,
+            0.1596
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 9,
+          "top_groups": [
+            {
+              "group": "blogspot.com",
+              "false_positives": 2,
+              "clean_rows": 36
+            },
+            {
+              "group": "azurewebsites.net",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "back.dog",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "camaranmt.rs.gov.br",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "cnc-club.ru",
+              "false_positives": 1,
+              "clean_rows": 1
+            }
+          ]
+        }
+      },
+      "target_fpr_0.001": {
+        "role": "scenario only, evidence needed",
+        "threshold": 0.88479,
+        "true_positives": 399,
+        "false_positives": 1,
+        "tpr": 0.2792,
+        "fpr": 0.0007,
+        "precision_at_1_in_1000": 0.2854,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.18408,
+            0.38649
+          ],
+          "fpr": [
+            0.0,
+            0.00225
+          ],
+          "precision_at_1_in_1000": [
+            0.08987,
+            1.0
+          ]
+        },
+        "bootstrap_degenerate": false,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.25287,
+            0.30672
+          ],
+          "fpr": [
+            9e-06,
+            0.004457
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0537,
+            0.9721
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.25608,
+            0.30326
+          ],
+          "fpr": [
+            1.8e-05,
+            0.003893
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0618,
+            0.9449
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 1,
+          "top_groups": [
+            {
+              "group": "back.dog",
+              "false_positives": 1,
+              "clean_rows": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "external": {
+    "model": {
+      "rows": 2858,
+      "phishing_rows": 1429,
+      "clean_rows": 1429,
+      "groups": 2344,
+      "auc": 0.9127,
+      "auc_ci95": [
+        0.89189,
+        0.92993
+      ],
+      "target_fpr_0.01": {
+        "role": "operating point (ADR 0003)",
+        "threshold": 0.74956,
+        "true_positives": 304,
+        "false_positives": 0,
+        "tpr": 0.2127,
+        "fpr": 0.0,
+        "precision_at_1_in_1000": 1.0,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.1199,
+            0.31989
+          ],
+          "fpr": [
+            0.0,
+            0.0
+          ],
+          "precision_at_1_in_1000": [
+            1.0,
+            1.0
+          ]
+        },
+        "bootstrap_degenerate": true,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.18889,
+            0.23809
+          ],
+          "fpr": [
+            0.0,
+            0.003062
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0582,
+            1.0
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.19178,
+            0.23488
+          ],
+          "fpr": [
+            0.0,
+            0.002578
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0693,
+            1.0
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 0,
+          "top_groups": []
+        }
+      },
+      "target_fpr_0.001": {
+        "role": "scenario only, evidence needed",
+        "threshold": 0.84127,
+        "true_positives": 129,
+        "false_positives": 0,
+        "tpr": 0.0903,
+        "fpr": 0.0,
+        "precision_at_1_in_1000": 1.0,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.05219,
+            0.13411
+          ],
+          "fpr": [
+            0.0,
+            0.0
+          ],
+          "precision_at_1_in_1000": [
+            1.0,
+            1.0
+          ]
+        },
+        "bootstrap_degenerate": true,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.07401,
+            0.1087
+          ],
+          "fpr": [
+            0.0,
+            0.003062
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0236,
+            1.0
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.07592,
+            0.10634
+          ],
+          "fpr": [
+            0.0,
+            0.002578
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0286,
+            1.0
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 0,
+          "top_groups": []
+        }
+      }
+    },
+    "model_by_overlap_bin": {
+      "same_page": {
+        "rows": 0
+      },
+      "same_site": {
+        "rows": 24,
+        "phishing_rows": 17,
+        "clean_rows": 7,
+        "groups": 14,
+        "auc": 1.0,
+        "auc_ci95": [
+          1.0,
+          1.0
+        ],
+        "target_fpr_0.01": {
+          "role": "operating point (ADR 0003)",
+          "threshold": 0.74956,
+          "true_positives": 9,
+          "false_positives": 0,
+          "tpr": 0.5294,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.27273,
+              0.86667
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.25034,
+              0.79555
+            ],
+            "fpr": [
+              0.0,
+              0.465276
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0005,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.27812,
+              0.77017
+            ],
+            "fpr": [
+              0.0,
+              0.409616
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0007,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        },
+        "target_fpr_0.001": {
+          "role": "scenario only, evidence needed",
+          "threshold": 0.84127,
+          "true_positives": 2,
+          "false_positives": 0,
+          "tpr": 0.1176,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.0,
+              0.25
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.01008,
+              0.3993
+            ],
+            "fpr": [
+              0.0,
+              0.465276
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.01458,
+              0.36441
+            ],
+            "fpr": [
+              0.0,
+              0.409616
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        }
+      },
+      "same_group": {
+        "rows": 245,
+        "phishing_rows": 236,
+        "clean_rows": 9,
+        "groups": 36,
+        "auc": 0.9962,
+        "auc_ci95": [
+          0.97727,
+          1.0
+        ],
+        "target_fpr_0.01": {
+          "role": "operating point (ADR 0003)",
+          "threshold": 0.74956,
+          "true_positives": 151,
+          "false_positives": 0,
+          "tpr": 0.6398,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.11828,
+              0.80507
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.56588,
+              0.70928
+            ],
+            "fpr": [
+              0.0,
+              0.385467
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0015,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.57501,
+              0.70109
+            ],
+            "fpr": [
+              0.0,
+              0.336267
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0017,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        },
+        "target_fpr_0.001": {
+          "role": "scenario only, evidence needed",
+          "threshold": 0.84127,
+          "true_positives": 63,
+          "false_positives": 0,
+          "tpr": 0.2669,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.05939,
+              0.35274
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.20444,
+              0.33699
+            ],
+            "fpr": [
+              0.0,
+              0.385467
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0005,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.21164,
+              0.32821
+            ],
+            "fpr": [
+              0.0,
+              0.336267
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0006,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        }
+      },
+      "none": {
+        "rows": 2589,
+        "phishing_rows": 1176,
+        "clean_rows": 1413,
+        "groups": 2294,
+        "auc": 0.8947,
+        "auc_ci95": [
+          0.87563,
+          0.9115
+        ],
+        "target_fpr_0.01": {
+          "role": "operating point (ADR 0003)",
+          "threshold": 0.74956,
+          "true_positives": 144,
+          "false_positives": 0,
+          "tpr": 0.1224,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.09752,
+              0.14946
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.10182,
+              0.1455
+            ],
+            "fpr": [
+              0.0,
+              0.003096
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0319,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.10425,
+              0.14256
+            ],
+            "fpr": [
+              0.0,
+              0.002607
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0385,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        },
+        "target_fpr_0.001": {
+          "role": "scenario only, evidence needed",
+          "threshold": 0.84127,
+          "true_positives": 64,
+          "false_positives": 0,
+          "tpr": 0.0544,
+          "fpr": 0.0,
+          "precision_at_1_in_1000": 1.0,
+          "group_bootstrap_ci95": {
+            "tpr": [
+              0.04075,
+              0.07047
+            ],
+            "fpr": [
+              0.0,
+              0.0
+            ],
+            "precision_at_1_in_1000": [
+              1.0,
+              1.0
+            ]
+          },
+          "bootstrap_degenerate": true,
+          "exact_ci_joint95_alpha0.025": {
+            "tpr": [
+              0.0406,
+              0.07114
+            ],
+            "fpr": [
+              0.0,
+              0.003096
+            ],
+            "precision_at_1_in_1000_range": [
+              0.013,
+              1.0
+            ]
+          },
+          "exact_binomial_ci95": {
+            "tpr": [
+              0.04216,
+              0.06897
+            ],
+            "fpr": [
+              0.0,
+              0.002607
+            ],
+            "precision_at_1_in_1000_range": [
+              0.0159,
+              1.0
+            ]
+          },
+          "false_positive_concentration": {
+            "groups_with_false_positives": 0,
+            "top_groups": []
+          }
+        }
+      }
+    },
+    "model_scored_without_duilawyeryork": {
+      "rows_removed": 0,
+      "rows": 2858,
+      "phishing_rows": 1429,
+      "clean_rows": 1429,
+      "groups": 2344,
+      "auc": 0.9127,
+      "auc_ci95": [
+        0.89189,
+        0.92993
+      ],
+      "target_fpr_0.01": {
+        "role": "operating point (ADR 0003)",
+        "threshold": 0.74956,
+        "true_positives": 304,
+        "false_positives": 0,
+        "tpr": 0.2127,
+        "fpr": 0.0,
+        "precision_at_1_in_1000": 1.0,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.1199,
+            0.31989
+          ],
+          "fpr": [
+            0.0,
+            0.0
+          ],
+          "precision_at_1_in_1000": [
+            1.0,
+            1.0
+          ]
+        },
+        "bootstrap_degenerate": true,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.18889,
+            0.23809
+          ],
+          "fpr": [
+            0.0,
+            0.003062
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0582,
+            1.0
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.19178,
+            0.23488
+          ],
+          "fpr": [
+            0.0,
+            0.002578
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0693,
+            1.0
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 0,
+          "top_groups": []
+        }
+      },
+      "target_fpr_0.001": {
+        "role": "scenario only, evidence needed",
+        "threshold": 0.84127,
+        "true_positives": 129,
+        "false_positives": 0,
+        "tpr": 0.0903,
+        "fpr": 0.0,
+        "precision_at_1_in_1000": 1.0,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.05219,
+            0.13411
+          ],
+          "fpr": [
+            0.0,
+            0.0
+          ],
+          "precision_at_1_in_1000": [
+            1.0,
+            1.0
+          ]
+        },
+        "bootstrap_degenerate": true,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.07401,
+            0.1087
+          ],
+          "fpr": [
+            0.0,
+            0.003062
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0236,
+            1.0
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.07592,
+            0.10634
+          ],
+          "fpr": [
+            0.0,
+            0.002578
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0286,
+            1.0
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 0,
+          "top_groups": []
+        }
+      }
+    },
+    "probe_without_scheme_and_www": {
+      "rows": 2858,
+      "phishing_rows": 1429,
+      "clean_rows": 1429,
+      "groups": 2344,
+      "auc": 0.8053,
+      "auc_ci95": [
+        0.76979,
+        0.83865
+      ],
+      "target_fpr_0.01": {
+        "role": "operating point (ADR 0003)",
+        "threshold": 0.69256,
+        "true_positives": 344,
+        "false_positives": 6,
+        "tpr": 0.2407,
+        "fpr": 0.0042,
+        "precision_at_1_in_1000": 0.0543,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.14323,
+            0.3545
+          ],
+          "fpr": [
+            0.00138,
+            0.00776
+          ],
+          "precision_at_1_in_1000": [
+            0.02456,
+            0.16968
+          ]
+        },
+        "bootstrap_degenerate": false,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.21573,
+            0.26708
+          ],
+          "fpr": [
+            0.001314,
+            0.009916
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0213,
+            0.169
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.21876,
+            0.26376
+          ],
+          "fpr": [
+            0.001542,
+            0.009116
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0235,
+            0.1462
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 6,
+          "top_groups": [
+            {
+              "group": "checkins.app",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "eatlocalapp.link",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "innform.io",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "mailify.com",
+              "false_positives": 1,
+              "clean_rows": 1
+            },
+            {
+              "group": "mesghalapp.com",
+              "false_positives": 1,
+              "clean_rows": 1
+            }
+          ]
+        }
+      },
+      "target_fpr_0.001": {
+        "role": "scenario only, evidence needed",
+        "threshold": 0.88479,
+        "true_positives": 88,
+        "false_positives": 1,
+        "tpr": 0.0616,
+        "fpr": 0.0007,
+        "precision_at_1_in_1000": 0.081,
+        "group_bootstrap_ci95": {
+          "tpr": [
+            0.03064,
+            0.10779
+          ],
+          "fpr": [
+            0.0,
+            0.00214
+          ],
+          "precision_at_1_in_1000": [
+            0.01925,
+            1.0
+          ]
+        },
+        "bootstrap_degenerate": false,
+        "exact_ci_joint95_alpha0.025": {
+          "tpr": [
+            0.04813,
+            0.07736
+          ],
+          "fpr": [
+            9e-06,
+            0.004457
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0107,
+            0.8979
+          ]
+        },
+        "exact_binomial_ci95": {
+          "tpr": [
+            0.04968,
+            0.07532
+          ],
+          "fpr": [
+            1.8e-05,
+            0.003893
+          ],
+          "precision_at_1_in_1000_range": [
+            0.0126,
+            0.8097
+          ]
+        },
+        "false_positive_concentration": {
+          "groups_with_false_positives": 1,
+          "top_groups": [
+            {
+              "group": "eatlocalapp.link",
+              "false_positives": 1,
+              "clean_rows": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}
