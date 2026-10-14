@@ -71,14 +71,18 @@ def is_scorable(url: object) -> bool:
     return isinstance(url, str) and url.strip() != ""
 
 
-def score_urls(urls: list[str]) -> list[float]:
-    """Phishing probability per input; NOT_SCORED for invalid inputs or any failure."""
+def score_urls(urls: list[str], model: object | None = None) -> list[float]:
+    """Phishing probability per input; NOT_SCORED for invalid inputs or any failure.
+
+    `model` defaults to the frozen primary model; src.evaluate passes the probe.
+    """
+    model = _MODEL if model is None else model
     scores = [NOT_SCORED] * len(urls)
     valid = [i for i, url in enumerate(urls) if is_scorable(url)]
-    if _MODEL is None or not valid:
+    if model is None or not valid:
         return scores
     try:
-        probs = _MODEL.predict_proba([urls[i] for i in valid])[:, 1]
+        probs = model.predict_proba([urls[i] for i in valid])[:, 1]
     except Exception:
         return scores
     for i, p in zip(valid, probs, strict=True):
