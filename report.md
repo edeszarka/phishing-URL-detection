@@ -88,6 +88,10 @@ positive among 1,429 clean URLs. Partial AUC is standardised (0.5 = random, 1 = 
   with other query parameters, fragments or encoding, and sibling pages on one host or
   platform, pass. External still shares 24 URLs at hostname level or stricter and 269
   at platform level with training [results/overlap.json].
+- **Duplication across files** (URLs only): no normalised URL is in all three files.
+  Against the raw training file, 146 test and 0 external URLs repeat a page after
+  normalisation, and 0 exactly. Within test, 24 rows repeat another test row after
+  normalisation (external: 0) [results/overlap.json].
 
 ## 2. URL observations
 
@@ -203,6 +207,9 @@ feeds.
 - **Scope:** the training feeds do not represent phishing in general (section 1).
 - **Intervals:** exact intervals ignore grouping, the bootstrap breaks down at 0 false
   positives, and neither includes split variance; the low-FPR ROC points have no intervals.
+  The 24 within-test duplicates make the exact intervals slightly narrow (the bootstrap
+  resamples them together); whether duplicates share a label was not checked, as that
+  needs test labels.
   `probability` is under-confident and not calibrated (section 3).
 - **Unfinished:** per-group cap (ADR 0004), effect of cleaning on metrics (ADR 0001),
   time-based split, host or reputation features, reproduction on a second OS.
