@@ -77,8 +77,9 @@ uv run ruff check . && uv run pytest
 
 - `src.evaluate` is the only script that reads evaluation labels. It refuses to
   overwrite `results/evaluation.json` without `--rerun-reason`. Every run is
-  appended to `results/evaluation_runs.jsonl`; the committed result is the single
-  first run.
+  appended to `results/evaluation_runs.jsonl`. The committed result is the third
+  run; the second and third only added fields (sample precision, low-FPR ROC), and
+  every value from the first run is unchanged.
 - Seeds are fixed (0). On the development machine (Windows 11), rerunning
   `src.train_final` reproduces the committed model files byte for byte. Their
   SHA-256 hashes are in `results/final_model.json`. This has not been checked
