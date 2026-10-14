@@ -2,9 +2,9 @@
 
 **OOF** = out-of-fold predictions on cleaned `train.csv`: every training row scored by
 a model that did not see its platform group (5-fold grouped CV, ADR 0002). Test and
-external numbers come from one evaluation at thresholds fixed beforehand (ADR 0003); a
-second, logged run only added the sample-precision column, every other value is
-identical (`results/evaluation_runs.jsonl`). Brackets name the file each number comes from.
+external numbers come from one evaluation at thresholds fixed beforehand (ADR 0003); two
+later logged runs only added the sample-precision column and the low-FPR ROC
+diagnostic; every other value is identical (`results/evaluation_runs.jsonl`). Brackets name the file each number comes from.
 
 ## 1. Result for the manager
 
@@ -28,9 +28,10 @@ phishing is far rarer. Intervals are platform-group bootstrap; with 0
 false positives that collapses, so external uses the exact Clopper-Pearson bound
 (joint 95%, alpha 0.025 per rate).
 
-**Supported:** the model ranks phishing above clean on both sources (AUC >= 0.91);
-recall at a low-FPR threshold does not transfer (about one phishing URL in five on the
-separate collection); at 1:1000 most alerts would be false on every set. **Not
+**Supported:** the model ranks phishing above clean on both sources (AUC >= 0.91),
+including at low FPR (table below); the fixed threshold does not transfer (about one
+phishing URL in five caught on the separate collection); at 1:1000 most alerts would
+be false on every set. **Not
 supported:** that test numbers predict future traffic, or a deployed precision on
 unseen sources above the ~0.06 lower bound.
 
@@ -63,8 +64,26 @@ recognise a site rather than judge a URL (section 2).
 - **External: a different source.** 2,589 of 2,858 URLs match training at no level.
   Yet even on no-overlap rows TPR is 0.1224, against 0.4519 for no-overlap test rows,
   so overlap does not explain the gap.
-  **Hypothesis:** the external URLs differ in style, notably in scheme/`www.`
-  conventions (probe evidence in section 2). Not tested further.
+  **Observation:** the ranking transfers but the score scale does not. On its own ROC
+  curve, external reaches TPR 0.634 at FPR 0.1% and partial AUC 0.827, higher than test
+  (0.2302, 0.7927), so its phishing URLs are ranked well but score below 0.74956.
+  **Hypothesis:** the shift comes from source-specific conventions such as scheme and
+  `www.`: without them the probe's external partial AUC falls to 0.6172. Not tested
+  further.
+
+**Low-FPR ROC (diagnostic, each set's own ROC curve; no threshold follows from it):**
+
+| TPR at FPR | 0.1% | 0.5% | 1% | 5% | partial AUC (FPR <= 1%) |
+|---|---|---|---|---|---|
+| OOF | 0.2085 | 0.3545 | 0.4373 | 0.7141 | 0.6674 |
+| test | 0.2302 | 0.6697 | 0.7341 | 0.8572 | 0.7927 |
+| test, no overlap | 0.0871 | 0.5064 | 0.5608 | 0.7314 | 0.7194 |
+| external | 0.634 | 0.6648 | 0.6704 | 0.7502 | 0.827 |
+| external, no overlap | 0.5595 | 0.5952 | 0.602 | 0.6973 | 0.7913 |
+
+OOF row: `results/roc_calibration_oof.json`; others `results/evaluation.json`. Point
+estimates without intervals; at FPR 0.1% each evaluation set allows at most one false
+positive among 1,429 clean URLs. Partial AUC is standardised (0.5 = random, 1 = perfect).
 - **What the external normalisation misses:** it compares whole URLs, so the same page
   with other query parameters, fragments or encoding, and sibling pages on one host or
   platform, pass. External still shares 24 URLs at hostname level or stricter and 269
@@ -121,7 +140,11 @@ about 0.06"; they cannot distinguish 0.06 from 0.4.
 **`probability`** is the logistic-regression score for the cleaned training population
 (4,068 of 8,325 phishing, about 1:1). It is not the chance that a URL is phishing at
 1:1000: even if it were calibrated for the training mix, the same score would mean a
-much lower chance at that prevalence. Its calibration was not checked, even on OOF. It is used only to rank and to apply the threshold.
+much lower chance at that prevalence. Even on the training mix it is under-confident:
+OOF rows scored 0.7-0.8 (mean 0.7549) are 0.9265 phishing, rows scored 0.1-0.2 (mean
+0.1453) are 0.0558 phishing; Brier score 0.1079 vs 0.2499 for a constant base-rate
+guess [results/roc_calibration_oof.json]. It is used only to rank and to apply the
+threshold; no calibration step was added (ADR 0003).
 
 **Recommendation: prioritise review; do not block or warn users.** Even at the upper
 estimates most alerts are false. At the external lower bound, about 6 in 100 alerts are
@@ -129,8 +152,10 @@ phishing, and only about one phishing URL in five from an unfamiliar source is c
 The stricter 0.84127 point stays a scenario: test precision 0.225 (bootstrap
 0.093-1.0) from 2 false positives, external TPR 0.0903 [results/evaluation.json].
 **Evidence needed before blocking:** labelled deployment traffic with enough clean URLs
-to bound FPR near 0.1%, false positives by hosting platform, a time-based split, and
-recall on phishing from sources outside the training feeds.
+to bound FPR near 0.1% and to set the threshold for that source (the external ROC shows
+the threshold, not the ranking, fails to transfer), false positives by hosting
+platform, a time-based split, and recall on phishing from sources outside the training
+feeds.
 
 ## 4. Data handling
 
@@ -177,7 +202,8 @@ recall on phishing from sources outside the training feeds.
   [results/group_ablation.json]. No variant was compared on test labels.
 - **Scope:** the training feeds do not represent phishing in general (section 1).
 - **Intervals:** exact intervals ignore grouping, the bootstrap breaks down at 0 false
-  positives, and neither includes split variance. `probability` is uncalibrated (section 3).
+  positives, and neither includes split variance; the low-FPR ROC points have no intervals.
+  `probability` is under-confident and not calibrated (section 3).
 - **Unfinished:** per-group cap (ADR 0004), effect of cleaning on metrics (ADR 0001),
   time-based split, host or reputation features, reproduction on a second OS.
 - **Next:** labelled deployment traffic to measure FPR at the 0.1% scale; a model less
