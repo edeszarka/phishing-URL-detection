@@ -124,8 +124,8 @@ These are patterns of these feeds, not of phishing in general.
   Missed phishing (2,289) looks like ordinary sites: `www.` 0.2905 vs 0.0905 for caught
   phishing, bare host 0.2473 vs 0.104, median length 46 vs 69. Phishing on trusted
   platforms is often missed (blogspot.com 108, appspot.com 93, google.com 83,
-  sharepoint.com 48). Of 42 false positives, 26 are blogspot.com and 8 are legitimate
-  microsoftonline.com/apple.com login URLs; none has `www.`. **[HYP]** Many misses are
+  sharepoint.com 48). Of 42 false positives, 26 are blogspot.com, 5 microsoftonline.com
+  and 3 apple.com; none has `www.`. **[HYP]** Many misses are
   compromised or look-alike sites with no URL-level signal; this is a limit of URL-only
   input, not of tuning.
 
