@@ -71,11 +71,10 @@ Patterns of these feeds, not of phishing in general [results/eda.json unless not
   rows are phishing, from only 5 platform groups.
 - **[HYP] contradicted: "HTTPS means legitimate".** 0.3326 of phishing rows (1,353) use
   https vs 0.4402 of clean rows (1,874).
-- **[OBS] OOF errors** [results/error_analysis_oof.json]: missed phishing (2,289) looks
-  like ordinary sites (`www.` 0.2905 vs 0.0905 for caught phishing, median length 46 vs
-  69), often on trusted platforms (blogspot.com 108, appspot.com 93, google.com 83). Of
-  42 false positives, 26 are blogspot.com; none has `www.`. **[HYP]** Many misses are
-  compromised or look-alike sites with no URL-level signal.
+- **[OBS] OOF errors** [results/error_analysis_oof.json]: missed phishing looks like
+  ordinary sites (`www.` 0.2905 vs 0.0905 for caught phishing); 26 of 42 false positives
+  are blogspot.com. **[HYP]** Many misses are compromised or look-alike sites with no
+  URL-level signal.
 
 ## 3. Threshold and deployment
 
