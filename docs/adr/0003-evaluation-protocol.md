@@ -97,3 +97,26 @@ Two details fixed before the run, without changing the decisions above:
   (`results/overlap.json`): same page (exact, normalised, normalised with path
   case), same site (host plus first path segment, hostname), same group (tenant
   or platform group), none.
+
+## Note, 2026-10-15 (detail moved from report.md, after the evaluation run)
+Diagnostics that the shortened report cites only in summary. Nothing here changes the
+decisions above; no threshold follows from them.
+
+- **Low-FPR ROC**, each set on its own ROC curve; point estimates without intervals.
+  At FPR 0.1% each evaluation set allows at most one false positive among 1,429 clean
+  URLs. Partial AUC is standardised (0.5 = random, 1 = perfect). OOF row:
+  `results/roc_calibration_oof.json`; others: `results/evaluation.json` (`low_fpr_roc`).
+
+  | TPR at FPR | 0.1% | 0.5% | 1% | 5% | partial AUC (FPR <= 1%) |
+  |---|---|---|---|---|---|
+  | OOF | 0.2085 | 0.3545 | 0.4373 | 0.7141 | 0.6674 |
+  | test | 0.2302 | 0.6697 | 0.7341 | 0.8572 | 0.7927 |
+  | test, no overlap | 0.0871 | 0.5064 | 0.5608 | 0.7314 | 0.7194 |
+  | external | 0.634 | 0.6648 | 0.6704 | 0.7502 | 0.827 |
+  | external, no overlap | 0.5595 | 0.5952 | 0.602 | 0.6973 | 0.7913 |
+
+  Without the scheme and `www.` prefix, the probe's external partial AUC is 0.6172.
+- **FPR <= 0.1% scenario** (threshold 0.84127, `results/evaluation.json`,
+  `target_fpr_0.001`): test TP/FP 580/2, TPR 0.4059, FPR 0.0014, precision at 1:1000
+  0.225 (bootstrap 0.093-1.0); external TP/FP 129/0, TPR 0.0903. It remains a scenario,
+  not the operating point.

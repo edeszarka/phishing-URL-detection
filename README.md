@@ -14,9 +14,10 @@ dependency. Runs on CPU.
 uv sync
 ```
 
-Pinned versions used for the committed model (also in `results/final_model.json`):
-Python 3.12.13, scikit-learn 1.9.1, numpy 2.5.4, scipy 1.18.1, pandas 3.0.6,
-joblib 1.6.0, tldextract 5.4.0 (bundled suffix list, no network).
+Pinned versions used for the committed model: Python 3.12.13, scikit-learn 1.9.1,
+numpy 2.5.4, scipy 1.18.1, pandas 3.0.6, joblib 1.6.0, tldextract 5.4.0 (bundled
+suffix list, no network). scikit-learn, numpy, scipy and joblib are also recorded in
+`results/final_model.json`, and `predict.py` warns if those differ.
 
 **The supplied data is not included.** Put `train.csv`, `test.csv` and
 `external_test.csv` in `data/` (ignored by git). Scripts regenerate any derived
