@@ -50,11 +50,13 @@ other query parameters, fragments or encoding, and sibling pages on one host or
 platform, pass; external still shares 24 URLs with training at hostname level or
 stricter and 269 at platform level [results/overlap.json].
 
-**Supported:** the model ranks phishing above clean on both sources (AUC >= 0.91); the
-fixed threshold does not transfer; at 1:1000 most alerts would be false on OOF and test
-(upper bounds 0.209 and 0.468). **Not supported:** that test numbers predict future
-traffic; deployed precision on unseen sources above the OOF estimate (0.0425); any upper
-bound for external, which had no false positives.
+**Supported:** the model ranks phishing above clean on both sources (AUC >= 0.91 in the
+table, lower 95% bounds >= 0.89); the fixed threshold keeps its false-positive rate on a
+new source but not its recall (external 0.2127 vs OOF 0.4373, intervals disjoint); at
+1:1000 most alerts would be false on OOF and test without overlap (upper bounds 0.209 and
+0.315). **Not supported:** that test numbers predict future traffic; any deployed
+precision on real traffic, since every estimate assumes the curated clean URLs resemble
+real clean traffic; any upper bound for external, which had no false positives.
 
 ## 2. URL observations
 
