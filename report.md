@@ -4,9 +4,10 @@
 (OOF FPR <= 1%), catches 61% of phishing on the overlapping test set but 21% on the
 separate external collection, with FPR at or below 0.35% on both. External is ranked
 well at low FPR; it is the threshold that does not transfer between sources. At 1
-phishing URL in 1,000, at least about 6% of alerts would be phishing, so I recommend
-using it to prioritise review, not to block, until it is validated on labelled
-deployment traffic.
+phishing URL in 1,000, about 4% of alerts would be phishing at the OOF operating point
+(0.0425, 95% 0.018-0.209); test gives 0.149, and external, with 0 false positives, only
+bounds it from below (>= 0.058). I therefore recommend using it to prioritise review,
+not to block, until it is validated on labelled deployment traffic.
 
 **OOF** = out-of-fold predictions on cleaned `train.csv`: every training row scored by
 a model that did not see its platform group (5-fold grouped CV, ADR 0002). Test and
@@ -39,9 +40,10 @@ false positives that collapses, so external uses the exact Clopper-Pearson bound
 **Supported:** the model ranks phishing above clean on both sources (AUC >= 0.91),
 including at low FPR (table below); the fixed threshold does not transfer (about one
 phishing URL in five caught on the separate collection); at 1:1000 most alerts would
-be false on every set. **Not
-supported:** that test numbers predict future traffic, or a deployed precision on
-unseen sources above the ~0.06 lower bound.
+be false on OOF and test (upper bounds 0.209 and 0.468); external had no false
+positives, so its precision has no informative upper bound. **Not supported:** that
+test numbers predict future traffic, or that deployed precision on unseen sources
+would exceed the OOF estimate (0.0425).
 
 **Overlap definition** (`src/overlap.py`). Each evaluation URL gets the strictest of
 seven levels at which it matches any cleaned training URL; each level implies the
@@ -145,8 +147,9 @@ precision = TPR·π / (TPR·π + FPR·(1-π)) with π = 0.001. FPR dominates, an
 rate the samples measure worst: each set has 1,429 clean URLs, so one false positive
 moves FPR by 1/1,429. Exact joint-95% FPR intervals are 0.00095-0.0089 (test) and
 0-0.0031 (external), implying precision 0.0615-0.4037 and >= 0.058
-[results/evaluation.json]. The samples support "precision at 1:1000 is likely at least
-about 0.06"; they cannot distinguish 0.06 from 0.4.
+[results/evaluation.json]. These evaluation-set lower bounds are about 0.06, but the
+OOF point estimate, at the FPR the threshold was chosen for, is 0.0425
+[results/oof_headline.json]; the samples cannot distinguish 0.04 from 0.4.
 
 **Assumptions behind these figures:**
 - 1 in 1,000 incoming URLs is phishing.
@@ -166,9 +169,10 @@ OOF rows scored 0.7-0.8 (mean 0.7549) are 0.9265 phishing, rows scored 0.1-0.2 (
 guess [results/roc_calibration_oof.json]. It is used only to rank and to apply the
 threshold; no calibration step was added (ADR 0003).
 
-**Recommendation: prioritise review; do not block or warn users.** Even at the upper
-estimates most alerts are false. At the external lower bound, about 6 in 100 alerts are
-phishing, and only about one phishing URL in five from an unfamiliar source is caught.
+**Recommendation: prioritise review; do not block or warn users.** On OOF and test,
+even the upper estimates leave most alerts false; external, with 0 false positives, is
+bounded only from below. At the OOF point estimate about 4 in 100 alerts are phishing,
+and only about one phishing URL in five from an unfamiliar source is caught.
 The stricter 0.84127 point stays a scenario: test precision 0.225 (bootstrap
 0.093-1.0) from 2 false positives, external TPR 0.0903 [results/evaluation.json].
 **Evidence needed before blocking:** labelled deployment traffic with enough clean URLs
