@@ -103,7 +103,8 @@ rows scored 0.7-0.8 are 0.9265 phishing, rows scored 0.1-0.2 are 0.0558
 [results/roc_calibration_oof.json]. It only ranks; no calibration was added.
 
 **Recommendation: prioritise review; do not block or warn users.** About 4 in 100 alerts
-would be phishing, and one phishing URL in five from an unfamiliar source is caught; a
+would be phishing (OOF, 2-21 in 100), and one phishing URL in five from an unfamiliar
+source is caught (0.12-0.32); a
 stricter FPR <= 0.1% threshold stays a scenario (ADR 0003). **Evidence needed before
 blocking:** labelled deployment traffic with enough clean URLs to bound FPR near 0.1%
 and set that source's threshold; false positives by hosting platform; a time-based
