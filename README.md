@@ -20,8 +20,9 @@ suffix list, no network). scikit-learn, numpy, scipy and joblib are also recorde
 `results/final_model.json`, and `predict.py` warns if those differ.
 
 **The supplied data is not included.** Put `train.csv`, `test.csv` and
-`external_test.csv` in `data/` (ignored by git). Scripts regenerate any derived
-file (cleaned data, OOF predictions, overlap levels) in `data/`.
+`external_test.csv` in `data/` (ignored by git). The cleaned data is recomputed in
+memory from `train.csv` by each script; other derived files (OOF predictions, overlap
+levels, error examples) are written to `data/`.
 
 ## Inference
 
@@ -62,13 +63,14 @@ uv run python -m src.oof_metrics         # results/oof_headline.json
 uv run python -m src.controls            # results/controls.json
 uv run python -m src.group_ablation      # results/group_ablation.json
 uv run python -m src.roc_calibration     # results/roc_calibration_oof.json (low-FPR ROC, calibration)
-uv run python -m src.error_analysis      # results/error_analysis_oof.json (OOF errors)
 
 # final model (overwrites models/*.joblib, results/final_model.json)
 uv run python -m src.train_final
+uv run python -m src.error_analysis      # results/error_analysis_oof.json, data/error_examples_oof.csv
+                                         # (OOF errors at the threshold in results/final_model.json)
 
 # evaluation
-uv run python -m src.overlap             # results/overlap.json (evaluation URLs only)
+uv run python -m src.overlap             # results/overlap.json, data/overlap_levels.csv (evaluation URLs only)
 uv run python -m src.evaluate --dry-run  # must report MATCH against oof_headline.json
 uv run python -m src.evaluate --rerun-reason "reproduction"   # results/evaluation.json
 uv run python -m src.write_predictions   # predictions.csv
