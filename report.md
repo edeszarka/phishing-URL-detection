@@ -213,9 +213,9 @@ feeds.
    choice barely matters: AUC 0.9421 / 0.9422 / 0.9417 [results/controls.json].
 2. Tenant-level folds leaked platforms (AUC 0.9 vs 0.6092) -> platform-level groups
    (ADR 0002) -> recall at 1% FPR drops from 0.5951 to 0.4373 [results/controls.json].
-3. `www.` gap -> stripped-input variant -> AUC 0.9346 vs 0.9421 on OOF. Not adopted,
-   kept as a probe (ADR 0003); on external it exposes prefix dependence (section 2)
-   [results/oof_headline.json].
+3. `www.` gap -> stripped-input variant -> AUC 0.9346 vs 0.9421 on OOF. A diagnostic
+   by design, never a candidate to replace the model (ADR 0003); on external it exposes
+   prefix dependence (section 2) [results/oof_headline.json].
 4. The 0.1% FPR point rests on 4 false positives -> operate at 1% FPR, threshold
    0.74956 (ADR 0003); test FPR stayed inside the OOF fold range (section 3)
    [results/oof_headline.json].
@@ -230,6 +230,9 @@ feeds.
   3 variants compared on OOF: baseline, stripped-input probe, duilawyeryork exclusion
   [results/baseline_oof.json, results/group_ablation.json]. No variant was compared on
   test labels.
+- **Why the baseline was kept:** the one candidate improvement, excluding
+  duilawyeryork.com, changed recall by -0.0052 to 0.0111 over 5 fold seeds, with every
+  CI including 0 [results/group_ablation.json]; the probe was a diagnostic by design.
 - **Scope:** the training feeds do not represent phishing in general (section 1).
 - **Intervals:** exact intervals ignore grouping, the bootstrap breaks down at 0 false
   positives, and neither includes split variance; the low-FPR ROC points have no intervals.
