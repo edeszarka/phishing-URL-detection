@@ -1,0 +1,149 @@
+{
+  "source": "data/oof_predictions.csv + cleaned train URLs (training labels only)",
+  "threshold": 0.74956,
+  "note": "diagnostic only; no threshold or model change follows from it (ADR 0003)",
+  "counts": {
+    "TP": 1779,
+    "FN": 2289,
+    "FP": 42,
+    "TN": 4215
+  },
+  "slices": {
+    "TP": {
+      "rows": 1779,
+      "share_https": 0.244,
+      "share_www": 0.0905,
+      "share_bare_host": 0.104,
+      "share_ip_host": 0.0298,
+      "length_q25_q50_q75": [
+        47.0,
+        69.0,
+        118.0
+      ],
+      "top_groups": [
+        {
+          "group": "duilawyeryork.com",
+          "rows": 216
+        },
+        {
+          "group": "appspot.com",
+          "rows": 103
+        },
+        {
+          "group": "blogspot.com",
+          "rows": 84
+        },
+        {
+          "group": "000webhostapp.com",
+          "rows": 26
+        },
+        {
+          "group": "stolizaparketa.ru",
+          "rows": 16
+        }
+      ]
+    },
+    "FN": {
+      "rows": 2289,
+      "share_https": 0.4015,
+      "share_www": 0.2905,
+      "share_bare_host": 0.2473,
+      "share_ip_host": 0.0122,
+      "length_q25_q50_q75": [
+        34.0,
+        46.0,
+        74.0
+      ],
+      "top_groups": [
+        {
+          "group": "blogspot.com",
+          "rows": 108
+        },
+        {
+          "group": "appspot.com",
+          "rows": 93
+        },
+        {
+          "group": "google.com",
+          "rows": 83
+        },
+        {
+          "group": "sharepoint.com",
+          "rows": 48
+        },
+        {
+          "group": "shadetreetechnology.com",
+          "rows": 45
+        }
+      ]
+    },
+    "FP": {
+      "rows": 42,
+      "share_https": 0.2381,
+      "share_www": 0.0,
+      "share_bare_host": 0.6667,
+      "share_ip_host": 0.0,
+      "length_q25_q50_q75": [
+        32.0,
+        35.0,
+        43.0
+      ],
+      "top_groups": [
+        {
+          "group": "blogspot.com",
+          "rows": 26
+        },
+        {
+          "group": "microsoftonline.com",
+          "rows": 5
+        },
+        {
+          "group": "apple.com",
+          "rows": 3
+        },
+        {
+          "group": "ederslik.edu.az",
+          "rows": 1
+        },
+        {
+          "group": "ex-prom.ru",
+          "rows": 1
+        }
+      ]
+    },
+    "TN": {
+      "rows": 4215,
+      "share_https": 0.4422,
+      "share_www": 0.6674,
+      "share_bare_host": 0.3711,
+      "share_ip_host": 0.0,
+      "length_q25_q50_q75": [
+        29.0,
+        42.0,
+        60.0
+      ],
+      "top_groups": [
+        {
+          "group": "wikipedia.org",
+          "rows": 134
+        },
+        {
+          "group": "blogspot.com",
+          "rows": 65
+        },
+        {
+          "group": "tumblr.com",
+          "rows": 59
+        },
+        {
+          "group": "wordpress.com",
+          "rows": 54
+        },
+        {
+          "group": "academic.ru",
+          "rows": 43
+        }
+      ]
+    }
+  }
+}

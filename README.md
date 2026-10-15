@@ -61,6 +61,7 @@ uv run python -m src.oof_metrics         # results/oof_headline.json
 uv run python -m src.controls            # results/controls.json
 uv run python -m src.group_ablation      # results/group_ablation.json
 uv run python -m src.roc_calibration     # results/roc_calibration_oof.json (low-FPR ROC, calibration)
+uv run python -m src.error_analysis      # results/error_analysis_oof.json (OOF errors)
 
 # final model (overwrites models/*.joblib, results/final_model.json)
 uv run python -m src.train_final
