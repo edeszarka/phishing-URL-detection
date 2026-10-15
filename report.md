@@ -41,18 +41,10 @@ binned as same page, same site, same group or none [results/overlap.json].
 - **External: a different source.** 2,589 of 2,858 URLs match training at no level, yet
   no-overlap TPR is 0.1224 against 0.4519 on test, so overlap does not explain the gap.
   **[OBS]** The ranking transfers but the score scale does not: on its own ROC curve
-  external reaches TPR 0.634 at FPR 0.1%, yet its phishing scores below 0.74956.
-
-| own ROC curve (diagnostic, no threshold follows) | TPR at FPR 0.1% | TPR at FPR 1% | partial AUC (FPR <= 1%) |
-|---|---|---|---|
-| OOF | 0.2085 | 0.4373 | 0.6674 |
-| test | 0.2302 | 0.7341 | 0.7927 |
-| test, no overlap | 0.0871 | 0.5608 | 0.7194 |
-| external | 0.634 | 0.6704 | 0.827 |
-| external, no overlap | 0.5595 | 0.602 | 0.7913 |
-
-Point estimates [results/roc_calibration_oof.json, results/evaluation.json]; at FPR 0.1%
-each evaluation set allows at most one false positive among 1,429 clean URLs.
+  external reaches TPR 0.634 at FPR 0.1% (0.5595 on no-overlap rows) and partial AUC
+  0.827 vs 0.7927 for test, yet its phishing scores below 0.74956. These are point
+  estimates; at FPR 0.1% a set allows at most one false positive among 1,429 clean URLs
+  (full table: ADR 0003).
 
 **What the external normalisation misses:** it compares whole URLs, so the same page with
 other query parameters, fragments or encoding, and sibling pages on one host or
