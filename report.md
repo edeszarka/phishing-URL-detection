@@ -25,9 +25,10 @@ overlap, not the test headline [results/oof_headline.json, results/evaluation.js
 | test, no overlap (1,508) | 0.9472 | 249 / 4 | 0.4519 | 0.00418 | 0.9842 | 0.098 (0.049-0.315) |
 | external, all 2,858 | 0.9127 | 304 / 0 | 0.2127 | 0 (<= 0.0031) | 1.0 | >= 0.058 (exact bound) |
 
-Intervals: platform-group bootstrap at the fixed threshold, the headline chosen before
-the run (ADR 0003); it collapses at 0 false positives, so external uses the exact
-Clopper-Pearson bound (joint 95%). Precision on sample reflects the 1:1 class mix, not
+Intervals: 95% bootstrap over platform groups at the fixed threshold, the headline
+interval type chosen before any test label was read (ADR 0003). With 0 false positives
+the bootstrap has zero width, so external uses the exact Clopper-Pearson bound (joint
+95%). Precision on sample reflects the 1:1 class mix, not
 deployment.
 
 **Overlap** (`src/overlap.py`, ADR 0003): each evaluation URL gets the strictest of seven
