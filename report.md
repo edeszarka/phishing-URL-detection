@@ -32,8 +32,11 @@ the bootstrap has zero width, so external uses the exact Clopper-Pearson bound (
 deployment.
 
 **Overlap** (`src/overlap.py`, ADR 0003): each evaluation URL gets the strictest of seven
-levels at which it matches cleaned training, from exact string to shared platform group,
-binned as same page, same site, same group or none [results/overlap.json].
+levels at which it matches cleaned training [results/overlap.json]: **same page** = exact
+string, or equal after the external-set normalisation (case, scheme, leading `www.`,
+trailing slash), with or without path case; **same site** = same hostname plus first path
+segment, or same hostname; **same group** = same tenant- or platform-level registered
+domain (ADR 0002); otherwise **none**.
 - **OOF:** platforms unseen in training; the only data that chose the threshold.
 - **Test: same feeds as training, overlapping.** 1,350 of 2,858 URLs share at least a
   platform group with training; 145 are the same page after the external-set
