@@ -1,10 +1,12 @@
 # URL phishing classifier: report
 
 **Summary.** A char 3-5-gram TF-IDF + logistic regression on the raw URL (C=1, one
-configuration) at threshold 0.74956 (OOF FPR <= 1%) catches 61% of phishing on the
-overlapping test set and 21% on the separate external collection, at FPR at or below
-0.35% on both. At 1 phishing URL in 1,000, about 4% of alerts would be phishing, so I
-recommend prioritising review, not blocking.
+configuration) at threshold 0.74956 (OOF FPR <= 1%) catches 44% of phishing on unseen
+platforms (OOF), 45% on test URLs without training overlap and 21% on the separate
+external collection (61% on the full test set, inflated by overlap). At 1 phishing URL in
+1,000, if the measured rates hold, about 4% of alerts would be phishing (OOF:
+0.018-0.209, the lowest of the three estimates), so I recommend prioritising review, not
+blocking.
 
 **OOF** = out-of-fold predictions on cleaned `train.csv`, folds grouped by platform
 (ADR 0002). Test and external were scored once at thresholds fixed beforehand (ADR 0003);
@@ -24,14 +26,18 @@ overlap, not the test headline [results/oof_headline.json, results/evaluation.js
 | test, no overlap (1,508) | 0.9472 | 249 / 4 | 0.4519 | 0.00418 | 0.9842 | 0.098 (0.049-0.315) |
 | external, all 2,858 | 0.9127 | 304 / 0 | 0.2127 | 0 (<= 0.0031) | 1.0 | >= 0.058 (exact bound) |
 
-Intervals: platform-group bootstrap at the fixed threshold, the headline chosen before
-the run (ADR 0003); it collapses at 0 false positives, so external uses the exact
-Clopper-Pearson bound (joint 95%). Precision on sample reflects the 1:1 class mix, not
+Intervals: 95% bootstrap over platform groups at the fixed threshold, the headline
+interval type chosen before any test label was read (ADR 0003). With 0 false positives
+the bootstrap has zero width, so external uses the exact Clopper-Pearson bound (joint
+95%). Precision on sample reflects the 1:1 class mix, not
 deployment.
 
 **Overlap** (`src/overlap.py`, ADR 0003): each evaluation URL gets the strictest of seven
-levels at which it matches cleaned training, from exact string to shared platform group,
-binned as same page, same site, same group or none [results/overlap.json].
+levels at which it matches cleaned training [results/overlap.json]: **same page** = exact
+string, or equal after the external-set normalisation (case, scheme, leading `www.`,
+trailing slash), with or without path case; **same site** = same hostname plus first path
+segment, or same hostname; **same group** = same tenant- or platform-level registered
+domain (ADR 0002); otherwise **none**.
 - **OOF:** platforms unseen in training; the only data that chose the threshold.
 - **Test: same feeds as training, overlapping.** 1,350 of 2,858 URLs share at least a
   platform group with training; 145 are the same page after the external-set
@@ -40,30 +46,33 @@ binned as same page, same site, same group or none [results/overlap.json].
 - **External: a different source.** 2,589 of 2,858 URLs match training at no level, yet
   no-overlap TPR is 0.1224 vs 0.4519 on test, so overlap does not explain the gap.
   **[OBS]** The ranking transfers, the score scale does not: on its own ROC curve
-  external reaches TPR 0.634 at FPR 0.1% (0.5595 without overlap) and partial AUC 0.827
-  vs 0.7927 for test, yet its phishing scores below 0.74956. Point estimates; at FPR
-  0.1% a set allows at most one false positive among 1,429 clean URLs (full table:
-  ADR 0003).
+  external reaches TPR 0.634 at FPR 0.1% (0.5595 without overlap), yet its phishing
+  scores below 0.74956. Point estimates; at FPR 0.1% a set allows at most one false
+  positive among 1,429 clean URLs (full table: ADR 0003).
 
 **What the external normalisation misses:** it compares whole URLs, so the same page with
 other query parameters, fragments or encoding, and sibling pages on one host or
 platform, pass; external still shares 24 URLs with training at hostname level or
-stricter and 269 at platform level [results/overlap.json].
+stricter and 269 at platform level or stricter [results/overlap.json].
 
-**Supported:** the model ranks phishing above clean on both sources (AUC >= 0.91); the
-fixed threshold does not transfer; at 1:1000 most alerts would be false on OOF and test
-(upper bounds 0.209 and 0.468). **Not supported:** that test numbers predict future
-traffic; deployed precision on unseen sources above the OOF estimate (0.0425); any upper
-bound for external, which had no false positives.
+**Supported:** the model ranks phishing above clean on both sources (AUC >= 0.91 in the
+table, lower 95% bounds >= 0.89); the fixed threshold keeps its false-positive rate on a
+new source but not its recall (external 0.2127 vs OOF 0.4373, intervals disjoint); at
+1:1000 most alerts would be false on OOF and test without overlap (upper bounds 0.209 and
+0.315). **Not supported:** that test numbers predict future traffic; any deployed
+precision on real traffic, since every estimate assumes the curated clean URLs resemble
+real clean traffic; any upper bound for external, which had no false positives.
 
 ## 2. URL observations
 
 Patterns of these feeds, not of phishing in general [results/eda.json unless noted].
 - **[OBS]** `www.` is in 0.6608 of clean rows (2,813) vs 0.203 of phishing (826).
-  **[HYP] "the model mainly ranks on the scheme/`www.` prefix": weakened on
-  training-like data, not on external.** Stripping both costs little AUC on OOF (0.9346
-  vs 0.9421) [results/oof_headline.json] and test (0.9645 vs 0.9714), a lot on external
-  (0.8053 vs 0.9127) [results/evaluation.json].
+  **[OBS]** The 12 most clean-leaning n-grams of the model are all fragments of
+  `://www.` [results/baseline_oof.json].
+    - **[HYP] "the model mainly ranks on the scheme/`www.` prefix": weakened on
+      training-like data, not on external.** Stripping both costs little AUC on OOF
+      (0.9346 vs 0.9421) [results/oof_headline.json] and test (0.9645 vs 0.9714), a lot
+      on external (0.8053 vs 0.9127) [results/evaluation.json].
 - **[OBS]** Phishing clusters on shared hosting platforms: on the 650 rows whose tenant-
   and platform-level keys differ (538 phishing), AUC is 0.9 when other tenants of the
   platform may be in training and 0.6092 when not [results/controls.json]. All 32 `.app`
@@ -85,10 +94,11 @@ per-fold OOF range 0-0.0317 [results/oof_headline.json], so it was not re-tuned.
 
 **Deployed precision** = TPR·π / (TPR·π + FPR·(1-π)), π = 0.001, from measured rates,
 not from `probability`. FPR dominates and is measured worst: with 1,429 clean URLs per
-set, one false positive moves FPR by 1/1,429. Estimates: 0.0425 (OOF), 0.149 (test),
->= 0.058 (external); the exact test cross-check, ignoring grouping, is 0.0615-0.4037
-[results/evaluation.json]. **The sample size supports** "most alerts are false" on OOF
-and test, but cannot distinguish 0.04 from 0.4 or bound external from above.
+set, one false positive moves FPR by 1/1,429. Estimates: 0.0425 (OOF), 0.098 (test
+without overlap), >= 0.058 (external); the exact cross-check for that test row, ignoring
+grouping, is 0.0333-0.3524 [results/evaluation.json]. **The sample size supports** "most
+alerts are false" on OOF and test without overlap, but cannot distinguish 0.033 from
+0.352 or bound external from above.
 **Assumptions:** prevalence 1:1000; measured rates hold in deployment, especially that
 the curated 1,429 clean URLs per set resemble real clean traffic (weakest); the
 threshold carries over to the refit model; rows (exact) or platform groups (bootstrap)
@@ -100,7 +110,8 @@ rows scored 0.7-0.8 are 0.9265 phishing, rows scored 0.1-0.2 are 0.0558
 [results/roc_calibration_oof.json]. It only ranks; no calibration was added.
 
 **Recommendation: prioritise review; do not block or warn users.** About 4 in 100 alerts
-would be phishing, and one phishing URL in five from an unfamiliar source is caught; a
+would be phishing (OOF, 2-21 in 100), and one phishing URL in five from an unfamiliar
+source is caught (0.12-0.32); a
 stricter FPR <= 0.1% threshold stays a scenario (ADR 0003). **Evidence needed before
 blocking:** labelled deployment traffic with enough clean URLs to bound FPR near 0.1%
 and set that source's threshold; false positives by hosting platform; a time-based
@@ -141,7 +152,10 @@ split; recall on phishing from sources outside the training feeds.
 ## 6. Limitations and next steps
 
 - **Configurations:** 1 hyperparameter configuration; 3 variants compared on OOF, none
-  on test labels [results/baseline_oof.json, results/group_ablation.json]. The baseline
+  on test labels [results/baseline_oof.json, results/group_ablation.json]. Logistic
+  regression was chosen, not compared with other models: the brief asks for a simple,
+  explainable model, a regularised linear model suits sparse n-gram features, its
+  per-n-gram weights can be read, and it outputs the required probability. The baseline
   was kept because the only candidate improvement (decision 5) had every CI including
   0; the probe was never a candidate.
 - **Intervals** ignore split variance; exact ones also ignore grouping and the 24
