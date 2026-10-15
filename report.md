@@ -66,7 +66,8 @@ real clean traffic; any upper bound for external, which had no false positives.
 
 Patterns of these feeds, not of phishing in general [results/eda.json unless noted].
 - **[OBS]** `www.` is in 0.6608 of clean rows (2,813) vs 0.203 of phishing (826).
-  **[HYP] "the model mainly ranks on the scheme/`www.` prefix": weakened on
+  **[OBS]** The 12 most clean-leaning n-grams of the model are all fragments of
+  `://www.` [results/baseline_oof.json]. **[HYP] "the model mainly ranks on the scheme/`www.` prefix": weakened on
   training-like data, not on external.** Stripping both costs little AUC on OOF (0.9346
   vs 0.9421) [results/oof_headline.json] and test (0.9645 vs 0.9714), a lot on external
   (0.8053 vs 0.9127) [results/evaluation.json].
