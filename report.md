@@ -90,11 +90,9 @@ not from `probability`. FPR dominates and is measured worst: each evaluation set
 0.149 (test), >= 0.058 (external); the exact cross-check for test, ignoring grouping, is
 0.0615-0.4037 [results/evaluation.json]. **The sample size allows** "most alerts are
 false" on OOF and test, but cannot distinguish 0.04 from 0.4 or bound external from above.
-
-**Assumptions:** prevalence 1:1000; measured TPR and FPR hold for deployment, in
-particular the curated 1,429 clean URLs per set resemble real clean traffic (weakest);
-the threshold carries over to the model refit on all rows; exact intervals assume
-independent rows, the bootstrap independent platform groups.
+**Assumptions:** prevalence 1:1000; measured rates hold for deployment, in particular the
+curated 1,429 clean URLs per set resemble real clean traffic (weakest); the threshold
+carries over to the refit model; rows (exact) or platform groups (bootstrap) are independent.
 
 **`probability`** is the score for the cleaned training population (4,068 of 8,325
 phishing), not the chance of phishing at 1:1000. Even on that mix it is
@@ -102,9 +100,8 @@ under-confident: OOF rows scored 0.7-0.8 are 0.9265 phishing, rows scored 0.1-0.
 0.0558 [results/roc_calibration_oof.json]. It only ranks; no calibration was added.
 
 **Recommendation: prioritise review; do not block or warn users.** About 4 in 100 alerts
-would be phishing, and one phishing URL in five from an unfamiliar source is caught. A
-stricter 0.84127 threshold stays a scenario: test precision 0.225 (0.093-1.0) from 2
-false positives, external TPR 0.0903 [results/evaluation.json]. **Evidence needed before
+would be phishing, and one phishing URL in five from an unfamiliar source is caught.
+A stricter FPR <= 0.1% threshold stays a scenario (ADR 0003). **Evidence needed before
 blocking:** labelled deployment traffic with enough clean URLs to bound FPR near 0.1% and
 set the threshold for that source; false positives by hosting platform; a time-based
 split; recall on phishing from sources outside the training feeds.
