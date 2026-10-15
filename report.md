@@ -45,15 +45,14 @@ domain (ADR 0002); otherwise **none**.
 - **External: a different source.** 2,589 of 2,858 URLs match training at no level, yet
   no-overlap TPR is 0.1224 vs 0.4519 on test, so overlap does not explain the gap.
   **[OBS]** The ranking transfers, the score scale does not: on its own ROC curve
-  external reaches TPR 0.634 at FPR 0.1% (0.5595 without overlap) and partial AUC 0.827
-  vs 0.7927 for test, yet its phishing scores below 0.74956. Point estimates; at FPR
-  0.1% a set allows at most one false positive among 1,429 clean URLs (full table:
-  ADR 0003).
+  external reaches TPR 0.634 at FPR 0.1% (0.5595 without overlap), yet its phishing
+  scores below 0.74956. Point estimates; at FPR 0.1% a set allows at most one false
+  positive among 1,429 clean URLs (full table: ADR 0003).
 
 **What the external normalisation misses:** it compares whole URLs, so the same page with
 other query parameters, fragments or encoding, and sibling pages on one host or
 platform, pass; external still shares 24 URLs with training at hostname level or
-stricter and 269 at platform level [results/overlap.json].
+stricter and 269 at platform level or stricter [results/overlap.json].
 
 **Supported:** the model ranks phishing above clean on both sources (AUC >= 0.91 in the
 table, lower 95% bounds >= 0.89); the fixed threshold keeps its false-positive rate on a
