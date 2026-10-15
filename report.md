@@ -4,8 +4,9 @@
 configuration) at threshold 0.74956 (OOF FPR <= 1%) catches 44% of phishing on unseen
 platforms (OOF), 45% on test URLs without training overlap and 21% on the separate
 external collection (61% on the full test set, inflated by overlap). At 1 phishing URL in
-1,000, about 4% of alerts would be phishing (OOF: 0.018-0.209, the most false positives
-of any set), so I recommend prioritising review, not blocking.
+1,000, if the measured rates hold, about 4% of alerts would be phishing (OOF:
+0.018-0.209, the lowest of the three estimates), so I recommend prioritising review, not
+blocking.
 
 **OOF** = out-of-fold predictions on cleaned `train.csv`, folds grouped by platform
 (ADR 0002). Test and external were scored once at thresholds fixed beforehand (ADR 0003);
