@@ -13,7 +13,9 @@ not to block, until it is validated on labelled deployment traffic.
 a model that did not see its platform group (5-fold grouped CV, ADR 0002). Test and
 external numbers come from one evaluation at thresholds fixed beforehand (ADR 0003); two
 later logged runs only added the sample-precision column and the low-FPR ROC
-diagnostic; every other value is identical (`results/evaluation_runs.jsonl`). Brackets name the file each number comes from.
+diagnostic; every other value is identical (runs logged in
+`results/evaluation_runs.jsonl`; values unchanged in the git history of
+`results/evaluation.json`). Brackets name the file each number comes from.
 
 ## 1. Result for the manager
 
@@ -226,7 +228,8 @@ feeds.
 
 - **Configurations tried:** 1 hyperparameter configuration [results/baseline_oof.json].
   3 variants compared on OOF: baseline, stripped-input probe, duilawyeryork exclusion
-  [results/group_ablation.json]. No variant was compared on test labels.
+  [results/baseline_oof.json, results/group_ablation.json]. No variant was compared on
+  test labels.
 - **Scope:** the training feeds do not represent phishing in general (section 1).
 - **Intervals:** exact intervals ignore grouping, the bootstrap breaks down at 0 false
   positives, and neither includes split variance; the low-FPR ROC points have no intervals.
