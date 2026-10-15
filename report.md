@@ -141,7 +141,10 @@ split; recall on phishing from sources outside the training feeds.
 ## 6. Limitations and next steps
 
 - **Configurations:** 1 hyperparameter configuration; 3 variants compared on OOF, none
-  on test labels [results/baseline_oof.json, results/group_ablation.json]. The baseline
+  on test labels [results/baseline_oof.json, results/group_ablation.json]. Logistic
+  regression was chosen, not compared with other models: the brief asks for a simple,
+  explainable model, a regularised linear model suits sparse n-gram features, its
+  per-n-gram weights can be read, and it outputs the required probability. The baseline
   was kept because the only candidate improvement (decision 5) had every CI including
   0; the probe was never a candidate.
 - **Intervals** ignore split variance; exact ones also ignore grouping and the 24
