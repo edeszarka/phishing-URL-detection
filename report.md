@@ -1,5 +1,13 @@
 # URL phishing classifier: report
 
+**Summary.** A char n-gram logistic regression on the raw URL, thresholded at 0.74956
+(OOF FPR <= 1%), catches 61% of phishing on the overlapping test set but 21% on the
+separate external collection, with FPR at or below 0.35% on both. External is ranked
+well at low FPR; it is the threshold that does not transfer between sources. At 1
+phishing URL in 1,000, at least about 6% of alerts would be phishing, so I recommend
+using it to prioritise review, not to block, until it is validated on labelled
+deployment traffic.
+
 **OOF** = out-of-fold predictions on cleaned `train.csv`: every training row scored by
 a model that did not see its platform group (5-fold grouped CV, ADR 0002). Test and
 external numbers come from one evaluation at thresholds fixed beforehand (ADR 0003); two
@@ -109,6 +117,14 @@ These are patterns of these feeds, not of phishing in general.
   `.app` rows are phishing, from only 5 platform groups [results/eda.json].
 - **[HYP] contradicted: "HTTPS means legitimate".** 1,353 of 4,068 phishing rows use
   https (0.3326) vs 1,874 of 4,257 clean (0.4402) [results/eda.json].
+- **[OBS] Errors at the operating threshold (OOF)** [results/error_analysis_oof.json].
+  Missed phishing (2,289) looks like ordinary sites: `www.` 0.2905 vs 0.0905 for caught
+  phishing, bare host 0.2473 vs 0.104, median length 46 vs 69. Phishing on trusted
+  platforms is often missed (blogspot.com 108, appspot.com 93, google.com 83,
+  sharepoint.com 48). Of 42 false positives, 26 are blogspot.com and 8 are legitimate
+  microsoftonline.com/apple.com login URLs; none has `www.`. **[HYP]** Many misses are
+  compromised or look-alike sites with no URL-level signal; this is a limit of URL-only
+  input, not of tuning.
 
 ## 3. Threshold and deployment
 
