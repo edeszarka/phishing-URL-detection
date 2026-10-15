@@ -33,7 +33,8 @@ rows with no training overlap**, not the test headline [results/evaluation.json]
 
 OOF row: `results/oof_headline.json`. "Precision on sample" is TP / (TP + FP) on the
 evaluation sets' own roughly 1:1 class mix; it says nothing about deployment, where
-phishing is far rarer. Intervals are platform-group bootstrap; with 0
+phishing is far rarer. OOF and test intervals are the platform-group bootstrap at the
+fixed threshold, the headline interval chosen before the run (ADR 0003); with 0
 false positives that collapses, so external uses the exact Clopper-Pearson bound
 (joint 95%, alpha 0.025 per rate).
 
@@ -147,7 +148,9 @@ precision = TPR·π / (TPR·π + FPR·(1-π)) with π = 0.001. FPR dominates, an
 rate the samples measure worst: each set has 1,429 clean URLs, so one false positive
 moves FPR by 1/1,429. Exact joint-95% FPR intervals are 0.00095-0.0089 (test) and
 0-0.0031 (external), implying precision 0.0615-0.4037 and >= 0.058
-[results/evaluation.json]. These evaluation-set lower bounds are about 0.06, but the
+[results/evaluation.json]. For test this exact range ignores grouping and is a
+cross-check; section 1 gives the headline bootstrap interval, 0.080-0.468 (ADR 0003).
+The exact lower bounds on both sets are about 0.06, but the
 OOF point estimate, at the FPR the threshold was chosen for, is 0.0425
 [results/oof_headline.json]; the samples cannot distinguish 0.04 from 0.4.
 
