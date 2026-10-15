@@ -87,9 +87,9 @@ per-fold OOF range 0-0.0317 [results/oof_headline.json], so it was not re-tuned.
 
 **Deployed precision** = TPR·π / (TPR·π + FPR·(1-π)), π = 0.001, from measured rates,
 not from `probability`. FPR dominates and is measured worst: with 1,429 clean URLs per
-set, one false positive moves FPR by 1/1,429. Estimates: 0.0425 (OOF), 0.149 (test),
->= 0.058 (external); the exact test cross-check, ignoring grouping, is 0.0615-0.4037
-[results/evaluation.json]. **The sample size supports** "most alerts are false" on OOF
+set, one false positive moves FPR by 1/1,429. Estimates: 0.0425 (OOF), 0.098 (test
+without overlap), >= 0.058 (external); the exact cross-check for that test row, ignoring
+grouping, is 0.0333-0.3524 [results/evaluation.json]. **The sample size supports** "most alerts are false" on OOF
 and test, but cannot distinguish 0.04 from 0.4 or bound external from above.
 **Assumptions:** prevalence 1:1000; measured rates hold in deployment, especially that
 the curated 1,429 clean URLs per set resemble real clean traffic (weakest); the
